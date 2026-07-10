@@ -104,9 +104,11 @@ function buildDaily() {
   // ---- story injections (alerts below quote these numbers) ----------------
   for (const r of rows) {
     const d = r.date;
-    // 1. Cam Ranh: pace gap for stays 3–9 Aug (week 32) — OTB 18% behind STLY
+    // 1. Cam Ranh: pace gap for stays 3–9 Aug (week 32) — OTB exactly 18%
+    // behind STLY, anchored to the STLY denominator so the alert copy,
+    // the KPI table and this series can never drift apart
     if (r.property === 'ACR' && r.lead > 0 && d >= new Date(2026, 7, 3) && d <= new Date(2026, 7, 9)) {
-      r.roomsSold = Math.round(r.roomsSold * 0.82);
+      r.roomsSold = Math.min(r.capacity, Math.round(r.stlyOtbRooms * 0.82));
       r.occ = r.roomsSold / r.capacity;
       r.pu7 = Math.round(r.pu7 * 0.55);
       r.pu1 = Math.round(r.pu1 * 0.5);
@@ -141,10 +143,16 @@ export function daily(propertyId = 'ALL') {
 
 // aggregate a set of per-property rows for one date into portfolio numbers
 export function rollup(rows) {
-  const capacity = rows.reduce((s, r) => s + r.capacity, 0);
+  const capacity = rows.reduce((s, r) => s + r.capacity, 0) || 1;
   const roomsSold = rows.reduce((s, r) => s + r.roomsSold, 0);
   const revenue = rows.reduce((s, r) => s + r.revenue, 0);
   const w = (key) => rows.reduce((s, r) => s + r[key] * r.capacity, 0) / capacity;
+  // reference ADRs must be room-night weighted — a simple mean of property
+  // ADRs shifts the portfolio comparison by several dollars
+  const budgetRooms = rows.reduce((s, r) => s + r.budgetOcc * r.capacity, 0);
+  const budgetRev = rows.reduce((s, r) => s + r.budgetOcc * r.capacity * r.budgetAdr, 0);
+  const lyRooms = rows.reduce((s, r) => s + r.lyOcc * r.capacity, 0);
+  const lyRev = rows.reduce((s, r) => s + r.lyOcc * r.capacity * r.lyAdr, 0);
   return {
     capacity,
     roomsSold,
@@ -154,8 +162,8 @@ export function rollup(rows) {
     revpar: revenue / capacity,
     budgetOcc: w('budgetOcc'),
     lyOcc: w('lyOcc'),
-    budgetAdr: rows.reduce((s, r) => s + r.budgetAdr, 0) / rows.length,
-    lyAdr: rows.reduce((s, r) => s + r.lyAdr, 0) / rows.length,
+    budgetAdr: budgetRooms ? budgetRev / budgetRooms : 0,
+    lyAdr: lyRooms ? lyRev / lyRooms : 0,
     fcOcc: rows.every((r) => r.fcOcc != null) ? w('fcOcc') : null,
     fcLo80: rows.every((r) => r.fcLo80 != null) ? w('fcLo80') : null,
     fcHi80: rows.every((r) => r.fcHi80 != null) ? w('fcHi80') : null,
@@ -272,8 +280,10 @@ export function paceCurve(propertyId) {
     let ty = null;
     if (w >= currentWeeksOut) {
       ty = Math.round(tyTotal * share(w) * (1 + noise(0.015)));
-      // Cam Ranh's early-August gap shows up at the head of the curve
-      if (propertyId === 'ACR' && w <= 6) ty = Math.round(ty * 0.85);
+      // Cam Ranh's early-August gap shows at the head of the curve (same
+      // 0.82 factor as the daily-series injection; the whole-month gap is
+      // smaller than the week-32 gap because only one week is affected)
+      if (propertyId === 'ACR' && w <= 6) ty = Math.round(ty * 0.82);
     }
     points.push({ weeksOut: w, ty, ly });
   }
@@ -295,13 +305,28 @@ export function pickupCalendar(propertyId) {
 }
 
 // ---- alerts & recommendations (part 3 will produce these for real) --------
+// Numbers quoted in alert copy are DERIVED from the generated series above,
+// so the story a card tells always matches what the charts and KPIs show.
+const acrWk32 = DAILY.filter(
+  (r) =>
+    r.property === 'ACR' && r.lead > 0 && r.date >= new Date(2026, 7, 3) && r.date <= new Date(2026, 7, 9)
+);
+const ACR_PACE_GAP = Math.round(
+  (1 - acrWk32.reduce((s, r) => s + r.roomsSold, 0) / acrWk32.reduce((s, r) => s + r.stlyOtbRooms, 0)) * 100
+);
+const amnNext30 = DAILY.filter((r) => r.property === 'AMN' && r.lead > 0 && r.lead <= 30);
+const AMN_CXL_7D = amnNext30.reduce((s, r) => s + r.cxl7, 0);
+// same trailing-norm definition the Property view KPI uses (~2% of OTB)
+const AMN_CXL_X = (AMN_CXL_7D / amnNext30.reduce((s, r) => s + r.roomsSold * 0.02, 0)).toFixed(1);
+const cxlCurve = [0.15, 0.12, 0.17, 0.15, 0.2, 0.29, 0.44, 0.54, 0.63, 0.76, 0.83, 0.93, 0.98, 1];
+
 export const ALERTS = [
   {
     id: 'a1',
     severity: 'risk',
     property: 'ACR',
-    title: 'Pace 18% behind for stays 3–9 Aug',
-    body: 'On-the-books for the first week of August is 18% behind same time last year. Pickup has slowed to ~9 rooms/day against 16 this time last year.',
+    title: `Pace ${ACR_PACE_GAP}% behind for stays 3–9 Aug`,
+    body: `On-the-books for the first week of August is ${ACR_PACE_GAP}% behind same time last year. Daily pickup for these stays is running at roughly half of last year's rate.`,
     evidence: [16, 15, 17, 14, 15, 13, 12, 11, 10, 9, 9, 8, 9, 9],
     evidenceLabel: 'Daily pickup, rooms — last 14 days',
     action:
@@ -314,8 +339,8 @@ export const ALERTS = [
     severity: 'risk',
     property: 'AMN',
     title: 'Cancellation spike from Booking.com',
-    body: '41 room nights cancelled in the last 7 days for stays within 30 days — 2.3× the trailing average. Concentrated in flexible-rate bookings.',
-    evidence: [6, 5, 7, 6, 8, 12, 18, 22, 26, 31, 34, 38, 40, 41],
+    body: `${AMN_CXL_7D} room nights cancelled in the last 7 days for stays within 30 days — ${AMN_CXL_X}× the trailing average. Concentrated in flexible-rate bookings.`,
+    evidence: cxlCurve.map((f) => Math.round(f * AMN_CXL_7D)),
     evidenceLabel: 'Rolling 7-day cancellations, room nights',
     action:
       'Rebalance 60% of released inventory to Expedia and Brand.com. Add a non-refundable fence at −12% to defend the base.',

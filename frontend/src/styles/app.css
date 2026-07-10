@@ -1,3 +1,7 @@
+/* self-hosted Fraunces + IBM Plex Sans (incl. Vietnamese subsets) — the demo
+   must keep its typography with no network */
+@import './fonts.css';
+
 /* ---------------------------------------------------------------------------
    Design tokens — "morning briefing ledger"
    Palette validated with dataviz validate_palette.js (light, all checks pass)
@@ -46,8 +50,8 @@
   --font-ui: 'IBM Plex Sans', system-ui, sans-serif;
   --font-display: 'Fraunces', Georgia, serif;
 
-  --radius: 4px;
-  --radius-panel: 6px;
+  --radius: 3px;
+  --radius-panel: 4px;
   --shadow-pop: 0 6px 24px rgba(28, 27, 24, 0.1);
 }
 

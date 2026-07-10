@@ -14,7 +14,7 @@
   let width = 600;
   let hover = null;
 
-  const m = { top: 14, right: 86, bottom: 26, left: 44 };
+  const m = { top: 14, right: 104, bottom: 26, left: 44 };
   $: iw = width - m.left - m.right;
   $: ih = height - m.top - m.bottom;
 
@@ -41,7 +41,14 @@
 </script>
 
 <div class="wrap" bind:clientWidth={width} style="height:{height}px">
-  <svg {width} {height} on:mousemove={onMove} on:mouseleave={() => (hover = null)} role="img">
+  <svg
+    {width}
+    {height}
+    on:mousemove={onMove}
+    on:mouseleave={() => (hover = null)}
+    role="img"
+    aria-label="Booking pace for {monthLabel}: cumulative room nights on the books, this year versus same time last year"
+  >
     <g transform="translate({m.left},{m.top})">
       {#each yTicks as v}
         <line x1="0" x2={iw} y1={y(v)} y2={y(v)} class="grid" />
@@ -52,7 +59,7 @@
       <line x1={x(currentWeeksOut)} x2={x(currentWeeksOut)} y1="0" y2={ih} class="today" />
       <text x={x(currentWeeksOut)} y="-4" class="tick c today-label">today</text>
 
-      <path d={lyLine} class="ly" />
+      <path d={lyLine} class="ly" style="stroke:{GRAY_CONTEXT}" />
       <path d={tyLine} class="ty" />
 
       <!-- direct labels at line ends -->

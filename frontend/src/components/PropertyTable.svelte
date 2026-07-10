@@ -21,7 +21,14 @@
   </thead>
   <tbody>
     {#each rows as r}
-      <tr class="row" on:click={() => dispatch('select', r.property.id)}>
+      <tr
+        class="row"
+        tabindex="0"
+        role="link"
+        aria-label="Open {r.property.name}"
+        on:click={() => dispatch('select', r.property.id)}
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && dispatch('select', r.property.id)}
+      >
         <td>
           <span class="dot" style="background:{r.property.color}"></span>
           {r.property.name}
@@ -41,6 +48,10 @@
 <style>
   .row {
     cursor: pointer;
+  }
+  .row:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
   }
   .dot {
     display: inline-block;

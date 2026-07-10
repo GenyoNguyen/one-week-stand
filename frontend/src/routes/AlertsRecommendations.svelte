@@ -6,6 +6,8 @@
   let loading = true;
   let alerts = [];
   let filter = 'all';
+  let openId = null; // accordion: one alert expanded at a time
+  let autoOpened = false;
 
   const SEV_ORDER = { risk: 0, watch: 1, opportunity: 2 };
 
@@ -31,6 +33,14 @@
   $: open = visible.filter((a) => !$alertStatus[a.id]);
   $: resolved = visible.filter((a) => $alertStatus[a.id]);
   $: acceptedCount = scoped.filter((a) => $alertStatus[a.id] === 'accepted').length;
+
+  // open the top of the queue once on first load, then let the user drive
+  $: if (!autoOpened && open.length) {
+    openId = open[0].id;
+    autoOpened = true;
+  }
+
+  const toggle = (id) => (openId = openId === id ? null : id);
 </script>
 
 <div class="view reveal">
@@ -64,7 +74,7 @@
   {:else}
     <section class="cards">
       {#each open as a (a.id)}
-        <RecommendationPanel alert={a} />
+        <RecommendationPanel alert={a} expanded={openId === a.id} on:toggle={() => toggle(a.id)} />
       {/each}
     </section>
 
@@ -72,7 +82,7 @@
       <h2 class="kicker resolved-head">Resolved today</h2>
       <section class="cards">
         {#each resolved as a (a.id)}
-          <RecommendationPanel alert={a} />
+          <RecommendationPanel alert={a} expanded={openId === a.id} on:toggle={() => toggle(a.id)} />
         {/each}
       </section>
     {/if}
@@ -119,11 +129,12 @@
     color: var(--ink-3);
     font-size: 11px;
   }
+  /* a decision queue reads top-to-bottom — one column, one card expanded */
   .cards {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 780px;
   }
   .resolved-head {
     margin-top: 6px;

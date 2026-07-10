@@ -1,6 +1,10 @@
 <script>
   import { PROPERTIES, COMPARE_MODES, HORIZONS, DATA_ASOF, DATA_SOURCE } from '../lib/constants.js';
-  import { propertyFilter, horizon, compareMode } from '../lib/stores.js';
+  import { propertyFilter, horizon, compareMode, currentView } from '../lib/stores.js';
+
+  // only show controls that actually apply to the current view — a visible
+  // 30/60/90 switch on views that ignore it teaches users the wrong model
+  $: showHorizon = $currentView === 'forecast';
 </script>
 
 <div class="bar">
@@ -12,11 +16,13 @@
       {/each}
     </select>
 
-    <div class="pills" role="group" aria-label="Horizon">
-      {#each HORIZONS as h}
-        <button class:active={$horizon === h} on:click={() => horizon.set(h)}>{h}d</button>
-      {/each}
-    </div>
+    {#if showHorizon}
+      <div class="pills" role="group" aria-label="Horizon">
+        {#each HORIZONS as h}
+          <button class:active={$horizon === h} on:click={() => horizon.set(h)}>{h}d</button>
+        {/each}
+      </div>
+    {/if}
 
     <div class="pills" role="group" aria-label="Comparison">
       {#each COMPARE_MODES as m}

@@ -121,6 +121,8 @@ Nguyên tắc pairing: nhảy cỡ ≥3x giữa hero và body; đậm nhạt tư
 - **Chart chính**: OTB 28 ngày tới theo ngày (cột), overlay đường forecast + đường budget.
 - **Cột phụ**: 3 alert nghiêm trọng nhất (link sang V5) + bảng mini 3 properties (Occ/ADR/RevPAR + delta).
 
+> **Quyết định scope (sau review vòng 1):** so sánh "vs OTB" không phải là toggle toàn cục — OTB là *nền* của mọi view forward, nên nó thể hiện bằng đường OTB trên mọi chart + cột "Gap to forecast" trong bảng V2. Toggle toàn cục chỉ có Budget/LY.
+
 ### V2 — Demand Forecast
 - **Fan chart** 30/60/90 ngày: đường forecast trung tâm, dải tin cậy 80%/50% (2 bước opacity rời rạc), OTB thực tế là đường liền đến hôm nay, forecast nét đứt từ hôm nay.
 - Small multiples 3 properties (cùng 1 trục y — tuyệt đối không dual-axis).
@@ -189,7 +191,7 @@ Ghi chú: các file docs trên đã có sẵn (rỗng) trong `docs/` — đều 
 - [ ] Không card grid đều nhau — layout có hierarchy 2/3–1/3
 - [ ] Mọi con số: tabular, căn phải, có đơn vị, có ngữ cảnh so sánh (vs budget/LY/OTB)
 - [ ] Copy nghiệp vụ cụ thể (tên property thật trong data, số thật) — không placeholder
-- [ ] Dòng data-freshness ở footer mỗi view
+- [ ] Dòng data-freshness luôn hiển thị (đặt ở FilterBar sticky — mọi view đều thấy; quyết định sau review vòng 1: sticky bar tốt hơn footer vì không phải cuộn xuống)
 - [ ] Palette pass `validate_palette.js` (light mode, surface cuối cùng)
 - [ ] Không dual-axis; màu series cố định xuyên views
 - [ ] Demo chạy offline được (fonts self-host, mock data fallback)

@@ -1,10 +1,16 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import Sparkline from './Sparkline.svelte';
   import { PROPERTIES } from '../lib/constants.js';
   import { alertStatus, setAlertStatus } from '../lib/stores.js';
 
   export let alert;
   export let compact = false;
+  // progressive disclosure: the queue shows collapsed summaries, one card
+  // expands at a time (parent owns which)
+  export let expanded = false;
+
+  const dispatch = createEventDispatcher();
 
   $: status = $alertStatus[alert.id] || 'new';
   $: propName =
@@ -24,7 +30,7 @@
   <header>
     <span class="tag {alert.severity}">
       <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d={ICONS[alert.severity]} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <path d={ICONS[alert.severity]} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
       {LABELS[alert.severity]}
     </span>
@@ -34,11 +40,23 @@
     {:else if status === 'dismissed'}
       <span class="state">Dismissed</span>
     {/if}
+    {#if status !== 'new' && !compact}
+      <button class="undo" on:click={() => setAlertStatus(alert.id, null)}>Undo</button>
+    {/if}
   </header>
 
-  <h3>{alert.title}</h3>
+  {#if compact}
+    <h3>{alert.title}</h3>
+  {:else}
+    <button class="title-row" aria-expanded={expanded} on:click={() => dispatch('toggle')}>
+      <h3>{alert.title}</h3>
+      <svg class="chev" class:open={expanded} width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  {/if}
 
-  {#if !compact}
+  {#if !compact && expanded}
     <p class="body">{alert.body}</p>
 
     <div class="evidence">
@@ -95,10 +113,40 @@
   .state.accepted {
     color: var(--good);
   }
+  .undo {
+    background: none;
+    border: none;
+    color: var(--accent-ink);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 0;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    color: inherit;
+    font-family: inherit;
+  }
+  .chev {
+    flex: none;
+    color: var(--ink-3);
+    transition: transform 0.15s;
+  }
+  .chev.open {
+    transform: rotate(180deg);
+  }
   h3 {
     font-size: 14.5px;
     font-weight: 600;
     line-height: 1.35;
+    margin: 0;
   }
   .compact h3 {
     font-size: 13px;

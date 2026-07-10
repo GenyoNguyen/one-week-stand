@@ -6,7 +6,7 @@
   import PropertyView from './routes/PropertyView.svelte';
   import SegmentChannelView from './routes/SegmentChannelView.svelte';
   import AlertsRecommendations from './routes/AlertsRecommendations.svelte';
-  import { currentView } from './lib/stores.js';
+  import { currentView, navigate } from './lib/stores.js';
 
   const VIEWS = [
     {
@@ -43,10 +43,7 @@
 
   $: active = VIEWS.find((v) => v.id === $currentView) ?? VIEWS[0];
 
-  function go(id) {
-    currentView.set(id);
-    location.hash = id;
-  }
+  const go = navigate;
 
   onMount(() => {
     const fromHash = () => {
@@ -70,7 +67,7 @@
       {#each VIEWS as v (v.id)}
         <button class="nav-item" class:active={v.id === active.id} on:click={() => go(v.id)}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d={v.icon} stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d={v.icon} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           {v.label}
         </button>

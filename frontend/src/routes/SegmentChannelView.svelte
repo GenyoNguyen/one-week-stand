@@ -2,7 +2,7 @@
   import StackedBar from '../components/StackedBar.svelte';
   import { getSegments, getSegmentMix, getChannels, getNationalities } from '../lib/api.js';
   import { propertyFilter } from '../lib/stores.js';
-  import { SEGMENTS, SERIES } from '../lib/constants.js';
+  import { PROPERTIES, SEGMENTS, SERIES } from '../lib/constants.js';
   import {
     fmtPct,
     fmtInt,
@@ -19,18 +19,21 @@
   let chans = [];
   let nats = [];
 
+  let seq = 0; // drop stale responses if filters change mid-flight
   async function load(pid) {
+    const my = ++seq;
     loading = true;
-    [segs, mixRows, chans, nats] = await Promise.all([
-      getSegments(pid),
-      getSegmentMix(),
-      getChannels(),
-      getNationalities()
-    ]);
+    const res = await Promise.all([getSegments(pid), getSegmentMix(), getChannels(), getNationalities()]);
+    if (my !== seq) return;
+    [segs, mixRows, chans, nats] = res;
     loading = false;
   }
   $: load($propertyFilter);
 
+  $: scopeName =
+    $propertyFilter === 'ALL'
+      ? 'all properties'
+      : PROPERTIES.find((p) => p.id === $propertyFilter)?.name;
   $: maxNat = Math.max(...nats.map((n) => n.share), 0.01);
 </script>
 
@@ -68,7 +71,7 @@
 
     <section class="two">
       <div class="panel">
-        <div class="panel-head"><h2 class="kicker">By segment</h2></div>
+        <div class="panel-head"><h2 class="kicker">By segment — {scopeName}</h2></div>
         <table class="data">
           <thead>
             <tr>
@@ -97,7 +100,7 @@
 
       <div class="panel">
         <div class="panel-head">
-          <h2 class="kicker">Top source markets</h2>
+          <h2 class="kicker">Top source markets — all properties</h2>
         </div>
         <div class="panel-body nats">
           {#each nats as n (n.name)}

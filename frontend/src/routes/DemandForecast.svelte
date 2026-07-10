@@ -9,7 +9,7 @@
     fmtDate,
     fmtDow,
     isWeekend,
-    fmtDelta,
+    fmtPts,
     deltaClass,
     deltaArrow
   } from '../lib/formatters.js';
@@ -19,11 +19,14 @@
   let perProp = [];
   let showAllRows = false;
 
+  let seq = 0; // drop stale responses if filters change mid-flight
   async function load(pid, h) {
+    const my = ++seq;
     loading = true;
     const jobs = [getSeries(pid, 1, h)];
     if (pid === 'ALL') for (const p of PROPERTIES) jobs.push(getSeries(p.id, 1, h));
     const [b, ...rest] = await Promise.all(jobs);
+    if (my !== seq) return;
     big = b;
     perProp = pid === 'ALL' ? rest : [];
     loading = false;
@@ -66,10 +69,21 @@
               <span class="dot" style="background:{p.color}"></span>
               {p.name}
             </div>
-            <ForecastChart data={perProp[i]} compare={$compareMode} height={140} compact />
+            <ForecastChart
+              data={perProp[i]}
+              compare={$compareMode}
+              height={140}
+              compact
+              accent={p.color}
+              label="{p.name} occupancy forecast, next {$horizon} days"
+            />
           </div>
         {/each}
       </section>
+      <p class="encodings">
+        Same encodings as the main chart: solid ink = on the books · dashed (property colour) =
+        forecast · shaded = 50/80% bands · gray = {$compareMode === 'budget' ? 'budget' : 'last year'}
+      </p>
     {/if}
 
     <section class="panel">
@@ -104,7 +118,7 @@
               <td class="r">
                 <span class="delta {deltaClass(r.fcOcc - r[cmpKey])}">
                   {deltaArrow(r.fcOcc - r[cmpKey])}
-                  {fmtDelta(r.fcOcc - r[cmpKey], { digits: 1 })} pts
+                  {fmtPts(r.fcOcc - r[cmpKey])}
                 </span>
               </td>
               <td class="r">{fmtInt(r.pu7)} rm</td>
@@ -144,6 +158,11 @@
     font-size: 12.5px;
     font-weight: 600;
     margin-bottom: 6px;
+  }
+  .encodings {
+    margin: -8px 0 0;
+    font-size: 11.5px;
+    color: var(--ink-3);
   }
   .dot {
     display: inline-block;

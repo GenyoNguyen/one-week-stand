@@ -8,13 +8,15 @@
   export let compare = 'budget';
   export let height = 300;
   export let compact = false;
+  export let accent = 'var(--accent)'; // fixed per-property colour when charted per property
+  export let label = 'Occupancy: on the books, forecast with 50/80% bands, and reference line';
 
   let width = 600;
   let hover = null; // {x, point}
 
   $: m = compact
-    ? { top: 8, right: 20, bottom: 20, left: 34 }
-    : { top: 12, right: 18, bottom: 26, left: 40 };
+    ? { top: 8, right: 20, bottom: 20, left: 42 }
+    : { top: 12, right: 18, bottom: 26, left: 42 };
   $: iw = width - m.left - m.right;
   $: ih = height - m.top - m.bottom;
 
@@ -62,7 +64,14 @@
 </script>
 
 <div class="wrap" bind:clientWidth={width} style="height:{height}px">
-  <svg {width} {height} on:mousemove={onMove} on:mouseleave={() => (hover = null)} role="img">
+  <svg
+    {width}
+    {height}
+    on:mousemove={onMove}
+    on:mouseleave={() => (hover = null)}
+    role="img"
+    aria-label={label}
+  >
     <g transform="translate({m.left},{m.top})">
       <!-- y grid -->
       {#each [0.25, 0.5, 0.75, 1] as v}
@@ -72,12 +81,12 @@
       <line x1="0" x2={iw} y1={y(0)} y2={y(0)} class="axis" />
 
       <!-- confidence bands: two discrete opacity steps, no gradient -->
-      <path d={band80} class="band b80" />
-      <path d={band50} class="band b50" />
+      <path d={band80} class="band b80" style="fill:{accent}" />
+      <path d={band50} class="band b50" style="fill:{accent}" />
 
       <!-- reference, forecast, on-the-books -->
-      <path d={cmpLine} class="cmp" />
-      <path d={fcLine} class="fc" />
+      <path d={cmpLine} class="cmp" style="stroke:{GRAY_CONTEXT}" />
+      <path d={fcLine} class="fc" style="stroke:{accent}" />
       <path d={otbLine} class="otb" />
 
       <!-- x ticks -->
@@ -88,7 +97,7 @@
       {#if hover}
         <line x1={hover.x} x2={hover.x} y1="0" y2={ih} class="crosshair" />
         <circle cx={hover.x} cy={y(hover.point.occ)} r="3.5" class="dot otb-dot" />
-        <circle cx={hover.x} cy={y(hover.point.fcOcc)} r="3.5" class="dot fc-dot" />
+        <circle cx={hover.x} cy={y(hover.point.fcOcc)} r="3.5" class="dot fc-dot" style="fill:{accent}" />
       {/if}
     </g>
   </svg>
@@ -100,7 +109,7 @@
     >
       <div class="t-date">{fmtDateFull(hover.point.date)}</div>
       <div class="t-row"><span class="sw otb-sw"></span>On the books <b class="num">{fmtPct(hover.point.occ)}</b></div>
-      <div class="t-row"><span class="sw fc-sw"></span>Forecast <b class="num">{fmtPct(hover.point.fcOcc)}</b>
+      <div class="t-row"><span class="sw fc-sw" style="background:{accent}"></span>Forecast <b class="num">{fmtPct(hover.point.fcOcc)}</b>
         <span class="t-band num">({fmtPct(hover.point.fcLo80)}–{fmtPct(hover.point.fcHi80)})</span>
       </div>
       <div class="t-row"><span class="sw cmp-sw"></span>{compare === 'budget' ? 'Budget' : 'Last year'}

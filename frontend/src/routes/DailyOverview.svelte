@@ -4,7 +4,7 @@
   import PropertyTable from '../components/PropertyTable.svelte';
   import RecommendationPanel from '../components/RecommendationPanel.svelte';
   import { getSeries, getAlerts } from '../lib/api.js';
-  import { propertyFilter, compareMode, currentView, selectedProperty } from '../lib/stores.js';
+  import { propertyFilter, compareMode, navigate, selectedProperty } from '../lib/stores.js';
   import { PROPERTIES, TODAY } from '../lib/constants.js';
   import {
     fmtPct,
@@ -26,15 +26,18 @@
 
   const SEV_ORDER = { risk: 0, watch: 1, opportunity: 2 };
 
+  let seq = 0; // drop stale responses if filters change mid-flight
   async function load(pid, cmp) {
+    const my = ++seq;
     loading = true;
     const [t, h, o, al, ...perProp] = await Promise.all([
       getSeries(pid, 0, 0),
       getSeries(pid, -13, 0),
-      getSeries(pid, 1, 28),
+      getSeries(pid, 1, 30),
       getAlerts(),
       ...PROPERTIES.map((p) => Promise.all([getSeries(p.id, 0, 0), getSeries(p.id, 1, 30)]))
     ]);
+    if (my !== seq) return;
     today = t[0];
     hist = h;
     outlook = o;
@@ -68,7 +71,9 @@
   $: cmpLabel = $compareMode === 'budget' ? 'vs budget' : 'vs last year';
 
   $: pickup24 = outlook.reduce((s, r) => s + r.pu1, 0);
+  $: pickupDayAvg7 = outlook.reduce((s, r) => s + r.pu7, 0) / 7;
   $: rev30 = outlook.reduce((s, r) => s + r.revenue, 0);
+  $: budgetRev30 = outlook.reduce((s, r) => s + r.budgetOcc * r.capacity * r.budgetAdr, 0);
 
   $: needsAttention = alerts
     .filter((a) => $propertyFilter === 'ALL' || a.property === $propertyFilter || a.property === 'ALL')
@@ -77,7 +82,7 @@
 
   function openProperty(id) {
     selectedProperty.set(id);
-    currentView.set('property');
+    navigate('property');
   }
 </script>
 
@@ -120,12 +125,16 @@
       <KpiCard
         label="Pickup last 24h"
         value={`${fmtInt(pickup24)} rm`}
+        delta={(pickup24 - pickupDayAvg7) / pickupDayAvg7}
+        deltaLabel="vs 7-day avg"
         spark={outlook.slice(0, 14).map((d) => d.pu1)}
         sparkCaption="next 14 stay dates"
       />
       <KpiCard
         label="Revenue OTB, next 30 days"
         value={fmtMoney(rev30)}
+        delta={(rev30 - budgetRev30) / budgetRev30}
+        deltaLabel="vs budget"
         spark={outlook.map((d) => d.revenue)}
         sparkCaption="by stay date"
       />
@@ -134,17 +143,22 @@
     <section class="grid">
       <div class="panel main">
         <div class="panel-head">
-          <h2 class="kicker">Occupancy outlook — next 28 days</h2>
+          <h2 class="kicker">Occupancy outlook — next 30 days</h2>
         </div>
         <div class="panel-body">
-          <ForecastChart data={outlook} compare={$compareMode} height={252} />
+          <ForecastChart
+            data={outlook}
+            compare={$compareMode}
+            height={252}
+            label="{scopeName} occupancy outlook for the next 30 days"
+          />
         </div>
       </div>
 
       <aside class="side">
         <div class="side-head">
           <h2 class="kicker">Needs attention</h2>
-          <button class="linkish" on:click={() => currentView.set('alerts')}>Review &amp; act →</button>
+          <button class="linkish" on:click={() => navigate('alerts')}>Review &amp; act →</button>
         </div>
         {#each needsAttention as a (a.id)}
           <RecommendationPanel alert={a} compact />

@@ -4,7 +4,7 @@
   import Heatmap from '../components/Heatmap.svelte';
   import StackedBar from '../components/StackedBar.svelte';
   import { getSeries, getPaceCurve, getPickupCalendar, getSegmentMix } from '../lib/api.js';
-  import { selectedProperty, compareMode } from '../lib/stores.js';
+  import { selectedProperty, propertyFilter, compareMode } from '../lib/stores.js';
   import { PROPERTIES, SERIES } from '../lib/constants.js';
   import { fmtPct, fmtMoneyFull, fmtInt } from '../lib/formatters.js';
 
@@ -16,7 +16,17 @@
   let calendar = [];
   let mix = [];
 
+  // follow the global property filter when it changes to a specific property,
+  // without fighting the local tabs afterwards
+  let lastFilter = null;
+  $: if ($propertyFilter !== lastFilter) {
+    lastFilter = $propertyFilter;
+    if ($propertyFilter !== 'ALL') selectedProperty.set($propertyFilter);
+  }
+
+  let seq = 0; // drop stale responses if the property changes mid-flight
   async function load(pid) {
+    const my = ++seq;
     loading = true;
     const [t, h, n, pc, cal, mixAll] = await Promise.all([
       getSeries(pid, 0, 0),
@@ -26,6 +36,7 @@
       getPickupCalendar(pid),
       getSegmentMix()
     ]);
+    if (my !== seq) return;
     today = t[0];
     hist = h;
     next30 = n;
@@ -42,6 +53,8 @@
   $: cmpLabel = $compareMode === 'budget' ? 'vs budget' : 'vs last year';
   $: pu7next30 = next30.reduce((s, r) => s + r.pu7, 0);
   $: cxl7next30 = next30.reduce((s, r) => s + r.cxl7, 0);
+  // trailing norm = the pre-spike baseline the generator uses (~2% of OTB)
+  $: cxlNorm = next30.reduce((s, r) => s + r.roomsSold * 0.02, 0);
 </script>
 
 <div class="view reveal">
@@ -92,6 +105,9 @@
       <KpiCard
         label="Cancellations 7d"
         value={`${fmtInt(cxl7next30)} rm`}
+        delta={(cxl7next30 - cxlNorm) / cxlNorm}
+        deltaLabel="vs trailing norm"
+        goodWhenUp={false}
         spark={next30.map((d) => d.cxl7)}
         sparkCaption="by stay date, next 30 days"
       />
@@ -102,6 +118,27 @@
         <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
         <div class="panel-body">
           <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
+          <details class="fallback">
+            <summary>View as table</summary>
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>Weeks out</th>
+                  <th class="r">This year, RN</th>
+                  <th class="r">Last year, RN</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each pace.points.filter((p) => p.weeksOut % 2 === 0) as p (p.weeksOut)}
+                  <tr>
+                    <td>{p.weeksOut === 0 ? 'Arrival' : `${p.weeksOut}w`}</td>
+                    <td class="r">{p.ty == null ? '—' : fmtInt(p.ty)}</td>
+                    <td class="r">{fmtInt(p.ly)}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </details>
         </div>
       </div>
 
@@ -213,5 +250,18 @@
     height: 9px;
     border-radius: 2px;
     display: inline-block;
+  }
+  .fallback {
+    margin-top: 10px;
+  }
+  .fallback summary {
+    font-size: 11.5px;
+    color: var(--accent-ink);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .fallback table {
+    margin-top: 8px;
+    max-width: 340px;
   }
 </style>
