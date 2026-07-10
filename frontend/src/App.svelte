@@ -6,6 +6,7 @@
   import PropertyView from './routes/PropertyView.svelte';
   import SegmentChannelView from './routes/SegmentChannelView.svelte';
   import AlertsRecommendations from './routes/AlertsRecommendations.svelte';
+  import DataUpload from './routes/DataUpload.svelte';
   import { currentView, navigate } from './lib/stores.js';
 
   const VIEWS = [
@@ -38,6 +39,12 @@
       label: 'Alerts & actions',
       component: AlertsRecommendations,
       icon: 'M8 2a4 4 0 0 1 4 4c0 3 1 4 1.5 4.5h-11C3 10 4 9 4 6a4 4 0 0 1 4-4Zm-1.5 11a1.5 1.5 0 0 0 3 0'
+    },
+    {
+      id: 'data',
+      label: 'Data',
+      component: DataUpload,
+      icon: 'M8 10V2.5m0 0L5 5.5m3-3 3 3M3 9.5v2A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-2'
     }
   ];
 
