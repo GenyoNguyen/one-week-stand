@@ -1,0 +1,217 @@
+<script>
+  import KpiCard from '../components/KpiCard.svelte';
+  import PaceChart from '../components/PaceChart.svelte';
+  import Heatmap from '../components/Heatmap.svelte';
+  import StackedBar from '../components/StackedBar.svelte';
+  import { getSeries, getPaceCurve, getPickupCalendar, getSegmentMix } from '../lib/api.js';
+  import { selectedProperty, compareMode } from '../lib/stores.js';
+  import { PROPERTIES, SERIES } from '../lib/constants.js';
+  import { fmtPct, fmtMoneyFull, fmtInt } from '../lib/formatters.js';
+
+  let loading = true;
+  let today = null;
+  let hist = [];
+  let next30 = [];
+  let pace = null;
+  let calendar = [];
+  let mix = [];
+
+  async function load(pid) {
+    loading = true;
+    const [t, h, n, pc, cal, mixAll] = await Promise.all([
+      getSeries(pid, 0, 0),
+      getSeries(pid, -13, 0),
+      getSeries(pid, 1, 30),
+      getPaceCurve(pid),
+      getPickupCalendar(pid),
+      getSegmentMix()
+    ]);
+    today = t[0];
+    hist = h;
+    next30 = n;
+    pace = pc;
+    calendar = cal;
+    mix = mixAll.find((m) => m.property.id === pid)?.mix ?? [];
+    loading = false;
+  }
+  $: load($selectedProperty);
+
+  $: prop = PROPERTIES.find((p) => p.id === $selectedProperty);
+  $: cmpOcc = today ? ($compareMode === 'budget' ? today.budgetOcc : today.lyOcc) : 0;
+  $: cmpAdr = today ? ($compareMode === 'budget' ? today.budgetAdr : today.lyAdr) : 0;
+  $: cmpLabel = $compareMode === 'budget' ? 'vs budget' : 'vs last year';
+  $: pu7next30 = next30.reduce((s, r) => s + r.pu7, 0);
+  $: cxl7next30 = next30.reduce((s, r) => s + r.cxl7, 0);
+</script>
+
+<div class="view reveal">
+  <header class="head">
+    <div>
+      <h1 class="view-title">{prop.name}</h1>
+      <p class="view-sub">{prop.rooms} keys · property deep-dive</p>
+    </div>
+    <div class="tabs" role="tablist">
+      {#each PROPERTIES as p}
+        <button
+          role="tab"
+          aria-selected={p.id === $selectedProperty}
+          class:active={p.id === $selectedProperty}
+          on:click={() => selectedProperty.set(p.id)}
+        >
+          <span class="dot" style="background:{p.color}"></span>{p.short}
+        </button>
+      {/each}
+    </div>
+  </header>
+
+  {#if loading}
+    <div class="skeleton" style="height:120px"></div>
+    <div class="skeleton" style="height:300px"></div>
+  {:else}
+    <section class="kpis">
+      <KpiCard
+        label="Occupancy tonight"
+        value={fmtPct(today.occ)}
+        delta={(today.occ - cmpOcc) / cmpOcc}
+        deltaLabel={cmpLabel}
+        spark={hist.map((d) => d.occ)}
+      />
+      <KpiCard
+        label="ADR tonight"
+        value={fmtMoneyFull(today.adr)}
+        delta={(today.adr - cmpAdr) / cmpAdr}
+        deltaLabel={cmpLabel}
+        spark={hist.map((d) => d.adr)}
+      />
+      <KpiCard
+        label="Pickup 7d, next 30 days"
+        value={`${fmtInt(pu7next30)} rm`}
+        spark={next30.map((d) => d.pu7)}
+        sparkCaption="by stay date"
+      />
+      <KpiCard
+        label="Cancellations 7d"
+        value={`${fmtInt(cxl7next30)} rm`}
+        spark={next30.map((d) => d.cxl7)}
+        sparkCaption="by stay date, next 30 days"
+      />
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
+        <div class="panel-body">
+          <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2 class="kicker">7-day pickup by stay date</h2></div>
+        <div class="panel-body">
+          <Heatmap cells={calendar} />
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
+      <div class="panel-body">
+        <StackedBar
+          items={mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
+          height={26}
+        />
+        <div class="legend">
+          {#each mix as m, i}
+            <span><i style="background:{SERIES[i]}"></i>{m.segment}</span>
+          {/each}
+        </div>
+      </div>
+    </section>
+  {/if}
+</div>
+
+<style>
+  .view {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .tabs {
+    display: inline-flex;
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .tabs button {
+    border: none;
+    background: none;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tabs button + button {
+    border-left: 1px solid var(--hairline);
+  }
+  .tabs button.active {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+  .grid .panel {
+    min-width: 0;
+  }
+  .panel-head {
+    padding: 12px 16px 0;
+  }
+  .panel-body {
+    padding: 10px 16px 14px;
+  }
+  .legend {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    flex-wrap: wrap;
+  }
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend i {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+</style>
