@@ -38,7 +38,7 @@
 | Do | Say | If challenged |
 |---|---|---|
 | Go to `#forecast`, switch 30d → 60d, hover the crosshair | "One consistent forecast by date and by property — replacing three different guesses. Hover any day: OTB, forecast, confidence band, budget." | "Forecast detail by stay date" table + "Show all 60 days" |
-| Point at 1–2 Sep on the chart/table | "National Day at Nha Trang: **92%** already on the books, forecast closing at **97%** — so the system recommends raising BAR 12–15% with a 2-night minimum stay. Opportunities, not just risks." | The "National Day compression" alert quotes the same 92%→97% |
+| **Select "The Anam Nha Trang" in the property filter**, then point at 1–2 Sep in the chart/table | "National Day at Nha Trang: **92%** already on the books, forecast closing at **97%** — so the system recommends raising BAR 12–15% with a 2-night minimum stay. Opportunities, not just risks." (The 92%/97% figures are per-property — they only show with Nha Trang selected; at "All properties" the portfolio blend is much lower.) | The forecast table rows for 1–2 Sep read OTB 92% / Forecast 97% (click "Show all 60 days" or hover the chart); the "National Day compression" alert quotes the same pair. **Reset the filter to All properties before the next step.** |
 
 ### 4. Property drill-down (45 seconds)
 
@@ -61,7 +61,7 @@
 
 | Question | Answer + where to point |
 |---|---|
-| "Where does that number come from?" | Every spoken figure has a second source: the Portfolio row, the detail tables, the channel table (listed per step under "If challenged") |
+| "Where does that number come from?" | Every core performance figure has a second source: the Portfolio row, the detail tables, the channel table (listed per step under "If challenged"). Recommendation impacts ($38K, BAR steps) are modeled estimates shown on their card — say so directly |
 | "How accurate is the forecast?" | The dashboard shows confidence bands rather than a single point — honest about uncertainty; backtesting accuracy belongs to part 2 (MiroFish) |
 | "Is this real data?" | The demo runs on mock data with the exact schema of the real export (17 columns — open the Data page); every UI component is unchanged when the backend connects |
 | "What about guest privacy?" | Only aggregated/anonymised data is ingested, nationality at ISO-2 level, in-region hosting — see `deployment_plan.md` |

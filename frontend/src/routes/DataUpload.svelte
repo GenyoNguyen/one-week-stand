@@ -195,30 +195,34 @@
       </div>
       <div class="panel-body" aria-live="polite">
         {#if stage === 'idle' || stage === 'validating'}
-          <label
+          <!-- semantic button = native keyboard support, single tab stop;
+               the real file input is out of the tab order entirely -->
+          <input
+            bind:this={fileInput}
+            class="file-input"
+            type="file"
+            accept=".csv"
+            tabindex="-1"
+            aria-hidden="true"
+            on:change={onPick}
+          />
+          <button
+            type="button"
             class="dropzone"
             class:over={dragOver}
-            role="button"
-            tabindex="0"
             aria-label="Upload a daily CSV export"
+            on:click={() => fileInput?.click()}
             on:dragover|preventDefault={() => (dragOver = true)}
             on:dragleave={() => (dragOver = false)}
-            on:drop={onDrop}
-            on:keydown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                fileInput?.click();
-              }
-            }}
+            on:drop|preventDefault={onDrop}
           >
-            <input bind:this={fileInput} type="file" accept=".csv" on:change={onPick} />
             {#if stage === 'validating'}
               <span>Checking file…</span>
             {:else}
               <span><b>Drop a daily CSV export here</b> or click to browse</span>
               <span class="hint">Same columns as the PMS/CRS daily export — see template</span>
             {/if}
-          </label>
+          </button>
         {:else if stage === 'report' && report}
           <div class="report">
             <div class="report-head">
@@ -349,6 +353,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
+    width: 100%;
     min-height: 150px;
     border: 1.5px dashed var(--hairline-strong);
     border-radius: var(--radius-panel);
@@ -357,6 +362,7 @@
     text-align: center;
     padding: 20px;
     font-size: 13px;
+    font-family: inherit;
     color: var(--ink-2);
   }
   .dropzone.over {
@@ -367,8 +373,7 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
-  /* visually hidden, not display:none — keeps the input usable by AT */
-  .dropzone input {
+  .file-input {
     position: absolute;
     width: 1px;
     height: 1px;
