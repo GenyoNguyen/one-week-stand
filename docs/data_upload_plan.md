@@ -1,65 +1,65 @@
-# Data Upload / Connect Plan
+# Data Upload / Connection Plan
 
-> Đề bài: "Integration: read structured daily exports from property management and reservation systems. A direct connector is welcome, but a scheduled file export is acceptable."
+> From the track brief: "Integration: read structured daily exports from property management and reservation systems. A direct connector is welcome, but a scheduled file export is acceptable."
 
-## Ba đường đưa dữ liệu vào (cùng một pipeline validate)
+## Three routes into the system (one shared validation pipeline)
 
-| # | Phương án | Khi nào dùng | Trạng thái |
+| # | Route | When to use | Status |
 |---|---|---|---|
-| 1 | **Scheduled file export** (khuyến nghị) | Vận hành hàng ngày — PMS/CRS drop CSV vào SFTP/thư mục chia sẻ lúc 05:30, ingest job tự nạp, 06:00 dashboard sẵn sàng. Không thao tác tay. | Thiết kế xong, cần Phần 1 |
-| 2 | **Manual upload** (trang Data trong UI) | Bổ sung/sửa dữ liệu, backfill lịch sử, hoặc khi đường tự động trục trặc | **Đã có UI + validate client-side** |
-| 3 | **Direct PMS/CRS connector** (Opera Cloud / SynXis API) | Sau pilot, khi có credentials — bỏ hẳn bước file | Giai đoạn 3 |
+| 1 | **Scheduled file export** (recommended) | Daily operations — PMS/CRS drops the CSV to SFTP/a shared folder at 05:30, the ingest job loads it, dashboards are ready by 06:00. No manual step. | Designed; needs part 1 |
+| 2 | **Manual upload** (Data page in the UI) | Corrections, historical backfill, or as a fallback when the automated feed fails | **UI + client-side validation shipped** |
+| 3 | **Direct PMS/CRS connector** (Opera Cloud / SynXis API) | Post-pilot, once credentials are provisioned — removes the file step entirely | Phase 3 |
 
-Cả ba đường đổ về cùng một validation trước khi ghi: sai schema thì từ chối cả file và báo lỗi cụ thể, không nạp nửa vời.
+All three routes land in the same validation before anything is written: a file that fails schema checks is rejected whole with a specific error — never partially ingested.
 
-## Schema file CSV hàng ngày (17 cột bắt buộc)
+## Daily CSV schema (17 required columns)
 
-Mỗi dòng = một tổ hợp `ngày lưu trú × property × segment × channel`. File có thể chứa nhiều ngày (backfill) hoặc một ngày (daily).
+One row = one combination of `stay date × property × segment × channel`. A file may contain many dates (backfill) or a single day (daily feed).
 
-| Cột | Kiểu | Ví dụ | Ghi chú |
+| Column | Type | Example | Notes |
 |---|---|---|---|
-| `date` | YYYY-MM-DD | 2026-07-09 | Ngày lưu trú (stay date) |
-| `property` | mã | ACR / AMN / ANT | Cam Ranh, Mui Ne, Nha Trang |
-| `rooms_available` | int | 213 | Số phòng khả dụng |
-| `rooms_sold` | int | 196 | Phòng đã bán (quá khứ) / OTB (tương lai) |
+| `date` | YYYY-MM-DD | 2026-07-09 | Stay date |
+| `property` | code | ACR / AMN / ANT | Cam Ranh, Mui Ne, Nha Trang |
+| `rooms_available` | int | 213 | |
+| `rooms_sold` | int | 196 | Actual (past) / on-the-books (future) |
 | `room_revenue` | number | 41160 | USD |
 | `adr` | number | 210.00 | |
 | `occupancy` | 0–1 | 0.92 | |
 | `market_segment` | text | OTA / Direct / Corporate / Group / Wholesale | |
-| `channel` | text | Booking.com / Brand.com / GDS... | |
-| `guest_nationality` | ISO-2 | KR | Mức quốc tịch — không có dữ liệu định danh khách |
+| `channel` | text | Booking.com / Brand.com / GDS … | |
+| `guest_nationality` | ISO-2 | KR | Country level only — no guest-identifying data |
 | `lead_time_days` | int | 21 | |
-| `cancellations` | int | 3 | Room nights hủy trong ngày báo cáo |
+| `cancellations` | int | 3 | Room nights cancelled on the reporting day |
 | `budget_occupancy` | 0–1 | 0.89 | |
 | `budget_adr` | number | 205.00 | |
-| `ly_occupancy` | 0–1 | 0.87 | Cùng kỳ năm trước |
+| `ly_occupancy` | 0–1 | 0.87 | Same time last year |
 | `ly_adr` | number | 198.00 | |
-| `otb_rooms` | int | 180 | On-the-books tại thời điểm export |
+| `otb_rooms` | int | 180 | On the books at export time |
 
-Template mẫu: nút **"Download CSV template"** ngay trên trang Data (sinh đúng header + 2 dòng ví dụ). Đây cũng là hợp đồng dữ liệu giữa Phần 1 (ingest) và Phần 4 (dashboard) — đổi schema phải cập nhật cả hai + file này.
+A sample file is one click away: the **"Download CSV template"** button on the Data page generates the exact header plus two example rows. This table is also the data contract between part 1 (ingest) and part 4 (dashboard) — any schema change must update both sides and this document.
 
-## Validate — hai lớp
+## Validation — two layers
 
-**Lớp 1 — client-side (đã chạy trong UI, không cần backend):**
-- Đúng đuôi `.csv`, đọc được, có dòng dữ liệu.
-- Đủ 17 cột bắt buộc (thiếu cột nào báo đúng cột đó); cột thừa được liệt kê và bỏ qua.
-- Tóm tắt trước khi Import: số dòng, khoảng ngày, danh sách property — người dùng xác nhận đúng file rồi mới nạp.
+**Layer 1 — client-side (already live in the UI, no backend needed):**
+- File is `.csv`, readable, and has data rows.
+- All 17 required columns present (missing ones are named individually); extra columns are listed and ignored.
+- A pre-import summary — row count, date range, properties found — so the user confirms it's the right file before importing.
 
-**Lớp 2 — server-side (Phần 1, khi backend nối vào):**
-- Kiểu dữ liệu từng cột, occupancy ∈ [0,1], `rooms_sold ≤ rooms_available`.
-- Liên tục ngày theo property (cảnh báo nếu thủng ngày); trùng khóa `date×property×segment×channel` → lấy bản mới nhất.
-- Ghi log ingest: file, người/nguồn nạp, số dòng nhận/loại, thời điểm — hiển thị ngược lên bảng "Ingest status" của trang Data.
+**Layer 2 — server-side (part 1, once the backend is connected):**
+- Per-column types, `occupancy ∈ [0,1]`, `rooms_sold ≤ rooms_available`.
+- Date continuity per property (gaps produce a warning); duplicate `date×property×segment×channel` keys → latest version wins.
+- An ingest log — file, uploader/source, rows accepted/rejected, timestamp — surfaced back into the Data page's "Ingest status" table.
 
-## Xử lý sự cố dữ liệu
+## Failure handling
 
-| Tình huống | Hành vi hệ thống |
+| Situation | System behaviour |
 |---|---|
-| 06:00 thiếu file của 1 property | Dashboard vẫn lên với 2 property còn lại; banner + dòng freshness ghi rõ property nào đang dùng dữ liệu cũ; alert cho admin |
-| File sai schema | Từ chối cả file, không nạp nửa vời; lỗi hiển thị ở trang Data + log |
-| Nạp lại cùng ngày (số điều chỉnh) | Upsert theo khóa — bản mới ghi đè, có log phiên bản |
-| Backfill lịch sử | Cùng schema, một file nhiều ngày; khuyến nghị ≤ 1 năm/file |
+| One property's file missing at 06:00 | Dashboard opens with the other two; a banner plus the freshness line state exactly which property is on stale data; admin is alerted |
+| File fails schema validation | Rejected whole — no partial ingest; the error shows on the Data page and in the log |
+| Re-upload of an existing day (restated figures) | Upsert by key — the new version overwrites, with a version log entry |
+| Historical backfill | Same schema, one file spanning many dates; ≤ 1 year per file recommended |
 
-## Trạng thái hiện tại
+## Current status
 
-- Trang **Data** (`#data`): bảng ingest status (mock), dropzone + validate 17 cột client-side, template download, mô tả 2 phương án kết nối — **hoạt động được ngay, không cần backend**.
-- Nút Import hiện dừng ở "Queued" (mock). Khi Phần 1 sẵn sàng: đổi 1 hàm trong `frontend/src/lib/api.js` để POST `/api/upload` — UI không đổi.
+- The **Data** page (`#data`) ships today: ingest-status table (mock), dropzone with 17-column client-side validation, template download, and both connection options described — **fully usable without a backend**.
+- The Import button currently ends at a "Queued" state (mock). When part 1 is ready, one function in `frontend/src/lib/api.js` switches to POST `/api/upload` — the UI is unchanged.

@@ -1,104 +1,105 @@
-# User Flow — Sử dụng hàng ngày
+# User Flow — Daily Operations
 
-> Nguyên tắc thiết kế: mỗi view trả lời một câu hỏi nghiệp vụ. Người dùng không "khám phá dashboard" — họ đi theo thói quen buổi sáng đã có sẵn, chỉ là nhanh hơn Excel.
+> Design principle: every view answers exactly one business question. Users don't "explore a dashboard" — they follow the morning routine they already have, just faster than Excel.
 
-## Nhịp dữ liệu
-
-```
-05:30  PMS/CRS xuất file CSV hàng ngày → thư mục chia sẻ / SFTP
-05:35  Ingest job (Phần 1) validate + nạp dữ liệu
-05:45  Forecast (Phần 2) + Intelligence (Phần 3) chạy lại
-06:00  Dashboard sẵn sàng — dòng "Data to 06:00" trên FilterBar xác nhận
-```
-
-Nếu 06:15 mà FilterBar vẫn hiện ngày hôm trước → dữ liệu chưa về, liên hệ admin (xem `deployment_plan.md`, mục giám sát).
-
-## Flow 1 — Giao ban sáng của Revenue/Commercial Analyst (07:30, ~10 phút)
-
-Đây là flow chính, thay thế 2–3 giờ ghép Excel mỗi sáng.
+## Data rhythm
 
 ```
-Mở dashboard (#daily)
- │  Đọc hero RevPAR tonight + delta vs Budget/LY   (30 giây: hôm nay tốt hay xấu?)
- │  Quét 4 KPI: Occupancy · ADR · Pickup 24h · Revenue OTB 30d
- │  Liếc "Occupancy outlook — next 30 days": có hố nào phía trước không?
+05:30  PMS/CRS writes the daily CSV export → shared folder / SFTP
+05:35  Ingest service (part 1) validates and loads it
+05:45  Forecast (part 2) and intelligence (part 3) re-run
+06:00  Dashboard is ready — the "Data to 06:00" line in the filter bar confirms it
+```
+
+If the filter bar still shows yesterday's date at 06:15, the export hasn't arrived — contact the admin (see the monitoring section of `deployment_plan.md`).
+
+## Flow 1 — Revenue/Commercial analyst's morning briefing (07:30, ~10 minutes)
+
+The core flow. It replaces the 2–3 hours previously spent assembling Excel every morning.
+
+```
+Open the dashboard (#daily)
+ │  Read the hero: RevPAR tonight + deltas vs Budget/LY   (30 seconds: good day or bad day?)
+ │  Scan the 4 KPIs: Occupancy · ADR · Pickup 24h · Revenue OTB 30d
+ │  Glance at "Occupancy outlook — next 30 days": any holes ahead?
  │
- ├─ Cột "Needs attention" (tối đa 3 cảnh báo nặng nhất)
- │   └─ Click một cảnh báo → mở ĐÚNG alert đó trong Alerts & actions
- │       │  Đọc evidence (sparkline) + Recommended action + impact
- │       ├─ Accept → tự gán owner (Revenue/Sales/Distribution/Reservations)
- │       │           → card chuyển "Resolved today", nói lại trong stand-up
- │       └─ Dismiss → nêu lý do miệng trong stand-up (Undo nếu bấm nhầm)
+ ├─ "Needs attention" column (top 3 alerts by severity)
+ │   └─ Click an alert → opens THAT alert in Alerts & actions
+ │       │  Read the evidence (sparkline) + recommended action + impact estimate
+ │       ├─ Accept → auto-assigned to its owner (Revenue/Sales/Distribution/Reservations)
+ │       │           → card moves to "Resolved today"; repeat it in stand-up
+ │       └─ Dismiss → give the reason verbally in stand-up (Undo if misclicked)
  │
- └─ Bảng "By property — tonight" + hàng Portfolio
-     └─ Property nào lệch nhiều → click hàng → Property view (Flow 3)
+ └─ "By property — tonight" table + Portfolio total row
+     └─ A property is off? → click its row → Property view (Flow 3)
 ```
 
-**Kết thúc giao ban:** mọi alert trong queue đã Accept hoặc Dismiss. Câu đo thành công của track: *đội ngũ hành động theo đề xuất, không chỉ đọc dashboard.*
+**End state of the briefing:** every alert in the queue has been accepted or dismissed. This is the track's success criterion: *teams acting on the system's recommendation, not merely reading its dashboard.*
 
-## Flow 2 — GM / Group Commercial lướt nhanh (bất kỳ lúc nào, ~2 phút)
-
-```
-#daily  → hero + 2 dòng delta là đủ trả lời "đêm nay thế nào?"
-#forecast → fan chart: forward book so với budget; dải tin cậy hẹp = chắc chắn
-#alerts → đếm "x accepted today" ở subtitle: đội có đang hành động không?
-```
-
-GM không cần thao tác gì — mọi con số nói to được đều có nguồn thứ hai trên màn hình (hàng Portfolio, bảng chi tiết) khi bị hỏi lại.
-
-## Flow 3 — Revenue Manager đào sâu một property (khi có alert hoặc thứ Hai hàng tuần)
+## Flow 2 — GM / Group Commercial quick read (any time, ~2 minutes)
 
 ```
-#property (từ drill-down hoặc chọn tab Cam Ranh / Mui Ne / Nha Trang)
+#daily   → the hero and its two delta lines answer "how is tonight?"
+#forecast → fan chart: the forward book against budget; narrow bands = high confidence
+#alerts  → the "x accepted today" counter in the subtitle: is the team acting?
+```
+
+GMs never need to operate anything — every number spoken out loud has a second on-screen source (the Portfolio row, the detail tables) when someone asks "where does that come from?".
+
+## Flow 3 — Revenue manager deep-dive on one property (on an alert, or every Monday)
+
+```
+#property (via drill-down, or the Cam Ranh / Mui Ne / Nha Trang tabs)
  │  KPI row: Occ · ADR · Pickup 7d (vs pace needed) · Cancellations (vs norm)
- │  Booking pace curve: đường màu = năm nay, xám = cùng kỳ năm ngoái
- │     → đang nhanh hay chậm hơn LY? Gap ở đầu đường = tuần có vấn đề
- │  Pickup heatmap: ô đậm = ngày đang hút booking; hàng nhạt bất thường = soi
- │  Segment mix: cơ cấu OTB 30 ngày tới, legend có % chính xác
- └─ Quyết định rate/inventory → thực hiện trong RMS/PMS (ngoài hệ thống này)
+ │  Booking pace curve: coloured line = this year, gray = same time last year
+ │     → running ahead or behind LY? A gap at the head of the curve = the problem week
+ │  Pickup heatmap: dark cells = dates currently absorbing bookings; an unusually
+ │     pale row is worth investigating
+ │  Segment mix: OTB for the next 30 days, legend carries exact shares
+ └─ Rate/inventory decisions are then executed in the RMS/PMS (outside this system)
 ```
 
-## Flow 4 — Reservations/Distribution khi có biến động kênh
+## Flow 4 — Reservations/Distribution when a channel misbehaves
 
 ```
 #segments
- │  Bảng "By channel": cột "Cxl rate (prev)" — số đỏ đậm = spike
- │  Ví dụ demo: Booking.com 19% (8%) ← đúng con số alert Mui Ne trích dẫn
- │  Segment mix theo property + "View as table"
- └─ Top source markets: thị trường nào tăng/giảm vs LY (KR +34%...)
+ │  "By channel" table: the "Cxl rate (prev)" column — bold red = spike
+ │  Demo example: Booking.com 19% (8%) ← the exact pair the Mui Ne alert quotes
+ │  Segment mix by property + "View as table"
+ └─ Top source markets: which markets are up/down vs LY (KR +34%, …)
 ```
 
-## Flow 5 — Operations lập kế hoạch nhân sự (chiều, cho tuần tới)
+## Flow 5 — Operations planning staffing (afternoon, for the coming week)
 
 ```
-#forecast → chọn 30d → đọc bảng "Forecast detail by stay date"
-   Cột Forecast + 80% band theo từng ngày = số phòng dự kiến để xếp ca
-   Cuối tuần (nền đậm) và ngày lễ nổi bật ngay trong bảng
+#forecast → select 30d → read "Forecast detail by stay date"
+   The Forecast column + 80% band per day = expected rooms for shift planning
+   Weekends (shaded rows) and holidays stand out directly in the table
 ```
 
-## Flow 6 — Nạp dữ liệu (admin / analyst, khi cần)
+## Flow 6 — Loading data (admin / analyst, when needed)
 
 ```
 #data
- │  Bảng "Ingest status": 3 property × lần nhận cuối × số dòng × trạng thái
- ├─ Bình thường: không phải làm gì (scheduled export tự chạy)
- └─ Bất thường / bổ sung: kéo-thả CSV vào "Manual upload"
-     → validate tại chỗ (17 cột bắt buộc, khoảng ngày, property)
-     → Ready → Import;  lỗi → báo đúng cột thiếu, tải template mẫu
+ │  "Ingest status" table: 3 properties × last received × rows × status
+ ├─ Normal days: nothing to do (the scheduled export runs itself)
+ └─ Exceptions / backfill: drag a CSV into "Manual upload"
+     → validated in place (17 required columns, date range, properties)
+     → Ready → Import;  on error → the exact missing columns, plus a template download
 ```
 
-Chi tiết schema và các phương án kết nối: `data_upload_plan.md`.
+Schema details and connection options: `data_upload_plan.md`.
 
-## Vòng đời một cảnh báo
+## Lifecycle of an alert
 
 ```
-Intelligence (Phần 3) sinh alert ──▶ Queue (#alerts, xếp theo Risk > Watch > Opportunity)
-        │ hiện tối đa 3 trên #daily "Needs attention"
+Intelligence (part 3) raises an alert ──▶ Queue (#alerts, ordered Risk > Watch > Opportunity)
+        │ the top 3 also surface on #daily under "Needs attention"
         ▼
-   Analyst mở (1 card một lúc — progressive disclosure)
-        ├─ Accept  ──▶ "Resolved today" + gán owner ──▶ nhắc lại trong stand-up
-        └─ Dismiss ──▶ "Resolved today" (kèm lý do miệng)
-              └─ Undo bất kỳ lúc nào trong ngày → quay lại queue
+   Analyst opens it (one card at a time — progressive disclosure)
+        ├─ Accept  ──▶ "Resolved today" + owner assigned ──▶ repeated in stand-up
+        └─ Dismiss ──▶ "Resolved today" (reason given verbally)
+              └─ Undo at any point during the day → back to the open queue
 ```
 
-Trạng thái accept/dismiss hiện lưu trong phiên (mock). Khi backend nối vào, trạng thái + owner + timestamp sẽ ghi qua API để làm báo cáo "acted on" hàng tuần — đúng tiêu chí thành công của track.
+Accept/dismiss state is currently session-local (mock). Once the backend is connected, status + owner + timestamp are written through the API, enabling a weekly "acted on" report — the track's success measure, made auditable.

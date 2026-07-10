@@ -1,61 +1,61 @@
 # Deployment Plan
 
-> Yêu cầu từ đề bài: cloud hoặc hybrid đều chấp nhận, không bắt buộc on-premise, ưu tiên cloud phổ biến để dễ hỗ trợ. Không dùng dữ liệu khách thật trong giai đoạn build; pilot trên dữ liệu thật cần tuân thủ bảo vệ dữ liệu cá nhân Việt Nam và giữ dữ liệu trong khu vực.
+> From the track brief: cloud-based or hybrid is acceptable, no on-premise requirement, a widely supported cloud is preferred for ease of support. No live guest data during the build; a later pilot on real data should respect Vietnam's personal data protection requirements, with guest data remaining in-region preferred.
 
-## Kiến trúc tổng thể
+## Architecture overview
 
 ```
-PMS / CRS (Opera, SynXis...)
-   │  export CSV hàng ngày 05:30 (SFTP / shared folder)   ← Giai đoạn 1
-   │  (API connector trực tiếp                             ← Giai đoạn 3)
+PMS / CRS (Opera, SynXis, …)
+   │  daily CSV export at 05:30 (SFTP / shared folder)      ← Phase 1
+   │  (direct API connector                                  ← Phase 3)
    ▼
-Ingest service (Phần 1 — FastAPI job): validate schema 17 cột → làm sạch → lưu
+Ingest service (part 1 — FastAPI job): validate 17-column schema → clean → store
    ▼
-Forecast engine (Phần 2 — MiroFish) + Intelligence (Phần 3 — alerts/recommendations)
+Forecast engine (part 2 — MiroFish) + intelligence (part 3 — alerts/recommendations)
    ▼
 REST API (FastAPI): /kpis /forecast /alerts /recommendations /upload
    ▼
-Dashboard (Phần 4 — Svelte, static build ~500KB kể cả fonts self-host)
+Dashboard (part 4 — Svelte, static build ~500KB including self-hosted fonts)
 ```
 
-Frontend là static files — không có secret, không gọi dịch vụ ngoài (fonts đã self-host), chỉ nói chuyện với API qua một origin.
+The frontend is static files — no secrets, no third-party calls at runtime (fonts are self-hosted), and it talks to the API on a single origin.
 
-## Ba giai đoạn triển khai
+## Three rollout phases
 
-### Giai đoạn 0 — Demo hackathon (hiện tại)
-- Chạy local: `npm run dev --prefix frontend` (mock data, offline được).
-- Không cần hạ tầng. Đây là trạng thái đã được review sign-off 27/27.
+### Phase 0 — Hackathon demo (current state)
+- Runs locally: `npm run dev --prefix frontend` (mock data, works offline).
+- No infrastructure required. This is the state that passed a 4-round review sign-off at 27/27.
 
-### Giai đoạn 1 — Pilot 1 property (tuần 1–4 sau hackathon)
-- **Hạ tầng:** 1 VM nhỏ (2 vCPU / 4GB) chạy Docker Compose: `nginx` (serve static + reverse proxy) + `api` (FastAPI) + `postgres`. Một máy là đủ cho 3 properties × vài năm dữ liệu daily.
-- **Region:** ưu tiên trong nước (VNG Cloud, FPT Cloud, Viettel Cloud) hoặc AWS `ap-southeast-1` (Singapore) nếu tập đoàn đã có sẵn — thỏa yêu cầu "data remaining in-region would be preferred".
-- **Dữ liệu vào:** scheduled CSV export qua SFTP 05:30 (không đụng hệ thống PMS production). Upload tay qua trang Data làm đường dự phòng.
-- **Truy cập:** HTTPS + SSO của tập đoàn (hoặc basic auth cho pilot); chỉ mạng nội bộ/VPN.
+### Phase 1 — Pilot on one property (weeks 1–4 after the hackathon)
+- **Infrastructure:** one small VM (2 vCPU / 4GB) running Docker Compose: `nginx` (static files + reverse proxy) + `api` (FastAPI) + `postgres`. A single machine comfortably holds 3 properties × several years of daily data.
+- **Region:** prefer an in-country provider (VNG Cloud, FPT Cloud, Viettel Cloud), or AWS `ap-southeast-1` (Singapore) if the group already uses it — satisfying the "data remaining in-region would be preferred" requirement.
+- **Data in:** scheduled CSV export over SFTP at 05:30 (no access to the production PMS itself). Manual upload via the Data page remains the fallback path.
+- **Access:** HTTPS behind the group's SSO (or basic auth for the pilot); internal network/VPN only.
 
-### Giai đoạn 2 — Cả 3 properties + go-live (tuần 5–8)
-- Bật đủ 3 nguồn export; backfill 2 năm lịch sử để pace/LY chính xác.
-- Đào tạo: 1 buổi 45 phút cho commercial team (đi theo `user_flow.md`), 15 phút cho GM.
-- Chạy song song với quy trình Excel 2 tuần → so số → cắt Excel.
+### Phase 2 — All three properties + go-live (weeks 5–8)
+- Enable all three export feeds; backfill two years of history so pace and LY comparisons are accurate.
+- Training: one 45-minute session for the commercial teams (following `user_flow.md`), 15 minutes for GMs.
+- Run in parallel with the Excel process for two weeks → reconcile numbers → retire the Excel workflow.
 
-### Giai đoạn 3 — Connector trực tiếp (sau pilot, tùy chọn)
-- API pull từ Opera Cloud / SynXis thay file export. Schema không đổi nên dashboard và forecast không phải sửa.
+### Phase 3 — Direct connector (post-pilot, optional)
+- API pull from Opera Cloud / SynXis replaces the file export. The schema is unchanged, so neither the dashboard nor the forecast needs modification.
 
-## Tuân thủ & bảo mật dữ liệu
+## Compliance & data protection
 
-| Yêu cầu | Cách đáp ứng |
+| Requirement | How it is met |
 |---|---|
-| Không dữ liệu khách thật khi build | Toàn bộ build/demo dùng mock + sample ẩn danh |
-| Nghị định 13/2023/NĐ-CP (PDPD) | Pilot chỉ nhận dữ liệu đã tổng hợp/ẩn danh: không tên khách, không số phòng, không liên lạc. `guest_nationality` giữ ở mức quốc tịch (không định danh) |
-| Dữ liệu trong khu vực | Region VN/SG như trên; không dịch vụ SaaS thứ ba nhận dữ liệu |
-| Phân quyền | Pilot: 1 role xem tất; go-live: role theo property nếu tập đoàn yêu cầu |
+| No live guest data during the build | The entire build/demo runs on mock + anonymised sample data |
+| Vietnam PDPD (Decree 13/2023/ND-CP) | The pilot ingests aggregated/anonymised data only: no guest names, room numbers, or contact details. `guest_nationality` stays at country level (non-identifying) |
+| Data in-region | VN/SG regions as above; no third-party SaaS receives the data |
+| Access control | Pilot: one read-all role; go-live: per-property roles if the group requires them |
 
-## Vận hành & giám sát
+## Operations & monitoring
 
-- **Health:** `GET /api/health` + uptime ping 5 phút/lần.
-- **Ingest guard:** nếu 06:00 chưa nhận đủ 3 file → email/Zalo cho admin + banner trên dashboard hiện dữ liệu cũ kèm ngày (không bao giờ hiện số cũ như số mới — nguyên tắc data freshness).
-- **Backup:** pg_dump hàng đêm, giữ 30 ngày. Dữ liệu gốc là file export nên luôn re-ingest lại được.
-- **Rollback:** static frontend + docker tag theo version — rollback = đổi tag, <5 phút.
+- **Health:** `GET /api/health` + an uptime ping every 5 minutes.
+- **Ingest guard:** if fewer than 3 files have arrived by 06:00 → email/Zalo alert to the admin, and the dashboard shows a banner with the stale date (old numbers are never presented as fresh — the data-freshness principle).
+- **Backups:** nightly `pg_dump`, 30-day retention. Source-of-truth is the export files, so a full re-ingest is always possible.
+- **Rollback:** static frontend + version-tagged Docker images — rollback = switch the tag, under 5 minutes.
 
-## Chi phí ước tính (pilot)
+## Estimated cost (pilot)
 
-1 VM 4GB in-region ≈ $25–40/tháng + domain/TLS. Không phí license — toàn bộ stack open-source.
+One 4GB in-region VM ≈ $25–40/month plus domain/TLS. No licence fees — the whole stack is open source.
