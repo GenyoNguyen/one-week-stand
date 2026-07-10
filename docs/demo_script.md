@@ -1,6 +1,6 @@
 # Demo Script — Final Presentation Structure
 
-> Target length: **6 minutes of demo + 2 minutes of Q&A**. The click path below was verified end-to-end by an independent "judge dry-run" (review rounds 3–4, no dead ends). Every number spoken out loud has a second on-screen source — the "If challenged" column says where to point.
+> Target length: **6 minutes of demo + 2 minutes of Q&A**. The click path below was verified end-to-end by an independent "judge dry-run" (review rounds 3–4, no dead ends). Every core performance figure has a second on-screen source — the "If challenged" column says where to point. Recommendation impacts ($38K, BAR steps) are modeled estimates that live on their card: own them as estimates rather than pointing elsewhere.
 
 ## Pre-stage checklist
 
@@ -20,7 +20,7 @@
 | Do | Say | If challenged |
 |---|---|---|
 | Open `#daily`, point at the freshness line in the filter bar | "It's 06:00 — data from all three resorts has already assembled itself." | "Data to 06:00 · PMS + CRS daily export" |
-| Point at the hero | "The whole portfolio tonight: RevPAR **$204**, about 5% over budget and 14–19% ahead of last year depending on the metric." | The **Portfolio** row at the bottom of the table: 91% · $224 · $204 — every digit matches |
+| Point at the hero | "The whole portfolio tonight: RevPAR **$204** — about 5% over budget and roughly 14% ahead of last year." | The **Portfolio** row at the bottom of the table: 91% · $224 · $204 — every digit matches; the hero's own delta lines show +4.9% and +13.7% |
 | Sweep the 4 KPIs | "Occupancy **91%**, pickup in the last 24 hours, 30-day OTB revenue — each with its comparison. No naked numbers." | The delta under every KPI |
 | Point at the outlook chart | "The next 30 days: the black line is what's on the books; the dashed line is the forecast with 50/80% confidence bands — we're honest about uncertainty." | "View as table" directly below the chart |
 
@@ -29,7 +29,7 @@
 | Do | Say | If challenged |
 |---|---|---|
 | Point at "Needs attention", click **"Pace 18% behind for stays 3–9 Aug"** | "The system doesn't just report — it points at what needs a decision. The first week of August at Cam Ranh is pacing **18%** behind the same time last year." | The exact alert opens, with a 14-day pickup evidence sparkline |
-| Read the recommended action | "A concrete recommendation: open the promotional BAR tier midweek 3–7 Aug on Brand.com and OTA, hold weekend rates. Roughly **$38K** if pace recovers to last year's trajectory." | The accent-bordered action block + impact line |
+| Read the recommended action | "A concrete recommendation: open the promotional BAR tier midweek 3–7 Aug on Brand.com and OTA, hold weekend rates. Roughly **$38K** if pace recovers to last year's trajectory." | The accent-bordered action block + impact line (a modeled estimate — say so if asked, don't point elsewhere) |
 | **Click Accept** | "One click — the action is assigned to the Revenue team. This is the brief's own success measure: *teams acting on the recommendation, not merely reading a dashboard*." | Card shows "Accepted · sent to Revenue" under Resolved today; the subtitle counts "1 accepted today" |
 | Open the Mui Ne alert | "A cancellation spike: **114** room nights in seven days, **2.6×** the norm — Booking.com's cancellation rate jumped from **8% to 19%**." | Segments & channels: the Booking.com row reads "19% (8%)"; Property view Mui Ne: KPI "114 rm · vs trailing norm (2.6×)" |
 

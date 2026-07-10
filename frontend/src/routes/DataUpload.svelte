@@ -29,6 +29,7 @@
   let stage = 'idle';
   let dragOver = false;
   let report = null;
+  let fileInput;
 
   function onDrop(e) {
     e.preventDefault();
@@ -43,41 +44,75 @@
     e.target.value = '';
   }
 
+  // Minimal RFC 4180 parser: quoted fields, escaped quotes (""), embedded
+  // commas and newlines. Real PMS exports come out of Excel, which produces
+  // all of those — naive split(',') mis-reads them.
+  function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (inQuotes) {
+        if (ch === '"') {
+          if (text[i + 1] === '"') {
+            cell += '"';
+            i++;
+          } else inQuotes = false;
+        } else cell += ch;
+      } else if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ',') {
+        row.push(cell);
+        cell = '';
+      } else if (ch === '\n' || ch === '\r') {
+        if (ch === '\r' && text[i + 1] === '\n') i++;
+        row.push(cell);
+        if (row.some((c) => c.trim() !== '')) rows.push(row);
+        row = [];
+        cell = '';
+      } else cell += ch;
+    }
+    row.push(cell);
+    if (row.some((c) => c.trim() !== '')) rows.push(row);
+    return rows;
+  }
+
   function validateFile(file) {
     stage = 'validating';
     report = null;
     const reader = new FileReader();
     reader.onload = () => {
-      const text = String(reader.result || '');
-      const lines = text.split(/\r?\n/).filter((l) => l.trim().length);
-      const header = (lines[0] || '')
-        .split(',')
-        .map((h) => h.trim().toLowerCase().replace(/^"|"$/g, ''));
+      // strip Excel's UTF-8 BOM before parsing, or the first header fails the check
+      const text = String(reader.result || '').replace(/^﻿/, '');
+      const table = parseCsv(text);
+      const header = (table[0] || []).map((h) => h.trim().toLowerCase());
       const missing = REQUIRED_COLUMNS.filter((c) => !header.includes(c));
       const extra = header.filter((c) => c && !REQUIRED_COLUMNS.includes(c));
+      const dataRows = table.slice(1);
 
-      // light content probing for the summary — not a full parse
       const dateIdx = header.indexOf('date');
       const propIdx = header.indexOf('property');
       const dates = [];
       const props = new Set();
-      for (const line of lines.slice(1)) {
-        const cells = line.split(',');
-        if (dateIdx >= 0 && cells[dateIdx]) dates.push(cells[dateIdx].trim());
-        if (propIdx >= 0 && cells[propIdx]) props.add(cells[propIdx].trim());
+      for (const cells of dataRows) {
+        if (dateIdx >= 0 && cells[dateIdx]?.trim()) dates.push(cells[dateIdx].trim());
+        if (propIdx >= 0 && cells[propIdx]?.trim()) props.add(cells[propIdx].trim());
       }
       dates.sort();
 
       report = {
         name: file.name,
         sizeKb: Math.max(1, Math.round(file.size / 1024)),
-        rows: Math.max(0, lines.length - 1),
+        rows: dataRows.length,
+        empty: table.length === 0,
         missing,
         extra,
         dateFrom: dates[0] ?? null,
         dateTo: dates[dates.length - 1] ?? null,
         properties: [...props],
-        ok: missing.length === 0 && lines.length > 1 && file.name.toLowerCase().endsWith('.csv')
+        ok: missing.length === 0 && dataRows.length > 0 && file.name.toLowerCase().endsWith('.csv')
       };
       stage = 'report';
     };
@@ -158,16 +193,25 @@
         <h2 class="kicker">Manual upload</h2>
         <button class="linkish" on:click={downloadTemplate}>Download CSV template</button>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" aria-live="polite">
         {#if stage === 'idle' || stage === 'validating'}
           <label
             class="dropzone"
             class:over={dragOver}
+            role="button"
+            tabindex="0"
+            aria-label="Upload a daily CSV export"
             on:dragover|preventDefault={() => (dragOver = true)}
             on:dragleave={() => (dragOver = false)}
             on:drop={onDrop}
+            on:keydown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                fileInput?.click();
+              }
+            }}
           >
-            <input type="file" accept=".csv" on:change={onPick} />
+            <input bind:this={fileInput} type="file" accept=".csv" on:change={onPick} />
             {#if stage === 'validating'}
               <span>Checking file…</span>
             {:else}
@@ -188,19 +232,24 @@
                 {#if report.dateFrom}· stay dates {report.dateFrom} → {report.dateTo}{/if}
                 {#if report.properties.length}· properties: {report.properties.join(', ')}{/if}
               </p>
+              {#if report.extra?.length}
+                <p class="hint">Ignored extra columns: {report.extra.join(', ')}</p>
+              {/if}
               <div class="actions">
                 <button class="primary" on:click={importFile}>Import</button>
                 <button class="ghost" on:click={reset}>Choose another file</button>
               </div>
             {:else}
-              <p class="err-line">
+              <p class="err-line" role="alert">
                 <span class="tag risk">Not importable</span>
                 {#if report.readError}
                   The file could not be read.
                 {:else if !report.name.toLowerCase().endsWith('.csv')}
                   Expected a .csv file.
+                {:else if report.empty}
+                  The file is empty.
                 {:else if report.rows === 0}
-                  No data rows found under the header.
+                  Header found, but no data rows under it.
                 {:else}
                   Missing columns: <b>{report.missing.join(', ')}</b>
                 {/if}
@@ -314,8 +363,18 @@
     border-color: var(--accent);
     background: var(--accent-soft);
   }
+  .dropzone:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* visually hidden, not display:none — keeps the input usable by AT */
   .dropzone input {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
   }
   .hint {
     font-size: 11.5px;
