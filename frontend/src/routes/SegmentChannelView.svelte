@@ -66,6 +66,29 @@
             <span><i style="background:{SERIES[i]}"></i>{s}</span>
           {/each}
         </div>
+        <details class="fallback">
+          <summary>View as table</summary>
+          <table class="data">
+            <thead>
+              <tr>
+                <th>Property</th>
+                {#each SEGMENTS as s}
+                  <th class="r">{s}</th>
+                {/each}
+              </tr>
+            </thead>
+            <tbody>
+              {#each mixRows as row (row.property.id)}
+                <tr>
+                  <td>{row.property.short}</td>
+                  {#each row.mix as m (m.segment)}
+                    <td class="r">{fmtPct(m.share)}</td>
+                  {/each}
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </details>
       </div>
     </section>
 
@@ -266,5 +289,18 @@
     font-size: 11px;
     color: var(--ink-3);
     margin-top: 6px;
+  }
+  .fallback {
+    margin-top: 10px;
+  }
+  .fallback summary {
+    font-size: 11.5px;
+    color: var(--accent-ink);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .fallback table {
+    margin-top: 8px;
+    max-width: 560px;
   }
 </style>

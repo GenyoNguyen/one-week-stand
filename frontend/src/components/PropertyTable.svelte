@@ -3,6 +3,7 @@
   import { fmtPct, fmtMoneyFull, fmtInt, fmtDelta, deltaClass, deltaArrow } from '../lib/formatters.js';
 
   export let rows = []; // [{property, occ, adr, revpar, pu7, delta}]
+  export let total = null; // portfolio rollup {occ, adr, revpar, pu7, delta} — same numbers the hero quotes
   export let compareLabel = 'vs budget';
 
   const dispatch = createEventDispatcher();
@@ -43,6 +44,20 @@
       </tr>
     {/each}
   </tbody>
+  {#if total}
+    <tfoot>
+      <tr class="total">
+        <td>Portfolio</td>
+        <td class="r">{fmtPct(total.occ)}</td>
+        <td class="r">{fmtMoneyFull(total.adr)}</td>
+        <td class="r">{fmtMoneyFull(total.revpar)}</td>
+        <td class="r">{fmtInt(total.pu7)} rm</td>
+        <td class="r">
+          <span class="delta {deltaClass(total.delta)}">{deltaArrow(total.delta)} {fmtDelta(total.delta)}</span>
+        </td>
+      </tr>
+    </tfoot>
+  {/if}
 </table>
 
 <style>
@@ -52,6 +67,12 @@
   .row:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: -2px;
+  }
+  .total td {
+    font-weight: 700;
+    border-top: 2px solid var(--hairline-strong);
+    border-bottom: none;
+    background: var(--panel-tint);
   }
   .dot {
     display: inline-block;

@@ -1,7 +1,7 @@
 <script>
   import RecommendationPanel from '../components/RecommendationPanel.svelte';
   import { getAlerts } from '../lib/api.js';
-  import { propertyFilter, alertStatus } from '../lib/stores.js';
+  import { propertyFilter, alertStatus, focusAlert } from '../lib/stores.js';
 
   let loading = true;
   let alerts = [];
@@ -34,7 +34,14 @@
   $: resolved = visible.filter((a) => $alertStatus[a.id]);
   $: acceptedCount = scoped.filter((a) => $alertStatus[a.id] === 'accepted').length;
 
-  // open the top of the queue once on first load, then let the user drive
+  // deep link from "Needs attention" wins; otherwise open the top of the
+  // queue once on first load, then let the user drive
+  $: if ($focusAlert) {
+    openId = $focusAlert;
+    filter = 'all';
+    autoOpened = true;
+    focusAlert.set(null);
+  }
   $: if (!autoOpened && open.length) {
     openId = open[0].id;
     autoOpened = true;

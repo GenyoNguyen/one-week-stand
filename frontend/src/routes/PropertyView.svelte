@@ -110,7 +110,7 @@
         label="Cancellations 7d"
         value={`${fmtInt(cxl7next30)} rm`}
         delta={(cxl7next30 - cxlNorm) / cxlNorm}
-        deltaLabel="vs trailing norm"
+        deltaLabel="vs trailing norm ({(cxl7next30 / cxlNorm).toFixed(1)}×)"
         goodWhenUp={false}
         spark={next30.map((d) => d.cxl7)}
         sparkCaption="by stay date, next 30 days"

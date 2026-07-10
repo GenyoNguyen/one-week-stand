@@ -21,6 +21,9 @@ export const compareMode = writable('budget'); // 'budget' | 'ly'
 // alert workflow state: id -> 'accepted' | 'dismissed'
 export const alertStatus = writable({});
 
+// one-shot deep link: "Needs attention" on Daily opens exactly this alert
+export const focusAlert = writable(null);
+
 export function setAlertStatus(id, status) {
   alertStatus.update((s) => {
     const next = { ...s };
