@@ -1,15 +1,21 @@
 <script>
   import { PROPERTIES, COMPARE_MODES, HORIZONS, DATA_ASOF, DATA_SOURCE } from '../lib/constants.js';
-  import { propertyFilter, horizon, compareMode, currentView } from '../lib/stores.js';
+  import { propertyFilter, selectedProperty, horizon, compareMode, currentView } from '../lib/stores.js';
 
   // only show controls that actually apply to the current view — a visible
   // 30/60/90 switch on views that ignore it teaches users the wrong model
   $: showHorizon = $currentView === 'forecast';
+
+  // property is ONE state: every control that picks a property writes both
+  // stores, so the global select and the Property-view tabs never disagree
+  function onPropChange(e) {
+    if (e.target.value !== 'ALL') selectedProperty.set(e.target.value);
+  }
 </script>
 
 <div class="bar">
   <div class="group">
-    <select class="prop" bind:value={$propertyFilter} aria-label="Property">
+    <select class="prop" bind:value={$propertyFilter} on:change={onPropChange} aria-label="Property">
       <option value="ALL">All properties</option>
       {#each PROPERTIES as p}
         <option value={p.id}>{p.name}</option>

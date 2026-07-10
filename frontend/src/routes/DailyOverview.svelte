@@ -81,7 +81,9 @@
     .slice(0, 3);
 
   function openProperty(id) {
+    // one property state: drill-down writes both stores atomically
     selectedProperty.set(id);
+    propertyFilter.set(id);
     navigate('property');
   }
 </script>
@@ -152,6 +154,29 @@
             height={252}
             label="{scopeName} occupancy outlook for the next 30 days"
           />
+          <details class="fallback">
+            <summary>View as table</summary>
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>Stay date</th>
+                  <th class="r">OTB occ</th>
+                  <th class="r">Forecast</th>
+                  <th class="r">{cmpLabel.replace('vs ', '')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each outlook as r (r.date)}
+                  <tr>
+                    <td>{fmtDateFull(r.date)}</td>
+                    <td class="r">{fmtPct(r.occ)}</td>
+                    <td class="r">{fmtPct(r.fcOcc)}</td>
+                    <td class="r">{fmtPct($compareMode === 'budget' ? r.budgetOcc : r.lyOcc)}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </details>
         </div>
       </div>
 
@@ -254,5 +279,18 @@
   }
   .props .panel-head {
     padding-bottom: 8px;
+  }
+  .fallback {
+    margin-top: 8px;
+  }
+  .fallback summary {
+    font-size: 11.5px;
+    color: var(--accent-ink);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .fallback table {
+    margin-top: 8px;
+    max-width: 420px;
   }
 </style>

@@ -6,7 +6,7 @@
   import { getSeries, getPaceCurve, getPickupCalendar, getSegmentMix } from '../lib/api.js';
   import { selectedProperty, propertyFilter, compareMode } from '../lib/stores.js';
   import { PROPERTIES, SERIES } from '../lib/constants.js';
-  import { fmtPct, fmtMoneyFull, fmtInt } from '../lib/formatters.js';
+  import { fmtPct, fmtMoneyFull, fmtInt, fmtDate } from '../lib/formatters.js';
 
   let loading = true;
   let today = null;
@@ -16,12 +16,11 @@
   let calendar = [];
   let mix = [];
 
-  // follow the global property filter when it changes to a specific property,
-  // without fighting the local tabs afterwards
-  let lastFilter = null;
-  $: if ($propertyFilter !== lastFilter) {
-    lastFilter = $propertyFilter;
-    if ($propertyFilter !== 'ALL') selectedProperty.set($propertyFilter);
+  // property is ONE state across the app: the tabs write both stores, so the
+  // global select can never disagree with the heading (review round 2)
+  function pick(id) {
+    selectedProperty.set(id);
+    propertyFilter.set(id);
   }
 
   let seq = 0; // drop stale responses if the property changes mid-flight
@@ -55,6 +54,9 @@
   $: cxl7next30 = next30.reduce((s, r) => s + r.cxl7, 0);
   // trailing norm = the pre-spike baseline the generator uses (~2% of OTB)
   $: cxlNorm = next30.reduce((s, r) => s + r.roomsSold * 0.02, 0);
+  // required pace: rooms still needed to hit forecast, spread over ~4.3 weeks
+  $: gapToForecast = next30.reduce((s, r) => s + Math.max(0, (r.fcOcc - r.occ) * r.capacity), 0);
+  $: requiredWeekly = gapToForecast / 4.3;
 </script>
 
 <div class="view reveal">
@@ -69,7 +71,7 @@
           role="tab"
           aria-selected={p.id === $selectedProperty}
           class:active={p.id === $selectedProperty}
-          on:click={() => selectedProperty.set(p.id)}
+          on:click={() => pick(p.id)}
         >
           <span class="dot" style="background:{p.color}"></span>{p.short}
         </button>
@@ -99,6 +101,8 @@
       <KpiCard
         label="Pickup 7d, next 30 days"
         value={`${fmtInt(pu7next30)} rm`}
+        delta={(pu7next30 - requiredWeekly) / requiredWeekly}
+        deltaLabel="vs pace needed for forecast"
         spark={next30.map((d) => d.pu7)}
         sparkCaption="by stay date"
       />
@@ -146,6 +150,25 @@
         <div class="panel-head"><h2 class="kicker">7-day pickup by stay date</h2></div>
         <div class="panel-body">
           <Heatmap cells={calendar} />
+          <details class="fallback">
+            <summary>View as table</summary>
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>Stay date</th>
+                  <th class="r">Pickup 7d</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each calendar.filter((c) => c.pu7 > 0) as c (c.date)}
+                  <tr>
+                    <td>{fmtDate(c.date)}</td>
+                    <td class="r">{fmtInt(c.pu7)} rm</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </details>
         </div>
       </div>
     </section>
@@ -159,7 +182,7 @@
         />
         <div class="legend">
           {#each mix as m, i}
-            <span><i style="background:{SERIES[i]}"></i>{m.segment}</span>
+            <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
           {/each}
         </div>
       </div>

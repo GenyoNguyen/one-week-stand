@@ -339,7 +339,7 @@ export const ALERTS = [
     severity: 'risk',
     property: 'AMN',
     title: 'Cancellation spike from Booking.com',
-    body: `${AMN_CXL_7D} room nights cancelled in the last 7 days for stays within 30 days — ${AMN_CXL_X}× the trailing average. Concentrated in flexible-rate bookings.`,
+    body: `${AMN_CXL_7D} room nights cancelled in the last 7 days for stays within 30 days — ${AMN_CXL_X}× the trailing average. Booking.com's cancellation rate has jumped from ${Math.round(CH_CXL_PREV[1] * 100)}% to ${Math.round(CH_CXL[1] * 100)}% over the same window (see Segments & channels).`,
     evidence: cxlCurve.map((f) => Math.round(f * AMN_CXL_7D)),
     evidenceLabel: 'Rolling 7-day cancellations, room nights',
     action:
