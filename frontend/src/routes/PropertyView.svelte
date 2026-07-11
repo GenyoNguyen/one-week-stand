@@ -119,11 +119,12 @@
     </section>
 
     <section class="grid">
-      <div class="panel">
-        <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
-        <div class="panel-body">
-          <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
-          <details class="fallback">
+      <div class="col">
+        <div class="panel">
+          <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
+          <div class="panel-body">
+            <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
+            <details class="fallback">
             <summary>View as table</summary>
             <table class="data">
               <thead>
@@ -143,11 +144,31 @@
                 {/each}
               </tbody>
             </table>
-          </details>
+            </details>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
+          <div class="panel-body mix-body">
+            <DonutChart
+              items={mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
+              size={164}
+              thickness={25}
+              centerValue="{fmtInt(otbRn30)} rn"
+              centerLabel="on the books"
+              ariaLabel="{prop.name} segment mix for the next 30 days on the books"
+            />
+            <div class="legend mix-legend">
+              {#each mix as m, i}
+                <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
+              {/each}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="panel">
+      <div class="panel heat">
         <div class="panel-head"><h2 class="kicker">7-day pickup by stay date</h2></div>
         <div class="panel-body">
           <Heatmap cells={calendar} />
@@ -170,25 +191,6 @@
               </tbody>
             </table>
           </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
-      <div class="panel-body mix-body">
-        <DonutChart
-          items={mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
-          size={190}
-          thickness={28}
-          centerValue="{fmtInt(otbRn30)} rn"
-          centerLabel="on the books"
-          ariaLabel="{prop.name} segment mix for the next 30 days on the books"
-        />
-        <div class="legend mix-legend">
-          {#each mix as m, i}
-            <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
-          {/each}
         </div>
       </div>
     </section>
@@ -249,9 +251,28 @@
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     gap: 12px;
-    align-items: start;
+    align-items: stretch; /* columns share one bottom edge */
   }
   .grid .panel {
+    min-width: 0;
+  }
+  .heat {
+    display: flex;
+    flex-direction: column;
+  }
+  .heat .panel-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .heat .fallback {
+    margin-top: auto; /* pin the table link to the panel's bottom */
+  }
+  /* left column stacks pace + segment mix to balance the tall heatmap */
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     min-width: 0;
   }
   .panel-head {
@@ -263,8 +284,11 @@
   .mix-body {
     display: flex;
     align-items: center;
-    gap: 36px;
+    justify-content: center;
+    gap: 44px;
     flex-wrap: wrap;
+    padding-top: 6px;
+    padding-bottom: 12px;
   }
   .legend {
     display: flex;
