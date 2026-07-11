@@ -286,7 +286,7 @@
   }
   .fallback summary {
     font-size: 11.5px;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-weight: 600;
     cursor: pointer;
   }

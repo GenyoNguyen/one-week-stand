@@ -174,7 +174,7 @@
   .linkish {
     background: none;
     border: none;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-size: 12px;
     font-weight: 600;
     padding: 0;

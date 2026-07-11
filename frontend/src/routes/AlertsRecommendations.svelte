@@ -233,8 +233,8 @@
   .impact {
     font-size: 12.5px;
     font-weight: 600;
-    color: var(--accent-ink);
-    border-left: 3px solid var(--accent);
+    color: var(--gold-ink);
+    border-left: 3px solid var(--gold);
     padding-left: 10px;
   }
   .owners {

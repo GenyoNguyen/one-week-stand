@@ -67,7 +67,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="brand">
-      <AnamLogo size={42} color="var(--gold)" />
+      <AnamLogo size={48} color="var(--gold)" />
       <div class="brand-name">The Anam</div>
       <div class="brand-sub">Commercial Intelligence</div>
     </div>
@@ -100,7 +100,7 @@
 <style>
   .app {
     display: grid;
-    grid-template-columns: 218px 1fr;
+    grid-template-columns: 232px 1fr;
     min-height: 100vh;
   }
   .sidebar {

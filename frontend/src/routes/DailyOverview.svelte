@@ -262,7 +262,7 @@
     pointer-events: none;
   }
   .hero .kicker {
-    color: var(--sidebar-muted);
+    color: #d3b475; /* brand gold on the charcoal card */
   }
   .hero-num {
     font-family: var(--font-display);
@@ -313,7 +313,7 @@
   .linkish {
     background: none;
     border: none;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-size: 12px;
     font-weight: 600;
     padding: 0;
@@ -327,7 +327,7 @@
     background: var(--panel-tint);
   }
   .alert-link:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--gold);
     outline-offset: 1px;
   }
   .props {
@@ -341,7 +341,7 @@
   }
   .fallback summary {
     font-size: 11.5px;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-weight: 600;
     cursor: pointer;
   }

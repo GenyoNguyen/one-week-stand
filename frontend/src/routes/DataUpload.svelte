@@ -341,7 +341,7 @@
   .linkish {
     background: none;
     border: none;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-size: 12px;
     font-weight: 600;
     padding: 0;
@@ -366,11 +366,11 @@
     color: var(--ink-2);
   }
   .dropzone.over {
-    border-color: var(--accent);
-    background: var(--accent-soft);
+    border-color: var(--gold);
+    background: var(--gold-soft);
   }
   .dropzone:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--gold);
     outline-offset: 2px;
   }
   .file-input {
