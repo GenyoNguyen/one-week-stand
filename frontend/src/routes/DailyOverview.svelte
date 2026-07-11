@@ -127,7 +127,7 @@
     <section class="hero-band">
       <div class="hero panel">
         <div class="hero-mark" aria-hidden="true">
-          <AnamLogo size={104} color="#c99a3c" opacity={0.16} />
+          <AnamLogo size={148} color="#c99a3c" opacity={0.15} />
         </div>
         <div class="kicker">RevPAR tonight</div>
         <div class="hero-num num">{fmtMoneyFull(today.revpar)}</div>
@@ -242,13 +242,18 @@
     flex-direction: column;
     gap: 18px;
   }
+  /* hero owns a tall left card (logo proportions); KPIs form a 2x2 grid */
   .hero-band {
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) repeat(4, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
   .hero {
-    padding: 14px 18px;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 22px 16px;
     background: var(--sidebar);
     border-color: var(--sidebar);
     color: var(--sidebar-ink);
@@ -257,8 +262,8 @@
   }
   .hero-mark {
     position: absolute;
-    right: -14px;
-    bottom: -26px;
+    right: -10px;
+    bottom: -30px;
     pointer-events: none;
   }
   .hero .kicker {
@@ -266,11 +271,11 @@
   }
   .hero-num {
     font-family: var(--font-display);
-    font-size: 46px;
-    font-weight: 500;
-    line-height: 1.1;
+    font-size: 58px;
+    font-weight: 400;
+    line-height: 1.05;
     letter-spacing: -0.01em;
-    margin: 4px 0 6px;
+    margin: 10px 0;
   }
   .hero-deltas {
     display: flex;

@@ -47,14 +47,15 @@
     <div class="skeleton" style="height:160px"></div>
     <div class="skeleton" style="height:300px"></div>
   {:else}
-    <section class="panel">
+    <section class="two">
+      <div class="panel">
       <div class="panel-head"><h2 class="kicker">Segment mix by property</h2></div>
       <div class="panel-body mixes">
         <div class="donuts">
           {#each mixRows as row (row.property.id)}
             <DonutChart
               items={row.mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
-              size={158}
+              size={140}
               thickness={24}
               centerValue={row.property.short}
               ariaLabel="{row.property.name} segment mix, next 30 days on the books"
@@ -90,9 +91,8 @@
           </table>
         </details>
       </div>
-    </section>
+      </div>
 
-    <section class="two">
       <div class="panel">
         <div class="panel-head"><h2 class="kicker">By segment — {scopeName}</h2></div>
         <table class="data">
@@ -120,7 +120,9 @@
           </tbody>
         </table>
       </div>
+    </section>
 
+    <section class="row2">
       <div class="panel">
         <div class="panel-head">
           <h2 class="kicker">Top source markets — all properties</h2>
@@ -142,10 +144,9 @@
           <div class="foot">Share of forward room nights · Δ vs last year</div>
         </div>
       </div>
-    </section>
 
-    <section class="panel">
-      <div class="panel-head"><h2 class="kicker">By channel — all properties</h2></div>
+      <div class="panel">
+        <div class="panel-head"><h2 class="kicker">By channel — all properties</h2></div>
       <table class="data">
         <thead>
           <tr>
@@ -174,7 +175,8 @@
             </tr>
           {/each}
         </tbody>
-      </table>
+        </table>
+      </div>
     </section>
   {/if}
 </div>
@@ -193,11 +195,20 @@
   }
   .two {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: 12px;
-    align-items: start;
+    align-items: stretch;
   }
   .two .panel {
+    min-width: 0;
+  }
+  .row2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+  .row2 .panel {
     min-width: 0;
   }
   .mixes {
