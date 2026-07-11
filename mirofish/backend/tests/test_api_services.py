@@ -4,7 +4,6 @@ from types import SimpleNamespace
 import pytest
 
 from app import create_app
-from app.config import Config
 from app.models.project import ProjectManager
 from app.services.forecast_service import (
     ForecastJob,
@@ -20,7 +19,6 @@ from app.services.simulation_runner import SimulationRunner
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
-    monkeypatch.setattr(Config, "FORECAST_API_KEY", "test-key")
     monkeypatch.setattr(ProjectManager, "PROJECTS_DIR", str(tmp_path / "projects"))
     monkeypatch.setattr(SimulationManager, "SIMULATION_DATA_DIR", str(tmp_path / "simulations"))
     monkeypatch.setattr(SimulationRunner, "RUN_STATE_DIR", str(tmp_path / "simulations"))
@@ -109,24 +107,11 @@ def test_post_services_validate_empty_requests(client, path):
     assert response.status_code == 400
 
 
-def test_forecast_service_auth_and_validation(client):
-    assert client.post("/api/forecast").status_code == 401
-    assert client.post(
-        "/api/forecast",
-        headers={"X-API-Key": "test-key"},
-    ).status_code == 400
-    assert client.get(
-        "/api/forecast/forecast_missing",
-        headers={"X-API-Key": "test-key"},
-    ).status_code == 404
-    assert client.get(
-        "/api/forecast/forecast_missing/result",
-        headers={"X-API-Key": "test-key"},
-    ).status_code == 404
-    assert client.post(
-        "/api/forecast/forecast_missing/resume",
-        headers={"X-API-Key": "test-key"},
-    ).status_code == 404
+def test_forecast_service_validation(client):
+    assert client.post("/api/forecast").status_code == 400
+    assert client.get("/api/forecast/forecast_missing").status_code == 404
+    assert client.get("/api/forecast/forecast_missing/result").status_code == 404
+    assert client.post("/api/forecast/forecast_missing/resume").status_code == 404
 
 
 def test_hotel_profile_rejects_supporting_files_without_performance_data(client):
@@ -142,7 +127,6 @@ def test_hotel_profile_rejects_supporting_files_without_performance_data(client)
             "files": (BytesIO(properties.encode()), "properties.md"),
         },
         content_type="multipart/form-data",
-        headers={"X-API-Key": "test-key"},
     )
 
     assert response.status_code == 400
@@ -178,10 +162,61 @@ def test_hotel_profile_accepts_performance_schema(client, monkeypatch):
             "files": (BytesIO(markdown.encode()), "performance.md"),
         },
         content_type="multipart/form-data",
-        headers={"X-API-Key": "test-key"},
     )
 
     assert response.status_code == 202
+
+
+def test_hotel_profile_defaults_report_locale_to_english(client, monkeypatch):
+    columns = [
+        "date", "property", "rooms_available", "rooms_sold", "room_revenue",
+        "adr", "occupancy", "market_segment", "channel", "guest_nationality",
+        "lead_time_days", "cancellations", "budget_occupancy", "budget_adr",
+        "ly_occupancy", "ly_adr", "otb_rooms",
+    ]
+    markdown = (
+        f"| {' | '.join(columns)} |\n"
+        f"| {' | '.join('---' for _ in columns)} |\n"
+        f"| {' | '.join('1' for _ in columns)} |\n"
+    )
+    submitted = {}
+
+    def submit(project_id, file_paths, options):
+        submitted.update(options)
+        return ForecastJob(
+            job_id="forecast_123456789abc",
+            project_id=project_id,
+            options=options,
+            file_paths=file_paths,
+        )
+
+    monkeypatch.setattr(ForecastService, "submit", submit)
+
+    response = client.post(
+        "/api/forecast",
+        data={
+            "data_profile": "hotel",
+            "files": (BytesIO(markdown.encode()), "performance.md"),
+        },
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 202
+    assert submitted["output_locale"] == "en"
+
+
+def test_forecast_rejects_unknown_output_locale(client):
+    response = client.post(
+        "/api/forecast",
+        data={
+            "output_locale": "xx",
+            "files": (BytesIO(b"forecast evidence"), "evidence.md"),
+        },
+        content_type="multipart/form-data",
+    )
+
+    assert response.status_code == 400
+    assert "output_locale" in response.get_json()["error"]
 
 
 def test_forecast_resume_endpoint_returns_conflict_for_nonresumable_job(client):
@@ -193,10 +228,7 @@ def test_forecast_resume_endpoint_returns_conflict_for_nonresumable_job(client):
     )
     ForecastJobStore.save(job)
 
-    response = client.post(
-        f"/api/forecast/{job.job_id}/resume",
-        headers={"X-API-Key": "test-key"},
-    )
+    response = client.post(f"/api/forecast/{job.job_id}/resume")
 
     assert response.status_code == 409
     assert "not resumable" in response.get_json()["error"]
@@ -226,10 +258,7 @@ def test_forecast_status_exposes_report_resume_stage(client, monkeypatch):
     )
     ForecastJobStore.save(job)
 
-    response = client.get(
-        f"/api/forecast/{job.job_id}",
-        headers={"X-API-Key": "test-key"},
-    )
+    response = client.get(f"/api/forecast/{job.job_id}")
 
     assert response.status_code == 200
     payload = response.get_json()["data"]
@@ -255,13 +284,43 @@ def test_latest_forecast_returns_most_recent_completed_job(client):
     ForecastJobStore.save(older)
     ForecastJobStore.save(newer)
 
-    response = client.get(
-        "/api/forecast/latest",
-        headers={"X-API-Key": "test-key"},
-    )
+    response = client.get("/api/forecast/latest")
 
     assert response.status_code == 200
     assert response.get_json()["data"]["job_id"] == newer.job_id
+
+
+def test_latest_forecast_can_be_scoped_to_hotel_jobs(client):
+    hotel = ForecastJob(
+        job_id="forecast_111111111111",
+        project_id="proj_111111111111",
+        status=ForecastStatus.COMPLETED,
+        report_id="report_hotel",
+        options={"data_profile": "hotel"},
+        created_at="2026-07-11T08:00:00",
+    )
+    newer_generic = ForecastJob(
+        job_id="forecast_222222222222",
+        project_id="proj_222222222222",
+        status=ForecastStatus.COMPLETED,
+        report_id="report_generic",
+        options={"data_profile": "generic"},
+        created_at="2026-07-12T08:00:00",
+    )
+    ForecastJobStore.save(hotel)
+    ForecastJobStore.save(newer_generic)
+
+    response = client.get("/api/forecast/latest?data_profile=hotel")
+
+    assert response.status_code == 200
+    assert response.get_json()["data"]["job_id"] == hotel.job_id
+
+
+def test_latest_forecast_rejects_unknown_profile(client):
+    response = client.get("/api/forecast/latest?data_profile=other")
+
+    assert response.status_code == 400
+    assert "data_profile" in response.get_json()["error"]
 
 
 def test_forecast_resume_endpoint_returns_existing_job(client, monkeypatch):
@@ -280,10 +339,7 @@ def test_forecast_resume_endpoint_returns_existing_job(client, monkeypatch):
     queued.status = ForecastStatus.QUEUED
     monkeypatch.setattr(ForecastService, "resume", lambda job_id: queued)
 
-    response = client.post(
-        f"/api/forecast/{job.job_id}/resume",
-        headers={"X-API-Key": "test-key"},
-    )
+    response = client.post(f"/api/forecast/{job.job_id}/resume")
 
     assert response.status_code == 202
     payload = response.get_json()["data"]
@@ -306,10 +362,7 @@ def test_forecast_resume_queue_full_is_retryable(client, monkeypatch):
         ),
     )
 
-    response = client.post(
-        f"/api/forecast/{job.job_id}/resume",
-        headers={"X-API-Key": "test-key"},
-    )
+    response = client.post(f"/api/forecast/{job.job_id}/resume")
 
     assert response.status_code == 429
     assert response.headers["Retry-After"] == "30"
@@ -328,7 +381,6 @@ def test_forecast_submit_queue_full_is_retryable(client, monkeypatch):
         "/api/forecast",
         data={"files": (BytesIO(b"# evidence"), "evidence.md")},
         content_type="multipart/form-data",
-        headers={"X-API-Key": "test-key"},
     )
 
     assert response.status_code == 429

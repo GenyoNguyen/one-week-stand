@@ -940,13 +940,11 @@ def test_forecast_api_submits_complete_pipeline(monkeypatch):
         )
 
     monkeypatch.setattr("app.api.forecast.ForecastService.submit", fake_submit)
-    monkeypatch.setattr(Config, "FORECAST_API_KEY", "test-key")
     client = create_app().test_client()
     response = client.post(
         "/api/forecast",
         data={"files": (BytesIO(b"forecast evidence"), "evidence.md")},
         content_type="multipart/form-data",
-        headers={"X-API-Key": "test-key"},
     )
 
     assert response.status_code == 202
@@ -957,6 +955,7 @@ def test_forecast_api_submits_complete_pipeline(monkeypatch):
     assert submitted["options"]["max_rounds"] == Config.FORECAST_DEFAULT_MAX_ROUNDS
     assert submitted["options"]["chunk_size"] == Config.FORECAST_DEFAULT_CHUNK_SIZE
     assert submitted["options"]["chunk_overlap"] == Config.FORECAST_DEFAULT_CHUNK_OVERLAP
+    assert submitted["options"]["output_locale"] == "zh"
 
 
 def test_nonempty_graph_without_typed_entities_is_rejected(isolated_jobs, monkeypatch):
