@@ -32,7 +32,17 @@
     .sort((a, b) => SEV_ORDER[a.severity] - SEV_ORDER[b.severity]);
   $: open = visible.filter((a) => !$alertStatus[a.id]);
   $: resolved = visible.filter((a) => $alertStatus[a.id]);
-  $: acceptedCount = scoped.filter((a) => $alertStatus[a.id] === 'accepted').length;
+  $: acceptedAlerts = scoped.filter((a) => $alertStatus[a.id] === 'accepted');
+  $: acceptedCount = acceptedAlerts.length;
+  $: dismissedCount = scoped.filter((a) => $alertStatus[a.id] === 'dismissed').length;
+  // sum the "$NNK" figures on accepted actions — modeled impact secured today
+  $: impactSum = acceptedAlerts.reduce((s, a) => {
+    const m = a.impact?.match(/\$(\d+)K/);
+    return s + (m ? Number(m[1]) : 0);
+  }, 0);
+  $: ownerCounts = Object.entries(
+    acceptedAlerts.reduce((o, a) => ((o[a.owner] = (o[a.owner] || 0) + 1), o), {})
+  );
 
   // deep link from "Needs attention" wins; otherwise open the top of the
   // queue once on first load, then let the user drive
@@ -79,20 +89,60 @@
       </p>
     </div>
   {:else}
-    <section class="cards">
-      {#each open as a (a.id)}
-        <RecommendationPanel alert={a} expanded={openId === a.id} on:toggle={() => toggle(a.id)} />
-      {/each}
-    </section>
-
-    {#if resolved.length}
-      <h2 class="kicker resolved-head">Resolved today</h2>
+    <div class="layout">
       <section class="cards">
-        {#each resolved as a (a.id)}
+        {#each open as a (a.id)}
           <RecommendationPanel alert={a} expanded={openId === a.id} on:toggle={() => toggle(a.id)} />
         {/each}
+        {#if !open.length}
+          <div class="panel queue-clear">
+            <p><b>Queue is clear.</b></p>
+            <p>Every alert has been decided — see the summary on the right, or Undo to revisit one.</p>
+          </div>
+        {/if}
       </section>
-    {/if}
+
+      <aside class="side">
+        <div class="panel summary">
+          <h2 class="kicker">Today so far</h2>
+          <div class="sum-nums">
+            <div class="sum">
+              <span class="big num">{acceptedCount}</span>
+              <span class="sum-label">accepted</span>
+            </div>
+            <div class="sum">
+              <span class="big num">{dismissedCount}</span>
+              <span class="sum-label">dismissed</span>
+            </div>
+            <div class="sum">
+              <span class="big num">{open.length}</span>
+              <span class="sum-label">in queue</span>
+            </div>
+          </div>
+          {#if impactSum > 0}
+            <div class="impact num">≈ ${impactSum}K modeled impact on accepted actions</div>
+          {/if}
+          {#if ownerCounts.length}
+            <div class="owners">
+              <span class="owners-label">Assigned to</span>
+              {#each ownerCounts as [owner, n] (owner)}
+                <span class="owner-chip">{owner}{n > 1 ? ` ×${n}` : ''}</span>
+              {/each}
+            </div>
+          {/if}
+          {#if !acceptedCount && !dismissedCount}
+            <p class="hint">No decisions yet — work the queue from the top.</p>
+          {/if}
+        </div>
+
+        {#if resolved.length}
+          <h2 class="kicker resolved-head">Resolved today</h2>
+          {#each resolved as a (a.id)}
+            <RecommendationPanel alert={a} expanded={openId === a.id} on:toggle={() => toggle(a.id)} />
+          {/each}
+        {/if}
+      </aside>
+    </div>
   {/if}
 </div>
 
@@ -136,15 +186,98 @@
     color: var(--ink-3);
     font-size: 11px;
   }
-  /* a decision queue reads top-to-bottom — one column, one card expanded */
+  /* decision queue on the left, running tally + resolved on the right */
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 14px;
+    align-items: start;
+  }
   .cards {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-width: 780px;
+    min-width: 0;
+  }
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: sticky;
+    top: 66px;
+  }
+  .summary {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sum-nums {
+    display: flex;
+    gap: 22px;
+  }
+  .sum {
+    display: flex;
+    flex-direction: column;
+  }
+  .big {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .sum-label {
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .impact {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent-ink);
+    border-left: 3px solid var(--accent);
+    padding-left: 10px;
+  }
+  .owners {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .owners-label {
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .owner-chip {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink-2);
+    border: 1px solid var(--hairline-strong);
+    border-radius: 3px;
+    padding: 1px 7px;
+  }
+  .hint {
+    margin: 0;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .queue-clear {
+    padding: 22px;
+  }
+  .queue-clear p {
+    margin: 0 0 4px;
+    color: var(--ink-2);
+    font-size: 13px;
   }
   .resolved-head {
-    margin-top: 6px;
+    margin-top: 8px;
+  }
+  @media (max-width: 1080px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .side {
+      position: static;
+    }
   }
   .empty {
     padding: 28px;
