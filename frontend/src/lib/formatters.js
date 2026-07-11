@@ -2,6 +2,27 @@ const nf0 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1, minimumFractionDigits: 1 });
 
 const bad = (v) => !Number.isFinite(v);
+let displayCurrency = 'USD';
+
+export function setDisplayCurrency(currency) {
+  const normalized = String(currency || '').trim().toUpperCase();
+  displayCurrency = /^[A-Z]{3}$/.test(normalized) ? normalized : 'USD';
+}
+
+export const getDisplayCurrency = () => displayCurrency;
+
+function currencySymbol(currency = displayCurrency) {
+  try {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+      currencyDisplay: 'narrowSymbol',
+      maximumFractionDigits: 0
+    }).formatToParts(0).find((part) => part.type === 'currency')?.value || currency;
+  } catch {
+    return currency;
+  }
+}
 
 export const fmtInt = (v) => (bad(v) ? '—' : nf0.format(Math.round(v)));
 
@@ -9,12 +30,13 @@ export const fmtMoney = (v) =>
   bad(v)
     ? '—'
     : v >= 1000000
-      ? `$${nf1.format(v / 1000000)}M`
+      ? `${currencySymbol()}${nf1.format(v / 1000000)}M`
       : v >= 100000
-        ? `$${nf0.format(Math.round(v / 1000))}K`
-        : `$${nf0.format(Math.round(v))}`;
+        ? `${currencySymbol()}${nf0.format(Math.round(v / 1000))}K`
+        : `${currencySymbol()}${nf0.format(Math.round(v))}`;
 
-export const fmtMoneyFull = (v) => (bad(v) ? '—' : `$${nf0.format(Math.round(v))}`);
+export const fmtMoneyFull = (v) =>
+  bad(v) ? '—' : `${currencySymbol()}${nf0.format(Math.round(v))}`;
 
 export const fmtPct = (v, digits = 0) => (bad(v) ? '—' : `${(digits ? nf1 : nf0).format(v * 100)}%`);
 
@@ -38,11 +60,12 @@ export function fmtPts(v, digits = 1) {
 }
 
 export function deltaClass(v, goodWhenUp = true) {
+  if (bad(v)) return 'flat';
   if (Math.abs(v) < 0.0005) return 'flat';
   return v > 0 === goodWhenUp ? 'pos' : 'neg';
 }
 
-export const deltaArrow = (v) => (Math.abs(v) < 0.0005 ? '·' : v > 0 ? '▲' : '▼');
+export const deltaArrow = (v) => (bad(v) || Math.abs(v) < 0.0005 ? '·' : v > 0 ? '▲' : '▼');
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

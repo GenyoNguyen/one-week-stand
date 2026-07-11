@@ -1,0 +1,153 @@
+{
+  "job": { "job_id": "forecast_fixture1234", "status": "completed" },
+  "dashboard_output": {
+    "schema_version": "hotel-dashboard.v1",
+    "available": true,
+    "run_metadata": {
+      "job_id": "forecast_fixture1234",
+      "as_of": "2026-07-10T06:00:00+07:00",
+      "as_of_basis": "forecast_job_submission_time",
+      "generated_at": "2026-07-10T06:10:00+07:00",
+      "currency": "VND",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "source_files": ["daily.csv", "properties.csv"],
+      "properties": [
+        { "id": "ACR", "name": "The Anam Cam Ranh", "city": "Cam Ranh", "rooms": 213 },
+        { "id": "AMN", "name": "The Anam Mui Ne", "city": "Mui Ne", "rooms": 127 },
+        { "id": "ANT", "name": "The Anam Nha Trang", "city": "Nha Trang", "rooms": 156 }
+      ]
+    },
+    "data_status": {
+      "status": "ready",
+      "accepted_rows": 42,
+      "rejected_rows": 1,
+      "missing_feeds": [],
+      "freshness": [{ "property": "ACR", "status": "unknown" }]
+    },
+    "daily_forecast": [
+      {
+        "date": "2026-07-10", "property": "ACR", "rooms_available": 213,
+        "room_nights": 160, "occupancy_pct": 75.12, "adr": 5000000, "revpar": 3755868,
+        "revenue": 800000000, "on_the_books_rooms": 160,
+        "expected_final_room_nights": 160, "expected_final_occupancy_pct": 75.12,
+        "forecast_adr": 5000000, "forecast_revenue": 800000000,
+        "budget_room_nights": 170, "budget_occupancy_pct": 79.81, "budget_adr": 5100000,
+        "budget_revenue": 867000000, "last_year_room_nights": 150,
+        "last_year_occupancy_pct": 70.42, "last_year_adr": 4800000,
+        "last_year_revenue": 720000000, "stly_otb_rooms": 145,
+        "pickup_room_nights": 12, "pickup_24h_room_nights": 2, "cancellations": 3,
+        "forecast_lo50_occupancy_pct": null, "forecast_hi50_occupancy_pct": null,
+        "forecast_lo80_occupancy_pct": null, "forecast_hi80_occupancy_pct": null
+      },
+      {
+        "date": "2026-07-10", "property": "AMN", "rooms_available": 127,
+        "room_nights": 90, "occupancy_pct": 70.87, "adr": 3000000, "revenue": 270000000,
+        "on_the_books_rooms": 90, "expected_final_room_nights": 90,
+        "expected_final_occupancy_pct": 70.87, "forecast_adr": 3000000,
+        "forecast_revenue": 270000000, "budget_room_nights": 95, "budget_adr": 3100000,
+        "budget_revenue": 294500000, "last_year_room_nights": 85, "last_year_adr": 2900000,
+        "last_year_revenue": 246500000, "stly_otb_rooms": 82,
+        "pickup_room_nights": 7, "pickup_24h_room_nights": 1, "cancellations": 2
+      },
+      {
+        "date": "2026-07-10", "property": "ANT", "rooms_available": 156,
+        "room_nights": 115, "occupancy_pct": 73.72, "adr": 4000000, "revenue": 460000000,
+        "on_the_books_rooms": 115, "expected_final_room_nights": 115,
+        "expected_final_occupancy_pct": 73.72, "forecast_adr": 4000000,
+        "forecast_revenue": 460000000, "budget_room_nights": 120, "budget_adr": 4100000,
+        "budget_revenue": 492000000, "last_year_room_nights": 110, "last_year_adr": 3900000,
+        "last_year_revenue": 429000000, "stly_otb_rooms": 107,
+        "pickup_room_nights": 9, "pickup_24h_room_nights": 2, "cancellations": 1
+      },
+      {
+        "date": "2026-07-11", "property": "ACR", "rooms_available": 213,
+        "room_nights": 180, "occupancy_pct": 84.51, "adr": 5200000, "revenue": 936000000,
+        "on_the_books_rooms": 120, "on_the_books_occupancy_pct": 56.34,
+        "expected_final_room_nights": 180, "expected_final_occupancy_pct": 84.51,
+        "forecast_adr": 5200000, "forecast_revenue": 936000000,
+        "budget_room_nights": 175, "budget_adr": 5150000, "budget_revenue": 901250000,
+        "last_year_room_nights": 165, "last_year_adr": 4900000, "last_year_revenue": 808500000,
+        "stly_otb_rooms": 110, "pickup_room_nights": 14, "pickup_24h_room_nights": 3,
+        "cancellations": 2, "forecast_lo50_occupancy_pct": null,
+        "forecast_hi50_occupancy_pct": null, "forecast_lo80_occupancy_pct": null,
+        "forecast_hi80_occupancy_pct": null
+      },
+      {
+        "date": "2026-07-11", "property": "AMN", "rooms_available": 127,
+        "room_nights": 100, "occupancy_pct": 78.74, "adr": 3100000, "revenue": 310000000,
+        "on_the_books_rooms": 70, "expected_final_room_nights": 100,
+        "expected_final_occupancy_pct": 78.74, "forecast_adr": 3100000,
+        "forecast_revenue": 310000000, "budget_room_nights": 98, "budget_adr": 3150000,
+        "budget_revenue": 308700000, "last_year_room_nights": 92, "last_year_adr": 2950000,
+        "last_year_revenue": 271400000, "stly_otb_rooms": 65,
+        "pickup_room_nights": 8, "pickup_24h_room_nights": 2, "cancellations": 2
+      },
+      {
+        "date": "2026-07-11", "property": "ANT", "rooms_available": 156,
+        "room_nights": 130, "occupancy_pct": 83.33, "adr": 4200000, "revenue": 546000000,
+        "on_the_books_rooms": 90, "expected_final_room_nights": 130,
+        "expected_final_occupancy_pct": 83.33, "forecast_adr": 4200000,
+        "forecast_revenue": 546000000, "budget_room_nights": 125, "budget_adr": 4150000,
+        "budget_revenue": 518750000, "last_year_room_nights": 118, "last_year_adr": 3950000,
+        "last_year_revenue": 466100000, "stly_otb_rooms": 86,
+        "pickup_room_nights": 10, "pickup_24h_room_nights": 2, "cancellations": 1
+      },
+      {
+        "date": "2026-07-17", "property": "ACR", "rooms_available": 213,
+        "room_nights": 170, "occupancy_pct": 79.81, "adr": 5100000, "revenue": 867000000,
+        "on_the_books_rooms": 100, "expected_final_room_nights": 170,
+        "expected_final_occupancy_pct": 79.81, "forecast_adr": 5100000,
+        "forecast_revenue": 867000000, "budget_room_nights": 180, "budget_adr": 5200000,
+        "budget_revenue": 936000000, "last_year_room_nights": 160, "last_year_adr": 4900000,
+        "last_year_revenue": 784000000, "stly_otb_rooms": 105,
+        "pickup_room_nights": 11, "pickup_24h_room_nights": 2, "cancellations": 4
+      }
+    ],
+    "breakdowns": {
+      "segments": [
+        { "property": "ACR", "segment": "Direct", "room_nights": 60, "revenue": 330000000, "adr": 5500000, "cancellation_rate_pct": 5, "last_year_room_nights": 50, "delta_last_year_pct": 20 },
+        { "property": "ACR", "segment": "OTA", "room_nights": 40, "revenue": 184000000, "adr": 4600000, "cancellation_rate_pct": 10, "last_year_room_nights": 45, "delta_last_year_pct": -11.11 },
+        { "property": "AMN", "segment": "Direct", "room_nights": 30, "revenue": 96000000, "adr": 3200000, "cancellation_rate_pct": 4, "last_year_room_nights": 25, "delta_last_year_pct": 20 },
+        { "property": "ANT", "segment": "OTA", "room_nights": 35, "revenue": 140000000, "adr": 4000000, "cancellation_rate_pct": 8, "last_year_room_nights": 30, "delta_last_year_pct": 16.67 }
+      ],
+      "channels": [
+        { "property": "ACR", "channel": "Brand.com", "room_nights": 60, "revenue": 330000000, "adr": 5500000, "cancellation_rate_pct": 5, "last_year_room_nights": 50, "delta_last_year_pct": 20 },
+        { "property": "AMN", "channel": "Brand.com", "room_nights": 30, "revenue": 96000000, "adr": 3200000, "cancellation_rate_pct": 4, "last_year_room_nights": 25, "delta_last_year_pct": 20 }
+      ],
+      "nationalities": [
+        { "property": "ACR", "nationality": "Vietnam", "name": "Vietnam", "room_nights": 50, "share_pct": 50, "last_year_room_nights": 40, "delta_last_year_pct": 25 },
+        { "property": "AMN", "nationality": "Vietnam", "name": "Vietnam", "room_nights": 30, "share_pct": 60, "last_year_room_nights": 25, "delta_last_year_pct": 20 },
+        { "property": "ANT", "nationality": "South Korea", "name": "South Korea", "room_nights": 40, "share_pct": 50, "last_year_room_nights": 32, "delta_last_year_pct": 25 }
+      ],
+      "pace": [
+        { "date": "2026-07-11", "property": "ACR", "on_the_books_rooms": 120, "stly_otb_rooms": 110, "booking_pace_pct": 109.09 },
+        { "date": "2026-07-17", "property": "ACR", "on_the_books_rooms": 100, "stly_otb_rooms": 105, "booking_pace_pct": 95.24 }
+      ],
+      "pickup": [
+        { "date": "2026-07-11", "property": "ACR", "pickup_room_nights": 14, "pickup_24h_room_nights": 3, "pickup_7d_rooms": null },
+        { "date": "2026-07-17", "property": "ACR", "pickup_room_nights": 11, "pickup_24h_room_nights": 2, "pickup_7d_rooms": null }
+      ],
+      "guest_flow": []
+    },
+    "risks": [{
+      "id": "revenue-gap:ACR:2026-07-17", "kind": "risk", "severity": "risk", "level": "high",
+      "type": "revenue_below_budget", "title": "Revenue outlook below budget for ACR on 2026-07-17",
+      "summary": "Uploaded performance fields are 7.4% below budget.", "property": "ACR",
+      "evidence": { "forecast_revenue": 867000000, "budget_revenue": 936000000, "revenue_below_budget": 69000000, "currency": "VND" },
+      "confidence": null
+    }],
+    "actions": [{
+      "id": "action:revenue-gap:ACR:2026-07-17", "risk_id": "revenue-gap:ACR:2026-07-17",
+      "recommendation": "Review rate, inventory and channel plans before changing controls.",
+      "impact": { "metric": "recoverable_revenue_gap", "minimum": null, "maximum": 69000000, "currency": "VND" },
+      "owner": null, "deadline": null
+    }],
+    "model_checks": { "last_successful_run": "2026-07-10T06:10:00+07:00", "historical_forecast_error_pct": null },
+    "capabilities": {
+      "hotel_dashboard": true, "point_forecast": true, "forecast_intervals": false,
+      "segment_breakdown": true, "channel_breakdown": true, "nationality_breakdown": true,
+      "pace_vs_stly": true, "pickup": true, "pickup_7d": false, "cancellations": true,
+      "action_workflow": false
+    }
+  }
+}
