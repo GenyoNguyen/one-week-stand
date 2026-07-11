@@ -211,6 +211,99 @@ MCP_TIMEOUT_SECONDS=30
 REPORT_FORCE_STRUCTURED_TABLE=true
 ```
 
+## Backend Forecast Service
+
+The forecast service runs the complete pipeline without frontend step orchestration:
+
+`upload -> ontology -> graph -> agent preparation -> simulation -> MCP source verification -> structured table -> final report`
+
+Configure a service API key before starting the backend:
+
+```env
+FORECAST_API_KEY=replace-with-a-long-random-secret
+```
+
+Submit a forecast using `multipart/form-data`:
+
+```bash
+curl -X POST http://localhost:5001/api/forecast \
+  -H "X-API-Key: $FORECAST_API_KEY" \
+  -F "files=@./evidence.pdf" \
+  -F "simulation_requirement=Forecast likely outcomes and risks" \
+  -F "max_rounds=20" \
+  -F "max_active_agents=4"
+```
+
+Hotel clients send every converted dataset as another `files` field and set
+`data_profile=hotel`. In that mode, the backend requires at least one daily
+reservation/performance table; property, room, and guest-flow files are treated
+as supporting inputs.
+
+The endpoint returns HTTP `202` with a `job_id`, `status_url`, and `result_url`. Poll status:
+
+```bash
+curl http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx \
+  -H "X-API-Key: $FORECAST_API_KEY"
+```
+
+Fetch the completed report:
+
+```bash
+curl http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx/result \
+  -H "X-API-Key: $FORECAST_API_KEY"
+```
+
+If a graph-processing job fails with `resumable: true`, continue the same job
+and graph instead of submitting the files again:
+
+```bash
+curl -X POST http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx/resume \
+  -H "X-API-Key: $FORECAST_API_KEY"
+```
+
+Final response fields useful to another frontend:
+
+- `data.report.markdown_content`: complete Markdown report.
+- `data.report.structured_output.columns`: configured table columns.
+- `data.report.structured_output.rows`: schema-validated table rows.
+- `data.report.outline`: report title, summary, and sections.
+
+If `simulation_requirement` or `report_prompt` is omitted, the backend uses configured defaults. The default report prompt requires `search_data_files` for uploaded-source verification and `create_structured_table` before final report assembly. Override per request with `-F "report_prompt=..."`.
+
+Optional service controls:
+
+```env
+FORECAST_DEFAULT_MAX_ROUNDS=20
+FORECAST_DEFAULT_MAX_ACTIVE_AGENTS=4
+FORECAST_MAX_CONCURRENT_JOBS=1
+FORECAST_MAX_QUEUED_JOBS=4
+FORECAST_MAX_FILES=10
+FORECAST_DEFAULT_CHUNK_SIZE=2000
+FORECAST_DEFAULT_CHUNK_OVERLAP=100
+FORECAST_GRAPH_MAX_SOURCE_CHARS=40000
+ZEP_REQUEST_TIMEOUT_SECONDS=30
+FORECAST_GRAPH_TIMEOUT_SECONDS=600
+FORECAST_GRAPH_MAX_TIMEOUT_SECONDS=3600
+FORECAST_GRAPH_POLL_SECONDS=3
+FORECAST_GRAPH_STATUS_ERROR_SWEEPS=5
+FORECAST_SIMULATION_TIMEOUT_SECONDS=3600
+```
+
+`FORECAST_GRAPH_TIMEOUT_SECONDS` is the no-progress limit, while
+`FORECAST_GRAPH_MAX_TIMEOUT_SECONDS` bounds total graph-processing time. Episode
+checkpoints are persisted under `backend/uploads/forecasts`, so a failed graph
+wait can be explicitly resumed without rebuilding it. Interrupted jobs are
+marked failed after backend restart and are not automatically resumed. Run one
+backend worker because simulation process handles are process-local.
+
+The graph is built from a stratified excerpt capped by
+`FORECAST_GRAPH_MAX_SOURCE_CHARS`; every uploaded source is represented. Full
+uploaded files remain available to `search_data_files` for report evidence, so
+the cap reduces Zep workload without discarding reporting data.
+
+Queue saturation returns HTTP `429` with `Retry-After`. Other validation errors
+remain HTTP `400` for new jobs or `409` for non-resumable existing jobs.
+
 ## 📬 Join the Conversation
 
 <div align="center">

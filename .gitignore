@@ -4,3 +4,7 @@ dist/
 .mirofish.pid
 __pycache__/
 *.pyc
+
+# MiroFish runtime artifacts
+/mirofish/backend/logs/
+/mirofish/backend/uploads/

@@ -41,6 +41,7 @@ class Config:
     
     # Zep配置
     ZEP_API_KEY = os.environ.get('ZEP_API_KEY')
+    ZEP_REQUEST_TIMEOUT_SECONDS = float(os.environ.get('ZEP_REQUEST_TIMEOUT_SECONDS', '30'))
 
     # Local MCP tools
     MCP_ENABLED = os.environ.get('MCP_ENABLED', 'true').lower() == 'true'
@@ -55,9 +56,49 @@ class Config:
         os.path.abspath(os.path.join(os.path.dirname(__file__), '../table_schema.json'))
     )
     MCP_TIMEOUT_SECONDS = float(os.environ.get('MCP_TIMEOUT_SECONDS', '30'))
+    MCP_MAX_FILE_BYTES = int(os.environ.get('MCP_MAX_FILE_BYTES', str(50 * 1024 * 1024)))
     REPORT_FORCE_STRUCTURED_TABLE = os.environ.get(
         'REPORT_FORCE_STRUCTURED_TABLE', 'true'
     ).lower() == 'true'
+
+    # Backend forecasting service
+    FORECAST_DEFAULT_REQUIREMENT = os.environ.get(
+        'FORECAST_DEFAULT_REQUIREMENT',
+        'Analyze the uploaded evidence, simulate plausible stakeholder reactions, and forecast the most likely outcomes, risks, and uncertainties.'
+    )
+    FORECAST_DEFAULT_REPORT_PROMPT = os.environ.get(
+        'FORECAST_DEFAULT_REPORT_PROMPT',
+        'Use search_data_files to verify important claims against the uploaded source files. At finalization, use create_structured_table with the configured schema. The final report must include evidence-backed conclusions and the validated structured table.'
+    )
+    FORECAST_DEFAULT_MAX_ROUNDS = int(os.environ.get('FORECAST_DEFAULT_MAX_ROUNDS', '20'))
+    FORECAST_DEFAULT_MAX_ACTIVE_AGENTS = int(os.environ.get('FORECAST_DEFAULT_MAX_ACTIVE_AGENTS', '4'))
+    FORECAST_API_KEY = os.environ.get('FORECAST_API_KEY')
+    FORECAST_MAX_CONCURRENT_JOBS = int(os.environ.get('FORECAST_MAX_CONCURRENT_JOBS', '1'))
+    FORECAST_MAX_QUEUED_JOBS = int(os.environ.get('FORECAST_MAX_QUEUED_JOBS', '4'))
+    FORECAST_MAX_FILES = int(os.environ.get('FORECAST_MAX_FILES', '10'))
+    FORECAST_MAX_ROUNDS = int(os.environ.get('FORECAST_MAX_ROUNDS', '200'))
+    FORECAST_MAX_ACTIVE_AGENTS = int(os.environ.get('FORECAST_MAX_ACTIVE_AGENTS', '100'))
+    FORECAST_DEFAULT_CHUNK_SIZE = int(
+        os.environ.get('FORECAST_DEFAULT_CHUNK_SIZE', '2000')
+    )
+    FORECAST_DEFAULT_CHUNK_OVERLAP = int(
+        os.environ.get('FORECAST_DEFAULT_CHUNK_OVERLAP', '100')
+    )
+    FORECAST_GRAPH_MAX_SOURCE_CHARS = int(
+        os.environ.get('FORECAST_GRAPH_MAX_SOURCE_CHARS', '40000')
+    )
+    # Graph processing may legitimately take longer than ten minutes for large
+    # uploads. Stop after sustained lack of progress, with a separate hard cap.
+    FORECAST_GRAPH_TIMEOUT_SECONDS = int(os.environ.get('FORECAST_GRAPH_TIMEOUT_SECONDS', '600'))
+    FORECAST_GRAPH_MAX_TIMEOUT_SECONDS = int(
+        os.environ.get('FORECAST_GRAPH_MAX_TIMEOUT_SECONDS', '3600')
+    )
+    FORECAST_GRAPH_POLL_SECONDS = float(os.environ.get('FORECAST_GRAPH_POLL_SECONDS', '3'))
+    FORECAST_GRAPH_STATUS_ERROR_SWEEPS = int(
+        os.environ.get('FORECAST_GRAPH_STATUS_ERROR_SWEEPS', '5')
+    )
+    FORECAST_SIMULATION_TIMEOUT_SECONDS = int(os.environ.get('FORECAST_SIMULATION_TIMEOUT_SECONDS', '3600'))
+    FORECAST_MEMORY_SETTLE_SECONDS = float(os.environ.get('FORECAST_MEMORY_SETTLE_SECONDS', '5'))
     
     # 文件上传配置
     MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB

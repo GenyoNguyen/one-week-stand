@@ -1,13 +1,35 @@
-import { defineConfig } from 'vite';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { defineConfig, loadEnv } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 
-export default defineConfig({
-  plugins: [svelte()],
-  server: {
-    port: 5173,
-    proxy: {
-      // FastAPI backend — the UI falls back to bundled mock data when this is down
-      '/api': 'http://localhost:8000'
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+export default defineConfig(({ mode }) => {
+  const rootEnv = loadEnv(mode, repositoryRoot, '');
+  const mirofishEnv = loadEnv(mode, path.join(repositoryRoot, 'mirofish'), '');
+  const apiTarget =
+    process.env.MIROFISH_API_URL ||
+    rootEnv.MIROFISH_API_URL ||
+    mirofishEnv.MIROFISH_API_URL ||
+    'http://127.0.0.1:5001';
+  const forecastApiKey =
+    process.env.FORECAST_API_KEY ||
+    rootEnv.FORECAST_API_KEY ||
+    mirofishEnv.FORECAST_API_KEY;
+
+  return {
+    plugins: [svelte()],
+    server: {
+      port: 5173,
+      proxy: {
+        '/api': {
+          target: apiTarget,
+          changeOrigin: true,
+          headers: forecastApiKey ? { 'X-API-Key': forecastApiKey } : {}
+        }
+      }
     }
-  }
+  };
 });

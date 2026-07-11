@@ -35,6 +35,7 @@ class LocalMCPClient:
             "PYTHONUTF8": "1",
             "MIROFISH_MCP_DATA_DIR": Config.MCP_DATA_DIR,
             "MIROFISH_TABLE_SCHEMA_PATH": Config.MCP_TABLE_SCHEMA_PATH,
+            "MIROFISH_MCP_MAX_FILE_BYTES": str(Config.MCP_MAX_FILE_BYTES),
         })
         self.server_params = StdioServerParameters(command=command, args=args, env=env)
         self._tools: Optional[list[dict[str, Any]]] = None

@@ -12,6 +12,7 @@ import threading
 import subprocess
 import signal
 import atexit
+import tempfile
 from typing import Dict, Any, List, Optional, Union
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -223,6 +224,7 @@ class SimulationRunner:
     _monitor_threads: Dict[str, threading.Thread] = {}
     _stdout_files: Dict[str, Any] = {}  # 存储 stdout 文件句柄
     _stderr_files: Dict[str, Any] = {}  # 存储 stderr 文件句柄
+    _run_state_lock = threading.RLock()
     
     # 图谱记忆更新配置
     _graph_memory_enabled: Dict[str, bool] = {}  # simulation_id -> enabled
@@ -298,16 +300,30 @@ class SimulationRunner:
     @classmethod
     def _save_run_state(cls, state: SimulationRunState):
         """保存运行状态到文件"""
-        sim_dir = os.path.join(cls.RUN_STATE_DIR, state.simulation_id)
-        os.makedirs(sim_dir, exist_ok=True)
-        state_file = os.path.join(sim_dir, "run_state.json")
-        
-        data = state.to_detail_dict()
-        
-        with open(state_file, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        
-        cls._run_states[state.simulation_id] = state
+        with cls._run_state_lock:
+            sim_dir = os.path.join(cls.RUN_STATE_DIR, state.simulation_id)
+            os.makedirs(sim_dir, exist_ok=True)
+            state_file = os.path.join(sim_dir, "run_state.json")
+            data = state.to_detail_dict()
+            temp_path = None
+            try:
+                with tempfile.NamedTemporaryFile(
+                    mode='w',
+                    encoding='utf-8',
+                    dir=sim_dir,
+                    prefix='.run_state_',
+                    suffix='.tmp',
+                    delete=False,
+                ) as temp_file:
+                    temp_path = temp_file.name
+                    json.dump(data, temp_file, ensure_ascii=False, indent=2)
+                    temp_file.flush()
+                    os.fsync(temp_file.fileno())
+                os.replace(temp_path, state_file)
+            finally:
+                if temp_path and os.path.exists(temp_path):
+                    os.remove(temp_path)
+            cls._run_states[state.simulation_id] = state
     
     @classmethod
     def start_simulation(

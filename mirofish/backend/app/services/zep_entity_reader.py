@@ -83,7 +83,10 @@ class ZepEntityReader:
         if not self.api_key:
             raise ValueError("ZEP_API_KEY 未配置")
         
-        self.client = Zep(api_key=self.api_key)
+        self.client = Zep(
+            api_key=self.api_key,
+            timeout=Config.ZEP_REQUEST_TIMEOUT_SECONDS,
+        )
     
     def _call_with_retry(
         self, 
@@ -192,7 +195,7 @@ class ZepEntityReader:
         try:
             # 使用重试机制调用Zep API
             edges = self._call_with_retry(
-                func=lambda: self.client.graph.node.get_entity_edges(node_uuid=node_uuid),
+                func=lambda: self.client.graph.node.get_edges(node_uuid),
                 operation_name=f"获取节点边(node={node_uuid[:8]}...)"
             )
             
@@ -433,5 +436,3 @@ class ZepEntityReader:
             enrich_with_edges=enrich_with_edges
         )
         return result.entities
-
-

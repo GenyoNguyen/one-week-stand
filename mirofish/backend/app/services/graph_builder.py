@@ -48,7 +48,10 @@ class GraphBuilderService:
         if not self.api_key:
             raise ValueError("ZEP_API_KEY 未配置")
         
-        self.client = Zep(api_key=self.api_key)
+        self.client = Zep(
+            api_key=self.api_key,
+            timeout=Config.ZEP_REQUEST_TIMEOUT_SECONDS,
+        )
         self.task_manager = TaskManager()
     
     def build_graph_async(
@@ -296,7 +299,8 @@ class GraphBuilderService:
         graph_id: str,
         chunks: List[str],
         batch_size: int = 3,
-        progress_callback: Optional[Callable] = None
+        progress_callback: Optional[Callable] = None,
+        checkpoint_callback: Optional[Callable[[List[str]], None]] = None,
     ) -> List[str]:
         """分批添加文本到图谱，返回所有 episode 的 uuid 列表"""
         episode_uuids = []
@@ -333,6 +337,9 @@ class GraphBuilderService:
                         ep_uuid = getattr(ep, 'uuid_', None) or getattr(ep, 'uuid', None)
                         if ep_uuid:
                             episode_uuids.append(ep_uuid)
+
+                if checkpoint_callback:
+                    checkpoint_callback(list(episode_uuids))
                 
                 # 避免请求过快
                 time.sleep(1)
@@ -503,4 +510,3 @@ class GraphBuilderService:
     def delete_graph(self, graph_id: str):
         """删除图谱"""
         self.client.graph.delete(graph_id=graph_id)
-

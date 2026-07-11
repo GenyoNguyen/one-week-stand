@@ -23,7 +23,7 @@ TABLE_SCHEMA_PATH = Path(
 ).resolve()
 SUPPORTED_EXTENSIONS = {".csv", ".json", ".jsonl", ".md", ".markdown", ".pdf", ".txt"}
 SUPPORTED_COLUMN_TYPES = {"array", "boolean", "integer", "number", "string"}
-MAX_FILE_BYTES = 20 * 1024 * 1024
+MAX_FILE_BYTES = int(os.environ.get("MIROFISH_MCP_MAX_FILE_BYTES", str(50 * 1024 * 1024)))
 
 
 def _load_table_schema() -> dict[str, Any]:
@@ -87,12 +87,26 @@ def _scope_directory(project_id: str) -> Path:
         raise ValueError("project_id is required")
     if not re.fullmatch(r"proj_[a-f0-9]{12}", project_id):
         raise ValueError("Invalid project_id")
-    project_dir = (DATA_DIR / "projects" / project_id).resolve()
+    project_dir = (DATA_DIR / "projects" / project_id / "files").resolve()
     if not project_dir.is_relative_to(DATA_DIR):
         raise ValueError("Project path escapes configured data directory")
     if not project_dir.is_dir():
         raise ValueError(f"Project data not found: {project_id}")
     return project_dir
+
+
+def _source_names(project_id: str) -> dict[str, str]:
+    metadata_path = DATA_DIR / "projects" / project_id / "project.json"
+    try:
+        with metadata_path.open("r", encoding="utf-8") as metadata_file:
+            project = json.load(metadata_file)
+        return {
+            item["stored_filename"]: item.get("filename", item["stored_filename"])
+            for item in project.get("files", [])
+            if item.get("stored_filename")
+        }
+    except Exception:
+        return {}
 
 
 @mcp.tool(
@@ -112,16 +126,25 @@ def search_data_files(
     query = query.strip()
     if not query:
         raise ValueError("query is required")
+    wildcard = query == "*"
     max_results = max(1, min(int(max_results), 100))
     scope = _scope_directory(project_id)
-    terms = [term for term in re.split(r"\s+", query.casefold()) if term]
+    source_names = _source_names(project_id)
+    terms = [
+        token.strip(".-")
+        for token in re.findall(r"[\w.-]+", query.casefold())
+        if token.strip(".-")
+    ]
+    if not wildcard and not terms:
+        raise ValueError("query must contain searchable terms")
     matches: list[tuple[int, int, dict[str, Any]]] = []
     errors: list[dict[str, str]] = []
+    source_previews: list[dict[str, Any]] = []
     total_matches = 0
     match_order = 0
     files_scanned = 0
 
-    for path in scope.rglob("*"):
+    for path in sorted(scope.rglob("*")):
         if not path.is_file() or path.suffix.lower() not in SUPPORTED_EXTENSIONS:
             continue
         resolved = path.resolve()
@@ -131,12 +154,19 @@ def search_data_files(
             continue
         files_scanned += 1
         try:
+            preview_units = []
             for text, location in _read_search_units(path):
+                if len(preview_units) < 12 and text.strip():
+                    preview_units.append({
+                        "location_type": "page" if path.suffix.lower() == ".pdf" else "line",
+                        "location": location,
+                        "snippet": re.sub(r"\s+", " ", text).strip()[:500],
+                    })
                 normalized = text.casefold()
-                if not all(term in normalized for term in terms):
+                if not normalized.strip() or (not wildcard and not all(term in normalized for term in terms)):
                     continue
-                score = sum(normalized.count(term) for term in terms)
-                first_match = min(normalized.find(term) for term in terms)
+                score = 1 if wildcard else sum(normalized.count(term) for term in terms)
+                first_match = 0 if wildcard else min(normalized.find(term) for term in terms)
                 start = max(0, first_match - 300)
                 end = min(len(text), first_match + 700)
                 snippet = re.sub(r"\s+", " ", text[start:end]).strip()
@@ -145,7 +175,7 @@ def search_data_files(
                 if end < len(text):
                     snippet = f"{snippet}..."
                 item = {
-                    "path": str(path.relative_to(DATA_DIR)),
+                    "source": source_names.get(path.name, path.name),
                     "location_type": "page" if path.suffix.lower() == ".pdf" else "line",
                     "location": location,
                     "snippet": snippet,
@@ -158,10 +188,14 @@ def search_data_files(
                     heapq.heappush(matches, entry)
                 elif score > matches[0][0]:
                     heapq.heapreplace(matches, entry)
+            source_previews.append({
+                "source": source_names.get(path.name, path.name),
+                "units": preview_units,
+            })
         except Exception as exc:
             if len(errors) < 10:
                 errors.append({
-                    "path": str(path.relative_to(DATA_DIR)),
+                    "source": source_names.get(path.name, path.name),
                     "error": str(exc),
                 })
 
@@ -173,6 +207,7 @@ def search_data_files(
         "matches": ranked_matches,
         "match_count": len(ranked_matches),
         "total_match_count": total_matches,
+        "source_previews": source_previews,
         "errors": errors,
     }
 
