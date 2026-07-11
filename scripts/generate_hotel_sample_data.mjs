@@ -7,7 +7,8 @@ import { fileURLToPath } from "node:url";
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 const CURRENT_DATE = "2026-07-11";
 const START_DATE = addDays(CURRENT_DATE, -365);
-const END_DATE = addDays(CURRENT_DATE, 90);
+const END_DATE = CURRENT_DATE;
+const OTB_OBSERVATION_LEAD_DAYS = 7;
 
 const PROPERTIES = [
   {
@@ -316,23 +317,20 @@ function leadTimeDays(property, slice, date) {
 function buildRows() {
   const rows = [];
   for (const date of dateRange(START_DATE, END_DATE)) {
-    const isFuture = date >= CURRENT_DATE;
     for (const property of PROPERTIES) {
       const weights = normalizedWeights(property, date);
       const actualRoomNights = splitInteger(finalRoomNights(property, date), weights);
       const budget = splitInteger(budgetRoomNights(property, date), weights);
       const lastYear = splitInteger(finalRoomNights(property, addYears(date, -1)), weights);
-      const currentOtbTotal = isFuture ? onTheBooksRoomNights(property, date, CURRENT_DATE) : 0;
-      const previousOtbTotal = isFuture ? onTheBooksRoomNights(property, date, addDays(CURRENT_DATE, -1)) : 0;
+      const otbObservationDate = addDays(date, -OTB_OBSERVATION_LEAD_DAYS);
+      const currentOtbTotal = onTheBooksRoomNights(property, date, otbObservationDate);
+      const previousOtbTotal = onTheBooksRoomNights(property, date, addDays(otbObservationDate, -1));
       const currentOtb = splitInteger(currentOtbTotal, weights);
       const previousOtb = splitInteger(previousOtbTotal, weights);
 
-      const daysToArrival = daysBetween(CURRENT_DATE, date);
       const lastYearStayDate = addYears(date, -1);
-      const lastYearReportDate = addDays(lastYearStayDate, -daysToArrival);
-      const lastYearOtbTotal = isFuture
-        ? onTheBooksRoomNights(property, lastYearStayDate, lastYearReportDate)
-        : 0;
+      const lastYearReportDate = addDays(lastYearStayDate, -OTB_OBSERVATION_LEAD_DAYS);
+      const lastYearOtbTotal = onTheBooksRoomNights(property, lastYearStayDate, lastYearReportDate);
       const lastYearOtb = splitInteger(lastYearOtbTotal, weights);
 
       for (let index = 0; index < COMMERCIAL_SLICES.length; index += 1) {
@@ -347,13 +345,13 @@ function buildRows() {
         rows.push({
           date,
           property: property.name,
-          occupancy_pct: isFuture ? "" : roundOneDecimal((roomNights / property.rooms) * 100),
-          adr_vnd: isFuture ? "" : adrVnd,
-          revpar_vnd: isFuture ? "" : roundMoney(revenueVnd / property.rooms),
-          room_nights: isFuture ? "" : roomNights,
-          revenue_vnd: isFuture ? "" : revenueVnd,
-          booking_pace_pct: isFuture ? pace : "",
-          pickup_room_nights: isFuture ? currentOtb[index] - previousOtb[index] : "",
+          occupancy_pct: roundOneDecimal((roomNights / property.rooms) * 100),
+          adr_vnd: adrVnd,
+          revpar_vnd: roundMoney(revenueVnd / property.rooms),
+          room_nights: roomNights,
+          revenue_vnd: revenueVnd,
+          booking_pace_pct: pace,
+          pickup_room_nights: currentOtb[index] - previousOtb[index],
           market_segment: slice.marketSegment,
           source: slice.source,
           channel: slice.channel,
@@ -361,14 +359,14 @@ function buildRows() {
           lead_time_days: leadTimeDays(property, slice, date),
           cancellations: cancellationCount(
             property,
-            isFuture ? previousOtb[index] : roomNights,
+            roomNights,
             date,
             index,
-            isFuture,
+            false,
           ),
           budget_room_nights: budget[index],
           last_year_room_nights: lastYear[index],
-          on_the_books_room_nights: isFuture ? currentOtb[index] : "",
+          on_the_books_room_nights: currentOtb[index],
         });
       }
     }

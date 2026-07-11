@@ -16,11 +16,13 @@ The room file contains one synthetic row per physical room. It joins to the othe
 
 The data is entirely synthetic and contains no guest names, booking references, emails, phone numbers, addresses, or other identifiable guest data.
 
-The synthetic reporting date is 2026-07-11:
+The observed period is 2025-07-11 through 2026-07-11:
 
-- Dates before 2026-07-11 contain finalized performance values.
-- Dates from 2026-07-11 onward contain on-the-books, pace, and pick-up values.
-- Budget and last-year room nights are provided for all dates.
+- Every row is an observed historical or present record.
+- No date after 2026-07-11 is included.
+- A forecast produced from this dataset should begin on 2026-07-12.
+- OTB, pace, and pick-up are historical observations captured seven days before each stay date.
+- Budget and last-year room nights are provided for every date.
 
 ## Daily Data Columns
 
@@ -33,8 +35,8 @@ The synthetic reporting date is 2026-07-11:
 | revpar_vnd | VND | Revenue for this slice divided by the property's rooms; the five slices sum to total property RevPAR |
 | room_nights | Count | Final sold room nights for this slice |
 | revenue_vnd | VND | Final room revenue for this slice |
-| booking_pace_pct | Percent | Current OTB pace compared with the same booking point last year; 100 means equal pace |
-| pickup_room_nights | Count | Net room nights added to OTB since the previous daily report; this can be negative |
+| booking_pace_pct | Percent | OTB seven days before arrival compared with the same lead time last year; 100 means equal pace |
+| pickup_room_nights | Count | Net room nights added between eight and seven days before the stay date; this can be negative |
 | market_segment | Text | Commercial segment such as Leisure, Corporate, Group_MICE, or Wholesale |
 | source | Text | Where the booking originated, such as Hotel Website or Booking.com |
 | channel | Text | Broad sales channel such as Direct, OTA, Corporate, or Wholesale |
@@ -43,7 +45,7 @@ The synthetic reporting date is 2026-07-11:
 | cancellations | Count | Number of cancelled reservations attributed to the slice |
 | budget_room_nights | Count | Budgeted room nights for the same property, date, and slice |
 | last_year_room_nights | Count | Final room nights for the corresponding date one year earlier |
-| on_the_books_room_nights | Count | Room nights currently booked for the future stay date |
+| on_the_books_room_nights | Count | Room nights recorded on the books seven days before the stay date |
 
 ## Property Data Columns
 
