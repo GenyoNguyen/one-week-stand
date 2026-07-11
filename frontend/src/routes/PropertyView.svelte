@@ -164,6 +164,27 @@
                 <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
               {/each}
             </div>
+            <details class="fallback mix-fallback">
+              <summary>View as table</summary>
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>Segment</th>
+                    <th class="r">Share</th>
+                    <th class="r">Room nights</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {#each mix as m (m.segment)}
+                    <tr>
+                      <td>{m.segment}</td>
+                      <td class="r">{fmtPct(m.share)}</td>
+                      <td class="r">{fmtInt(m.share * otbRn30)}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            </details>
           </div>
         </div>
       </div>
@@ -303,6 +324,15 @@
     flex-direction: column;
     gap: 8px;
     font-size: 12.5px;
+  }
+  /* full-width row beneath the donut + legend (mix-body wraps) */
+  .mix-fallback {
+    flex-basis: 100%;
+    margin-top: 0;
+  }
+  .mix-fallback table {
+    max-width: 340px;
+    margin: 8px auto 0;
   }
   .legend span {
     display: inline-flex;

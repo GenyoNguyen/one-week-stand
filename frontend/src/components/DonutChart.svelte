@@ -33,8 +33,12 @@
         fill={s.data.color}
         class="seg"
         class:dim={hover && hover !== s.data.label}
+        tabindex="0"
+        role="img"
         on:mouseenter={() => (hover = s.data.label)}
         on:mouseleave={() => (hover = null)}
+        on:focus={() => (hover = s.data.label)}
+        on:blur={() => (hover = null)}
         aria-label="{s.data.label}: {fmtPct(s.data.share)}"
       />
     {/each}
@@ -54,6 +58,11 @@
   }
   .seg.dim {
     opacity: 0.3;
+  }
+  .seg:focus-visible {
+    outline: none;
+    stroke: var(--ink);
+    stroke-width: 1.5;
   }
   .c-value {
     text-anchor: middle;
