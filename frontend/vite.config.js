@@ -14,20 +14,15 @@ export default defineConfig(({ mode }) => {
     rootEnv.MIROFISH_API_URL ||
     mirofishEnv.MIROFISH_API_URL ||
     'http://127.0.0.1:5001';
-  const forecastApiKey =
-    process.env.FORECAST_API_KEY ||
-    rootEnv.FORECAST_API_KEY ||
-    mirofishEnv.FORECAST_API_KEY;
-
   return {
     plugins: [svelte()],
     server: {
+      host: '127.0.0.1',
       port: 5173,
       proxy: {
         '/api': {
           target: apiTarget,
-          changeOrigin: true,
-          headers: forecastApiKey ? { 'X-API-Key': forecastApiKey } : {}
+          changeOrigin: true
         }
       }
     }
