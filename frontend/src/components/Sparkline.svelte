@@ -9,7 +9,7 @@
   $: span = max - min || 1;
   $: pts = data
     .map((v, i) => {
-      const x = (i / (data.length - 1)) * (width - 4) + 2;
+      const x = (i / Math.max(1, data.length - 1)) * (width - 4) + 2;
       const y = height - 3 - ((v - min) / span) * (height - 8);
       return [x, y];
     });

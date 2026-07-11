@@ -3,7 +3,7 @@
   import { fmtPct, fmtMoneyFull, fmtInt, fmtDelta, deltaClass, deltaArrow } from '../lib/formatters.js';
 
   export let rows = []; // [{property, occ, adr, revpar, pu7, delta}]
-  export let total = null; // portfolio rollup {occ, adr, revpar, pu7, delta} — same numbers the hero quotes
+  export let total = null; // pu7 is the uploaded source pickup measure, not an inferred rolling window
   export let compareLabel = 'vs budget';
 
   const dispatch = createEventDispatcher();
@@ -16,7 +16,7 @@
       <th class="r">Occ tonight</th>
       <th class="r">ADR</th>
       <th class="r">RevPAR</th>
-      <th class="r">Pickup 7d</th>
+      <th class="r">Source pickup</th>
       <th class="r">RevPAR {compareLabel}</th>
     </tr>
   </thead>

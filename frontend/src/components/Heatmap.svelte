@@ -1,21 +1,21 @@
 <script>
-  // 7-day pickup by stay date, calendar layout. Sequential single hue —
-  // magnitude only, so one teal ramp, light to dark.
+  // Uploaded net pickup by stay date. Positive and negative movements use a
+  // diverging scale so cancellations/reductions never produce invalid colors.
   import { fmtDate, fmtInt } from '../lib/formatters.js';
 
   export let cells = []; // [{date, pu7}] — consecutive days starting tomorrow
 
-  $: max = Math.max(1, ...cells.map((c) => c.pu7));
+  $: maxAbs = Math.max(1, ...cells.map((c) => Math.abs(c.pu7)));
 
   // teal ramp between two endpoints, discrete enough to stay readable
   function shade(v) {
-    const t = Math.pow(v / max, 0.75);
-    const from = [232, 242, 239];
-    const to = [7, 84, 72];
+    const t = Math.pow(Math.abs(v) / maxAbs, 0.75);
+    const from = [242, 239, 233];
+    const to = v < 0 ? [157, 70, 54] : [7, 84, 72];
     const c = from.map((f, i) => Math.round(f + (to[i] - f) * t));
     return `rgb(${c[0]},${c[1]},${c[2]})`;
   }
-  const ink = (v) => (v / max > 0.55 ? '#f2efe9' : 'var(--ink-2)');
+  const ink = (v) => (Math.abs(v) / maxAbs > 0.55 ? '#f2efe9' : 'var(--ink-2)');
 
   // align first cell to its weekday column (Mon-first)
   $: lead = cells.length ? (cells[0].date.getDay() + 6) % 7 : 0;
@@ -38,7 +38,7 @@
       on:mouseenter={() => (hover = c)}
       on:mouseleave={() => (hover = null)}
       role="figure"
-      aria-label="{fmtDate(c.date)}: {c.pu7} rooms picked up in last 7 days"
+      aria-label="{fmtDate(c.date)}: uploaded pickup measure of {c.pu7} rooms"
     >
       {c.date.getDate()}
     </div>
@@ -47,15 +47,15 @@
 
 <div class="foot">
   <span class="hint num">
-    {#if hover}{fmtDate(hover.date)} — {fmtInt(hover.pu7)} rooms picked up in the last 7 days{:else}Hover a
+    {#if hover}{fmtDate(hover.date)} — source pickup measure: {fmtInt(hover.pu7)} rooms{:else}Hover a
     date for detail{/if}
   </span>
   <span class="scale">
-    0
-    {#each [0.2, 0.4, 0.6, 0.8, 1] as s}
-      <i style="background:{shade(s * max)}"></i>
-    {/each}
-    {fmtInt(max)} rm
+    −{fmtInt(maxAbs)}
+    <i style="background:{shade(-maxAbs)}"></i>
+    <i style="background:{shade(0)}"></i>
+    <i style="background:{shade(maxAbs)}"></i>
+    +{fmtInt(maxAbs)} rm
   </span>
 </div>
 
