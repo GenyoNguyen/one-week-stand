@@ -1,0 +1,1099 @@
+date,property,bookings_checking_in,bookings_staying,bookings_checking_out,guests_checking_in,guests_staying,guests_checking_out,staffing_status
+2025-07-11,The Anam 1,27,78,20,50,147,37,Right amount
+2025-07-11,The Anam 2,24,54,19,39,87,31,Over-deployed
+2025-07-11,The Anam 3,16,45,12,27,77,20,Over-deployed
+2025-07-12,The Anam 1,21,78,21,40,148,39,Over-deployed
+2025-07-12,The Anam 2,21,54,21,35,87,35,Over-deployed
+2025-07-12,The Anam 3,13,45,13,22,77,22,Over-deployed
+2025-07-13,The Anam 1,14,71,21,25,134,39,Over-deployed
+2025-07-13,The Anam 2,16,49,21,27,79,35,Over-deployed
+2025-07-13,The Anam 3,9,41,13,15,70,22,Over-deployed
+2025-07-14,The Anam 1,19,71,19,35,134,35,Over-deployed
+2025-07-14,The Anam 2,19,49,19,31,79,31,Over-deployed
+2025-07-14,The Anam 3,12,41,12,20,70,20,Over-deployed
+2025-07-15,The Anam 1,19,71,19,35,134,35,Over-deployed
+2025-07-15,The Anam 2,19,49,19,31,79,31,Over-deployed
+2025-07-15,The Anam 3,12,41,12,20,70,20,Over-deployed
+2025-07-16,The Anam 1,19,71,19,35,134,35,Over-deployed
+2025-07-16,The Anam 2,19,49,19,31,79,31,Over-deployed
+2025-07-16,The Anam 3,12,41,12,20,70,20,Over-deployed
+2025-07-17,The Anam 1,19,71,19,36,135,35,Over-deployed
+2025-07-17,The Anam 2,19,49,19,31,79,31,Over-deployed
+2025-07-17,The Anam 3,12,41,12,20,70,20,Over-deployed
+2025-07-18,The Anam 1,26,78,19,48,148,35,Right amount
+2025-07-18,The Anam 2,23,53,19,37,85,31,Over-deployed
+2025-07-18,The Anam 3,16,45,12,26,76,20,Over-deployed
+2025-07-19,The Anam 1,21,78,21,39,148,39,Over-deployed
+2025-07-19,The Anam 2,20,53,20,33,85,33,Over-deployed
+2025-07-19,The Anam 3,13,45,13,22,76,22,Over-deployed
+2025-07-20,The Anam 1,20,77,21,33,140,41,Over-deployed
+2025-07-20,The Anam 2,21,53,21,29,81,33,Over-deployed
+2025-07-20,The Anam 3,10,41,14,20,70,26,Over-deployed
+2025-07-21,The Anam 1,21,77,21,41,140,41,Over-deployed
+2025-07-21,The Anam 2,21,53,21,33,81,33,Over-deployed
+2025-07-21,The Anam 3,13,41,13,24,70,24,Over-deployed
+2025-07-22,The Anam 1,21,77,21,41,140,41,Over-deployed
+2025-07-22,The Anam 2,21,53,21,33,81,33,Over-deployed
+2025-07-22,The Anam 3,13,41,13,24,70,24,Over-deployed
+2025-07-23,The Anam 1,21,77,21,41,140,41,Over-deployed
+2025-07-23,The Anam 2,21,53,21,33,81,33,Over-deployed
+2025-07-23,The Anam 3,13,41,13,24,70,24,Over-deployed
+2025-07-24,The Anam 1,22,78,21,43,142,41,Right amount
+2025-07-24,The Anam 2,21,53,21,33,81,33,Over-deployed
+2025-07-24,The Anam 3,13,41,13,24,70,24,Over-deployed
+2025-07-25,The Anam 1,28,85,21,53,154,41,Right amount
+2025-07-25,The Anam 2,26,58,21,41,89,33,Right amount
+2025-07-25,The Anam 3,17,45,13,30,76,24,Right amount
+2025-07-26,The Anam 1,23,85,23,45,154,45,Right amount
+2025-07-26,The Anam 2,23,58,23,36,89,36,Right amount
+2025-07-26,The Anam 3,14,45,14,26,76,26,Right amount
+2025-07-27,The Anam 1,16,78,23,33,142,45,Over-deployed
+2025-07-27,The Anam 2,18,53,23,28,81,36,Over-deployed
+2025-07-27,The Anam 3,10,41,14,20,70,26,Over-deployed
+2025-07-28,The Anam 1,21,78,21,54,155,41,Right amount
+2025-07-28,The Anam 2,21,53,21,32,80,33,Over-deployed
+2025-07-28,The Anam 3,12,41,12,21,69,22,Over-deployed
+2025-07-29,The Anam 1,21,78,21,41,155,41,Over-deployed
+2025-07-29,The Anam 2,21,53,21,34,81,33,Over-deployed
+2025-07-29,The Anam 3,12,41,12,22,69,22,Over-deployed
+2025-07-30,The Anam 1,23,72,29,44,143,56,Right amount
+2025-07-30,The Anam 2,20,53,20,36,86,31,Over-deployed
+2025-07-30,The Anam 3,12,41,12,22,69,22,Over-deployed
+2025-07-31,The Anam 1,26,72,26,50,143,50,Right amount
+2025-07-31,The Anam 2,20,53,20,31,86,31,Over-deployed
+2025-07-31,The Anam 3,12,41,12,22,69,22,Over-deployed
+2025-08-01,The Anam 1,41,81,32,76,156,63,Under-deployed
+2025-08-01,The Anam 2,23,53,23,37,86,37,Right amount
+2025-08-01,The Anam 3,14,41,14,29,73,25,Right amount
+2025-08-02,The Anam 1,36,81,36,71,156,71,Under-deployed
+2025-08-02,The Anam 2,23,53,23,37,86,37,Right amount
+2025-08-02,The Anam 3,14,41,14,25,73,25,Right amount
+2025-08-03,The Anam 1,29,74,36,58,143,71,Under-deployed
+2025-08-03,The Anam 2,18,48,23,29,78,37,Over-deployed
+2025-08-03,The Anam 3,11,38,14,19,67,25,Over-deployed
+2025-08-04,The Anam 1,33,74,33,65,143,65,Under-deployed
+2025-08-04,The Anam 2,21,48,21,34,78,34,Right amount
+2025-08-04,The Anam 3,12,37,13,22,66,23,Over-deployed
+2025-08-05,The Anam 1,33,74,33,65,143,65,Under-deployed
+2025-08-05,The Anam 2,21,48,21,34,78,34,Right amount
+2025-08-05,The Anam 3,13,37,13,23,66,23,Over-deployed
+2025-08-06,The Anam 1,33,74,33,65,143,65,Under-deployed
+2025-08-06,The Anam 2,21,48,21,34,78,34,Right amount
+2025-08-06,The Anam 3,13,37,13,23,66,23,Over-deployed
+2025-08-07,The Anam 1,33,74,33,65,143,65,Under-deployed
+2025-08-07,The Anam 2,21,48,21,34,78,34,Right amount
+2025-08-07,The Anam 3,13,37,13,23,66,23,Over-deployed
+2025-08-08,The Anam 1,26,81,19,51,156,38,Right amount
+2025-08-08,The Anam 2,26,54,20,41,87,32,Right amount
+2025-08-08,The Anam 3,16,41,12,29,73,22,Right amount
+2025-08-09,The Anam 1,20,81,20,40,156,40,Over-deployed
+2025-08-09,The Anam 2,22,53,23,36,86,37,Right amount
+2025-08-09,The Anam 3,14,41,14,25,73,25,Right amount
+2025-08-10,The Anam 1,22,67,36,39,124,71,Right amount
+2025-08-10,The Anam 2,18,48,23,24,73,37,Over-deployed
+2025-08-10,The Anam 3,11,38,14,16,64,25,Over-deployed
+2025-08-11,The Anam 1,30,67,30,59,124,59,Right amount
+2025-08-11,The Anam 2,21,48,21,34,73,34,Right amount
+2025-08-11,The Anam 3,13,38,13,23,64,23,Over-deployed
+2025-08-12,The Anam 1,30,67,30,59,124,59,Under-deployed
+2025-08-12,The Anam 2,20,48,20,32,73,32,Over-deployed
+2025-08-12,The Anam 3,13,38,13,23,64,23,Over-deployed
+2025-08-13,The Anam 1,30,67,30,59,124,59,Right amount
+2025-08-13,The Anam 2,20,48,20,32,73,32,Over-deployed
+2025-08-13,The Anam 3,13,38,13,23,64,23,Over-deployed
+2025-08-14,The Anam 1,30,67,30,58,123,59,Under-deployed
+2025-08-14,The Anam 2,21,48,21,34,73,34,Right amount
+2025-08-14,The Anam 3,13,38,13,23,64,23,Over-deployed
+2025-08-15,The Anam 1,37,74,30,72,136,59,Under-deployed
+2025-08-15,The Anam 2,26,53,21,42,81,34,Right amount
+2025-08-15,The Anam 3,16,41,13,28,69,23,Right amount
+2025-08-16,The Anam 1,33,74,33,65,136,65,Under-deployed
+2025-08-16,The Anam 2,23,53,23,37,81,37,Right amount
+2025-08-16,The Anam 3,14,41,14,25,69,25,Right amount
+2025-08-17,The Anam 1,26,67,33,52,123,65,Under-deployed
+2025-08-17,The Anam 2,18,48,23,29,73,37,Over-deployed
+2025-08-17,The Anam 3,10,37,14,18,62,25,Over-deployed
+2025-08-18,The Anam 1,17,67,17,34,123,34,Over-deployed
+2025-08-18,The Anam 2,20,48,20,32,73,32,Over-deployed
+2025-08-18,The Anam 3,12,37,12,23,63,22,Over-deployed
+2025-08-19,The Anam 1,17,67,17,34,123,34,Over-deployed
+2025-08-19,The Anam 2,20,48,20,32,73,32,Over-deployed
+2025-08-19,The Anam 3,12,37,12,22,63,22,Over-deployed
+2025-08-20,The Anam 1,10,60,17,24,115,32,Over-deployed
+2025-08-20,The Anam 2,15,43,20,26,69,30,Over-deployed
+2025-08-20,The Anam 3,16,37,16,29,63,29,Right amount
+2025-08-21,The Anam 1,15,60,15,28,115,28,Over-deployed
+2025-08-21,The Anam 2,18,43,18,27,69,27,Over-deployed
+2025-08-21,The Anam 3,16,37,16,29,63,29,Right amount
+2025-08-22,The Anam 1,23,68,15,44,131,28,Over-deployed
+2025-08-22,The Anam 2,24,49,18,37,79,27,Over-deployed
+2025-08-22,The Anam 3,20,41,16,35,69,29,Under-deployed
+2025-08-23,The Anam 1,17,68,17,32,131,32,Over-deployed
+2025-08-23,The Anam 2,21,49,21,32,79,32,Over-deployed
+2025-08-23,The Anam 3,18,41,18,32,69,32,Under-deployed
+2025-08-24,The Anam 1,9,60,17,16,115,32,Over-deployed
+2025-08-24,The Anam 2,15,43,21,22,69,32,Over-deployed
+2025-08-24,The Anam 3,13,37,17,24,63,30,Right amount
+2025-08-25,The Anam 1,15,60,15,28,115,28,Over-deployed
+2025-08-25,The Anam 2,18,43,18,27,69,27,Over-deployed
+2025-08-25,The Anam 3,16,37,16,29,63,29,Right amount
+2025-08-26,The Anam 1,15,60,15,28,115,28,Over-deployed
+2025-08-26,The Anam 2,18,43,18,27,69,27,Over-deployed
+2025-08-26,The Anam 3,16,37,16,29,63,29,Right amount
+2025-08-27,The Anam 1,15,60,15,28,115,28,Over-deployed
+2025-08-27,The Anam 2,18,43,18,27,69,27,Over-deployed
+2025-08-27,The Anam 3,16,37,16,29,63,29,Right amount
+2025-08-28,The Anam 1,41,74,27,79,143,51,Under-deployed
+2025-08-28,The Anam 2,18,43,18,27,69,27,Over-deployed
+2025-08-28,The Anam 3,16,37,16,28,62,29,Right amount
+2025-08-29,The Anam 1,41,82,33,77,158,62,Under-deployed
+2025-08-29,The Anam 2,23,48,18,35,77,27,Over-deployed
+2025-08-29,The Anam 3,20,41,16,36,69,29,Under-deployed
+2025-08-30,The Anam 1,15,68,29,31,131,58,Right amount
+2025-08-30,The Anam 2,20,53,15,32,85,24,Over-deployed
+2025-08-30,The Anam 3,18,45,14,31,76,24,Right amount
+2025-08-31,The Anam 1,17,61,24,34,117,48,Over-deployed
+2025-08-31,The Anam 2,12,48,17,19,77,27,Over-deployed
+2025-08-31,The Anam 3,11,41,15,19,70,25,Over-deployed
+2025-09-01,The Anam 1,23,59,25,41,109,49,Right amount
+2025-09-01,The Anam 2,17,44,21,30,74,33,Over-deployed
+2025-09-01,The Anam 3,11,38,14,21,66,25,Over-deployed
+2025-09-02,The Anam 1,35,70,24,68,130,47,Under-deployed
+2025-09-02,The Anam 2,27,52,19,44,88,30,Right amount
+2025-09-02,The Anam 3,18,43,13,32,74,24,Right amount
+2025-09-03,The Anam 1,17,59,28,34,109,55,Over-deployed
+2025-09-03,The Anam 2,15,44,23,22,74,36,Over-deployed
+2025-09-03,The Anam 3,9,37,15,17,64,27,Over-deployed
+2025-09-04,The Anam 1,25,60,24,49,111,47,Right amount
+2025-09-04,The Anam 2,19,44,19,21,66,29,Over-deployed
+2025-09-04,The Anam 3,14,38,13,26,66,24,Over-deployed
+2025-09-05,The Anam 1,31,67,24,60,124,47,Right amount
+2025-09-05,The Anam 2,24,49,19,37,74,29,Over-deployed
+2025-09-05,The Anam 3,17,42,13,31,73,24,Right amount
+2025-09-06,The Anam 1,27,67,27,53,124,53,Right amount
+2025-09-06,The Anam 2,21,49,21,33,74,33,Over-deployed
+2025-09-06,The Anam 3,14,41,15,25,71,27,Right amount
+2025-09-07,The Anam 1,20,60,27,40,111,53,Right amount
+2025-09-07,The Anam 2,16,44,21,26,67,33,Over-deployed
+2025-09-07,The Anam 3,11,38,14,20,66,25,Over-deployed
+2025-09-08,The Anam 1,24,59,25,47,109,49,Right amount
+2025-09-08,The Anam 2,20,44,20,31,67,31,Over-deployed
+2025-09-08,The Anam 3,12,37,13,22,64,24,Over-deployed
+2025-09-09,The Anam 1,24,59,24,47,109,47,Right amount
+2025-09-09,The Anam 2,20,44,20,31,67,31,Over-deployed
+2025-09-09,The Anam 3,13,37,13,24,64,24,Over-deployed
+2025-09-10,The Anam 1,24,59,24,54,116,47,Right amount
+2025-09-10,The Anam 2,15,39,20,23,59,31,Over-deployed
+2025-09-10,The Anam 3,14,37,14,28,67,25,Right amount
+2025-09-11,The Anam 1,24,59,24,47,116,47,Right amount
+2025-09-11,The Anam 2,17,39,17,26,59,26,Over-deployed
+2025-09-11,The Anam 3,14,37,14,25,67,25,Over-deployed
+2025-09-12,The Anam 1,31,66,24,60,129,47,Right amount
+2025-09-12,The Anam 2,22,44,17,33,66,26,Over-deployed
+2025-09-12,The Anam 3,18,41,14,33,74,26,Right amount
+2025-09-13,The Anam 1,26,66,26,51,129,51,Right amount
+2025-09-13,The Anam 2,20,44,20,39,74,31,Over-deployed
+2025-09-13,The Anam 3,15,41,15,27,74,27,Right amount
+2025-09-14,The Anam 1,20,59,27,39,115,53,Right amount
+2025-09-14,The Anam 2,15,39,20,16,59,31,Over-deployed
+2025-09-14,The Anam 3,12,38,15,22,69,27,Over-deployed
+2025-09-15,The Anam 1,24,59,24,47,115,47,Right amount
+2025-09-15,The Anam 2,17,39,17,26,59,26,Over-deployed
+2025-09-15,The Anam 3,14,38,14,25,69,25,Over-deployed
+2025-09-16,The Anam 1,24,59,24,47,115,47,Right amount
+2025-09-16,The Anam 2,10,39,10,16,59,16,Over-deployed
+2025-09-16,The Anam 3,14,38,14,25,69,25,Over-deployed
+2025-09-17,The Anam 1,24,59,24,47,115,47,Right amount
+2025-09-17,The Anam 2,18,39,18,28,59,28,Over-deployed
+2025-09-17,The Anam 3,14,38,14,25,69,25,Over-deployed
+2025-09-18,The Anam 1,25,60,24,49,117,47,Right amount
+2025-09-18,The Anam 2,17,39,17,26,59,26,Over-deployed
+2025-09-18,The Anam 3,13,37,14,24,67,26,Over-deployed
+2025-09-19,The Anam 1,31,67,24,61,131,47,Right amount
+2025-09-19,The Anam 2,22,44,17,34,67,26,Over-deployed
+2025-09-19,The Anam 3,17,41,13,32,75,24,Right amount
+2025-09-20,The Anam 1,20,66,21,37,129,39,Over-deployed
+2025-09-20,The Anam 2,15,44,15,27,71,23,Over-deployed
+2025-09-20,The Anam 3,7,37,11,8,64,19,Over-deployed
+2025-09-21,The Anam 1,14,59,21,25,115,39,Over-deployed
+2025-09-21,The Anam 2,10,39,15,15,63,23,Over-deployed
+2025-09-21,The Anam 3,6,33,10,10,57,17,Over-deployed
+2025-09-22,The Anam 1,19,59,19,35,115,35,Over-deployed
+2025-09-22,The Anam 2,13,39,13,20,63,20,Over-deployed
+2025-09-22,The Anam 3,9,33,9,16,57,16,Over-deployed
+2025-09-23,The Anam 1,19,59,19,35,115,35,Over-deployed
+2025-09-23,The Anam 2,13,39,13,20,63,20,Over-deployed
+2025-09-23,The Anam 3,9,33,9,16,57,16,Over-deployed
+2025-09-24,The Anam 1,19,59,19,35,115,35,Over-deployed
+2025-09-24,The Anam 2,13,39,13,20,63,20,Over-deployed
+2025-09-24,The Anam 3,9,33,9,16,57,16,Over-deployed
+2025-09-25,The Anam 1,19,59,19,35,115,35,Over-deployed
+2025-09-25,The Anam 2,13,39,13,20,63,20,Over-deployed
+2025-09-25,The Anam 3,9,33,9,16,57,16,Over-deployed
+2025-09-26,The Anam 1,26,66,19,49,129,35,Over-deployed
+2025-09-26,The Anam 2,18,44,13,27,70,20,Over-deployed
+2025-09-26,The Anam 3,13,37,9,23,64,16,Over-deployed
+2025-09-27,The Anam 1,21,66,21,39,129,39,Over-deployed
+2025-09-27,The Anam 2,15,44,15,24,71,23,Over-deployed
+2025-09-27,The Anam 3,10,37,10,17,64,17,Over-deployed
+2025-09-28,The Anam 1,13,59,20,23,115,37,Over-deployed
+2025-09-28,The Anam 2,10,39,15,15,63,23,Over-deployed
+2025-09-28,The Anam 3,6,33,10,10,57,17,Over-deployed
+2025-09-29,The Anam 1,18,59,18,33,115,33,Over-deployed
+2025-09-29,The Anam 2,13,39,13,20,63,20,Over-deployed
+2025-09-29,The Anam 3,8,33,8,14,57,14,Over-deployed
+2025-09-30,The Anam 1,23,58,24,42,113,44,Over-deployed
+2025-09-30,The Anam 2,12,38,13,18,61,20,Over-deployed
+2025-09-30,The Anam 3,14,38,9,26,66,17,Over-deployed
+2025-10-01,The Anam 1,32,67,23,59,127,45,Right amount
+2025-10-01,The Anam 2,15,43,10,21,66,16,Over-deployed
+2025-10-01,The Anam 3,18,44,12,33,77,22,Right amount
+2025-10-02,The Anam 1,27,67,27,53,127,53,Right amount
+2025-10-02,The Anam 2,22,54,11,35,83,18,Over-deployed
+2025-10-02,The Anam 3,14,44,14,25,77,25,Right amount
+2025-10-03,The Anam 1,34,74,27,66,140,53,Under-deployed
+2025-10-03,The Anam 2,8,48,14,13,74,22,Over-deployed
+2025-10-03,The Anam 3,17,47,14,30,82,25,Right amount
+2025-10-04,The Anam 1,30,75,29,60,143,57,Under-deployed
+2025-10-04,The Anam 2,23,59,12,35,90,19,Over-deployed
+2025-10-04,The Anam 3,15,47,15,27,82,27,Right amount
+2025-10-05,The Anam 1,22,67,30,43,127,59,Right amount
+2025-10-05,The Anam 2,9,53,15,15,81,24,Over-deployed
+2025-10-05,The Anam 3,11,43,15,20,75,27,Over-deployed
+2025-10-06,The Anam 1,27,67,27,53,127,53,Right amount
+2025-10-06,The Anam 2,14,53,14,22,81,22,Over-deployed
+2025-10-06,The Anam 3,15,44,14,27,77,25,Right amount
+2025-10-07,The Anam 1,27,67,27,53,127,53,Right amount
+2025-10-07,The Anam 2,14,53,14,22,81,22,Over-deployed
+2025-10-07,The Anam 3,14,44,14,25,77,25,Right amount
+2025-10-08,The Anam 1,26,67,26,52,128,51,Right amount
+2025-10-08,The Anam 2,14,53,14,23,82,22,Over-deployed
+2025-10-08,The Anam 3,14,44,14,25,77,25,Right amount
+2025-10-09,The Anam 1,26,67,26,51,128,51,Right amount
+2025-10-09,The Anam 2,14,53,14,22,82,22,Over-deployed
+2025-10-09,The Anam 3,14,44,14,25,77,25,Right amount
+2025-10-10,The Anam 1,27,74,20,56,147,37,Right amount
+2025-10-10,The Anam 2,24,58,19,37,89,30,Over-deployed
+2025-10-10,The Anam 3,17,47,14,30,82,25,Right amount
+2025-10-11,The Anam 1,22,74,22,41,147,41,Over-deployed
+2025-10-11,The Anam 2,21,58,21,33,89,33,Over-deployed
+2025-10-11,The Anam 3,15,47,15,27,82,27,Right amount
+2025-10-12,The Anam 1,15,67,22,27,133,41,Over-deployed
+2025-10-12,The Anam 2,16,53,21,26,82,33,Over-deployed
+2025-10-12,The Anam 3,11,43,15,20,75,27,Over-deployed
+2025-10-13,The Anam 1,20,67,20,37,133,37,Over-deployed
+2025-10-13,The Anam 2,19,53,19,29,81,30,Over-deployed
+2025-10-13,The Anam 3,13,43,13,24,75,24,Over-deployed
+2025-10-14,The Anam 1,20,67,20,37,133,37,Over-deployed
+2025-10-14,The Anam 2,19,53,19,31,82,30,Over-deployed
+2025-10-14,The Anam 3,14,44,13,26,77,24,Right amount
+2025-10-15,The Anam 1,20,67,20,37,133,37,Over-deployed
+2025-10-15,The Anam 2,19,53,19,30,82,30,Over-deployed
+2025-10-15,The Anam 3,14,44,14,25,77,25,Right amount
+2025-10-16,The Anam 1,20,67,20,25,121,37,Over-deployed
+2025-10-16,The Anam 2,19,53,19,30,82,30,Over-deployed
+2025-10-16,The Anam 3,13,43,14,23,75,25,Over-deployed
+2025-10-17,The Anam 1,28,75,20,52,136,37,Right amount
+2025-10-17,The Anam 2,24,58,19,37,89,30,Over-deployed
+2025-10-17,The Anam 3,18,47,14,32,82,25,Right amount
+2025-10-18,The Anam 1,21,74,22,39,134,41,Over-deployed
+2025-10-18,The Anam 2,21,58,21,33,89,33,Over-deployed
+2025-10-18,The Anam 3,15,47,15,27,82,27,Right amount
+2025-10-19,The Anam 1,14,67,21,26,121,39,Over-deployed
+2025-10-19,The Anam 2,16,53,21,25,81,33,Over-deployed
+2025-10-19,The Anam 3,12,44,15,22,77,27,Right amount
+2025-10-20,The Anam 1,26,73,20,57,139,39,Right amount
+2025-10-20,The Anam 2,14,48,19,28,77,32,Over-deployed
+2025-10-20,The Anam 3,19,44,19,34,77,34,Under-deployed
+2025-10-21,The Anam 1,21,73,21,41,139,41,Over-deployed
+2025-10-21,The Anam 2,18,48,18,30,77,30,Over-deployed
+2025-10-21,The Anam 3,19,44,19,34,77,34,Under-deployed
+2025-10-22,The Anam 1,21,73,21,41,139,41,Over-deployed
+2025-10-22,The Anam 2,18,48,18,31,78,30,Over-deployed
+2025-10-22,The Anam 3,19,44,19,34,77,34,Under-deployed
+2025-10-23,The Anam 1,21,73,21,41,139,41,Over-deployed
+2025-10-23,The Anam 2,18,48,18,30,78,30,Over-deployed
+2025-10-23,The Anam 3,19,44,19,34,77,34,Under-deployed
+2025-10-24,The Anam 1,29,81,21,57,155,41,Right amount
+2025-10-24,The Anam 2,23,53,18,38,86,30,Right amount
+2025-10-24,The Anam 3,23,48,19,40,83,34,Under-deployed
+2025-10-25,The Anam 1,23,81,23,45,155,45,Right amount
+2025-10-25,The Anam 2,20,53,20,33,86,33,Right amount
+2025-10-25,The Anam 3,20,48,20,36,83,36,Under-deployed
+2025-10-26,The Anam 1,16,74,23,32,142,45,Over-deployed
+2025-10-26,The Anam 2,15,48,20,25,78,33,Over-deployed
+2025-10-26,The Anam 3,17,44,21,31,76,38,Under-deployed
+2025-10-27,The Anam 1,21,74,21,41,142,41,Over-deployed
+2025-10-27,The Anam 2,18,48,18,30,78,30,Over-deployed
+2025-10-27,The Anam 3,19,44,19,34,76,34,Under-deployed
+2025-10-28,The Anam 1,22,74,22,42,141,43,Over-deployed
+2025-10-28,The Anam 2,17,48,17,29,78,29,Over-deployed
+2025-10-28,The Anam 3,18,44,18,34,77,33,Under-deployed
+2025-10-29,The Anam 1,22,74,22,43,141,43,Over-deployed
+2025-10-29,The Anam 2,17,48,17,29,78,29,Over-deployed
+2025-10-29,The Anam 3,18,44,18,33,77,33,Right amount
+2025-10-30,The Anam 1,15,68,21,30,130,41,Over-deployed
+2025-10-30,The Anam 2,23,53,18,31,81,28,Over-deployed
+2025-10-30,The Anam 3,10,40,14,21,73,25,Over-deployed
+2025-10-31,The Anam 1,27,75,20,52,143,39,Over-deployed
+2025-10-31,The Anam 2,25,58,20,40,89,32,Right amount
+2025-10-31,The Anam 3,17,44,13,31,80,24,Right amount
+2025-11-01,The Anam 1,55,98,32,112,191,64,Under-deployed
+2025-11-01,The Anam 2,24,58,24,46,96,39,Right amount
+2025-11-01,The Anam 3,23,51,16,39,90,29,Under-deployed
+2025-11-02,The Anam 1,34,91,41,68,177,82,Under-deployed
+2025-11-02,The Anam 2,19,53,24,31,88,39,Over-deployed
+2025-11-02,The Anam 3,14,47,18,26,83,33,Right amount
+2025-11-03,The Anam 1,38,91,38,76,177,76,Under-deployed
+2025-11-03,The Anam 2,20,52,21,32,86,34,Over-deployed
+2025-11-03,The Anam 3,17,47,17,31,83,31,Right amount
+2025-11-04,The Anam 1,38,91,38,69,177,69,Under-deployed
+2025-11-04,The Anam 2,21,52,21,34,86,34,Over-deployed
+2025-11-04,The Anam 3,17,47,17,31,83,31,Right amount
+2025-11-05,The Anam 1,38,91,38,69,177,69,Under-deployed
+2025-11-05,The Anam 2,21,52,21,34,86,34,Over-deployed
+2025-11-05,The Anam 3,17,47,17,31,83,31,Right amount
+2025-11-06,The Anam 1,38,91,38,69,177,69,Under-deployed
+2025-11-06,The Anam 2,21,52,21,34,86,34,Over-deployed
+2025-11-06,The Anam 3,17,47,17,30,82,31,Right amount
+2025-11-07,The Anam 1,45,98,38,83,191,69,Under-deployed
+2025-11-07,The Anam 2,26,57,21,42,94,34,Right amount
+2025-11-07,The Anam 3,21,51,17,38,89,31,Under-deployed
+2025-11-08,The Anam 1,42,98,42,83,191,83,Under-deployed
+2025-11-08,The Anam 2,25,58,24,41,96,39,Right amount
+2025-11-08,The Anam 3,18,51,18,34,90,33,Under-deployed
+2025-11-09,The Anam 1,35,91,42,70,178,83,Under-deployed
+2025-11-09,The Anam 2,19,53,24,30,87,39,Over-deployed
+2025-11-09,The Anam 3,14,47,18,26,83,33,Right amount
+2025-11-10,The Anam 1,39,91,39,68,169,77,Under-deployed
+2025-11-10,The Anam 2,15,52,16,23,86,24,Over-deployed
+2025-11-10,The Anam 3,21,51,17,38,90,31,Under-deployed
+2025-11-11,The Anam 1,39,91,39,77,169,77,Under-deployed
+2025-11-11,The Anam 2,16,52,16,24,86,24,Over-deployed
+2025-11-11,The Anam 3,18,51,18,33,90,33,Under-deployed
+2025-11-12,The Anam 1,39,91,39,77,169,77,Under-deployed
+2025-11-12,The Anam 2,16,52,16,24,86,24,Over-deployed
+2025-11-12,The Anam 3,18,51,18,33,90,33,Under-deployed
+2025-11-13,The Anam 1,39,91,39,77,169,77,Under-deployed
+2025-11-13,The Anam 2,16,52,16,24,86,24,Over-deployed
+2025-11-13,The Anam 3,18,51,18,33,90,33,Under-deployed
+2025-11-14,The Anam 1,46,98,39,90,182,77,Under-deployed
+2025-11-14,The Anam 2,21,57,16,32,94,24,Over-deployed
+2025-11-14,The Anam 3,22,55,18,40,97,33,Under-deployed
+2025-11-15,The Anam 1,42,98,42,83,182,83,Under-deployed
+2025-11-15,The Anam 2,18,58,17,28,96,26,Over-deployed
+2025-11-15,The Anam 3,19,54,20,35,95,37,Under-deployed
+2025-11-16,The Anam 1,35,91,42,70,169,83,Under-deployed
+2025-11-16,The Anam 2,12,52,18,17,86,27,Over-deployed
+2025-11-16,The Anam 3,16,51,19,30,90,35,Under-deployed
+2025-11-17,The Anam 1,39,91,39,77,169,77,Under-deployed
+2025-11-17,The Anam 2,16,52,16,24,86,24,Over-deployed
+2025-11-17,The Anam 3,18,51,18,33,90,33,Under-deployed
+2025-11-18,The Anam 1,38,91,38,77,170,76,Under-deployed
+2025-11-18,The Anam 2,17,53,16,25,87,24,Over-deployed
+2025-11-18,The Anam 3,19,51,19,35,90,35,Under-deployed
+2025-11-19,The Anam 1,38,91,38,69,170,69,Under-deployed
+2025-11-19,The Anam 2,16,53,16,24,87,24,Over-deployed
+2025-11-19,The Anam 3,19,51,19,35,90,35,Under-deployed
+2025-11-20,The Anam 1,29,83,37,58,155,73,Under-deployed
+2025-11-20,The Anam 2,27,58,22,42,95,34,Right amount
+2025-11-20,The Anam 3,15,47,19,29,86,33,Under-deployed
+2025-11-21,The Anam 1,41,90,34,80,168,67,Under-deployed
+2025-11-21,The Anam 2,29,63,24,46,104,37,Under-deployed
+2025-11-21,The Anam 3,21,51,17,28,85,29,Under-deployed
+2025-11-22,The Anam 1,37,90,37,73,168,73,Under-deployed
+2025-11-22,The Anam 2,26,63,26,40,104,40,Right amount
+2025-11-22,The Anam 3,19,51,19,33,85,33,Under-deployed
+2025-11-23,The Anam 1,30,83,37,60,155,73,Under-deployed
+2025-11-23,The Anam 2,21,58,26,31,95,40,Right amount
+2025-11-23,The Anam 3,15,47,19,26,78,33,Under-deployed
+2025-11-24,The Anam 1,34,83,34,67,155,67,Under-deployed
+2025-11-24,The Anam 2,24,58,24,37,95,37,Right amount
+2025-11-24,The Anam 3,17,47,17,29,78,29,Right amount
+2025-11-25,The Anam 1,34,83,34,67,155,67,Under-deployed
+2025-11-25,The Anam 2,24,58,24,37,95,37,Right amount
+2025-11-25,The Anam 3,17,47,17,29,78,29,Right amount
+2025-11-26,The Anam 1,34,83,34,67,155,67,Under-deployed
+2025-11-26,The Anam 2,24,58,24,37,95,37,Right amount
+2025-11-26,The Anam 3,17,47,17,29,78,29,Right amount
+2025-11-27,The Anam 1,34,83,34,67,155,67,Under-deployed
+2025-11-27,The Anam 2,24,58,24,37,95,37,Right amount
+2025-11-27,The Anam 3,17,47,17,29,78,29,Right amount
+2025-11-28,The Anam 1,42,90,35,81,167,69,Under-deployed
+2025-11-28,The Anam 2,29,63,24,46,104,37,Under-deployed
+2025-11-28,The Anam 3,21,51,17,36,85,29,Under-deployed
+2025-11-29,The Anam 1,39,91,38,77,169,75,Under-deployed
+2025-11-29,The Anam 2,26,63,26,40,104,40,Right amount
+2025-11-29,The Anam 3,18,51,18,31,85,31,Under-deployed
+2025-11-30,The Anam 1,30,83,38,61,155,75,Under-deployed
+2025-11-30,The Anam 2,21,58,26,31,95,40,Over-deployed
+2025-11-30,The Anam 3,10,47,14,17,78,24,Over-deployed
+2025-12-01,The Anam 1,43,96,30,90,187,58,Under-deployed
+2025-12-01,The Anam 2,31,66,23,47,105,37,Right amount
+2025-12-01,The Anam 3,26,56,17,54,101,31,Under-deployed
+2025-12-02,The Anam 1,36,97,35,69,189,67,Under-deployed
+2025-12-02,The Anam 2,26,66,26,42,105,42,Right amount
+2025-12-02,The Anam 3,20,56,20,37,101,37,Under-deployed
+2025-12-03,The Anam 1,34,96,35,65,187,67,Under-deployed
+2025-12-03,The Anam 2,26,66,26,42,105,42,Right amount
+2025-12-03,The Anam 3,20,56,20,37,101,37,Under-deployed
+2025-12-04,The Anam 1,35,96,35,66,186,67,Under-deployed
+2025-12-04,The Anam 2,24,65,25,38,103,40,Right amount
+2025-12-04,The Anam 3,20,56,20,37,101,37,Under-deployed
+2025-12-05,The Anam 1,42,103,35,81,200,67,Under-deployed
+2025-12-05,The Anam 2,31,71,25,50,113,40,Under-deployed
+2025-12-05,The Anam 3,24,60,20,44,108,37,Under-deployed
+2025-12-06,The Anam 1,39,104,38,75,202,73,Under-deployed
+2025-12-06,The Anam 2,27,71,27,44,113,44,Under-deployed
+2025-12-06,The Anam 3,21,60,21,39,108,39,Under-deployed
+2025-12-07,The Anam 1,30,96,38,57,186,73,Under-deployed
+2025-12-07,The Anam 2,22,66,27,36,105,44,Right amount
+2025-12-07,The Anam 3,17,56,21,32,101,39,Under-deployed
+2025-12-08,The Anam 1,34,96,34,66,187,65,Under-deployed
+2025-12-08,The Anam 2,25,66,25,39,104,40,Right amount
+2025-12-08,The Anam 3,20,56,20,36,100,37,Under-deployed
+2025-12-09,The Anam 1,34,96,34,65,187,65,Under-deployed
+2025-12-09,The Anam 2,25,66,25,40,104,40,Right amount
+2025-12-09,The Anam 3,20,56,20,37,100,37,Under-deployed
+2025-12-10,The Anam 1,34,96,34,64,186,65,Under-deployed
+2025-12-10,The Anam 2,18,66,18,35,111,28,Over-deployed
+2025-12-10,The Anam 3,15,52,19,28,93,35,Under-deployed
+2025-12-11,The Anam 1,34,96,34,65,186,65,Under-deployed
+2025-12-11,The Anam 2,18,66,18,28,111,28,Over-deployed
+2025-12-11,The Anam 3,18,52,18,33,93,33,Under-deployed
+2025-12-12,The Anam 1,42,103,35,81,200,67,Under-deployed
+2025-12-12,The Anam 2,23,71,18,36,119,28,Over-deployed
+2025-12-12,The Anam 3,22,56,18,37,100,30,Under-deployed
+2025-12-13,The Anam 1,37,103,37,71,200,71,Under-deployed
+2025-12-13,The Anam 2,19,71,19,29,119,29,Over-deployed
+2025-12-13,The Anam 3,19,56,19,36,101,35,Under-deployed
+2025-12-14,The Anam 1,30,96,37,57,186,71,Under-deployed
+2025-12-14,The Anam 2,14,66,19,21,111,29,Over-deployed
+2025-12-14,The Anam 3,16,52,20,29,93,37,Under-deployed
+2025-12-15,The Anam 1,35,96,35,68,187,67,Under-deployed
+2025-12-15,The Anam 2,18,66,18,28,111,28,Over-deployed
+2025-12-15,The Anam 3,18,52,18,33,93,33,Under-deployed
+2025-12-16,The Anam 1,35,96,35,66,186,67,Under-deployed
+2025-12-16,The Anam 2,18,66,18,28,111,28,Over-deployed
+2025-12-16,The Anam 3,18,52,18,33,93,33,Under-deployed
+2025-12-17,The Anam 1,35,96,35,67,186,67,Under-deployed
+2025-12-17,The Anam 2,18,66,18,28,111,28,Over-deployed
+2025-12-17,The Anam 3,18,52,18,33,93,33,Under-deployed
+2025-12-18,The Anam 1,34,96,34,66,187,65,Under-deployed
+2025-12-18,The Anam 2,18,66,18,28,111,28,Over-deployed
+2025-12-18,The Anam 3,18,52,18,33,93,33,Under-deployed
+2025-12-19,The Anam 1,41,103,34,78,200,65,Under-deployed
+2025-12-19,The Anam 2,23,71,18,36,119,28,Over-deployed
+2025-12-19,The Anam 3,22,56,18,40,100,33,Under-deployed
+2025-12-20,The Anam 1,53,110,46,104,215,89,Under-deployed
+2025-12-20,The Anam 2,32,76,27,48,126,41,Under-deployed
+2025-12-20,The Anam 3,19,60,15,28,102,26,Under-deployed
+2025-12-21,The Anam 1,42,103,49,82,202,95,Under-deployed
+2025-12-21,The Anam 2,24,71,29,36,118,44,Right amount
+2025-12-21,The Anam 3,12,56,16,21,95,28,Right amount
+2025-12-22,The Anam 1,46,103,46,88,201,89,Under-deployed
+2025-12-22,The Anam 2,27,71,27,41,118,41,Right amount
+2025-12-22,The Anam 3,15,56,15,26,95,26,Right amount
+2025-12-23,The Anam 1,46,103,46,89,201,89,Under-deployed
+2025-12-23,The Anam 2,27,71,27,41,118,41,Right amount
+2025-12-23,The Anam 3,15,56,15,26,95,26,Right amount
+2025-12-24,The Anam 1,26,103,26,50,201,50,Right amount
+2025-12-24,The Anam 2,27,71,27,41,118,41,Right amount
+2025-12-24,The Anam 3,15,56,15,26,95,26,Right amount
+2025-12-25,The Anam 1,46,103,46,89,201,89,Under-deployed
+2025-12-25,The Anam 2,27,71,27,41,118,41,Right amount
+2025-12-25,The Anam 3,15,56,15,26,95,26,Right amount
+2025-12-26,The Anam 1,33,110,26,64,215,50,Under-deployed
+2025-12-26,The Anam 2,32,76,27,50,127,41,Under-deployed
+2025-12-26,The Anam 3,19,60,15,33,102,26,Under-deployed
+2025-12-27,The Anam 1,28,110,28,54,215,54,Under-deployed
+2025-12-27,The Anam 2,29,76,29,44,127,44,Under-deployed
+2025-12-27,The Anam 3,16,60,16,28,102,28,Under-deployed
+2025-12-28,The Anam 1,21,103,28,40,201,54,Right amount
+2025-12-28,The Anam 2,23,71,28,35,119,43,Right amount
+2025-12-28,The Anam 3,12,56,16,21,95,28,Right amount
+2025-12-29,The Anam 1,26,103,26,50,201,50,Right amount
+2025-12-29,The Anam 2,27,71,27,41,119,41,Right amount
+2025-12-29,The Anam 3,15,56,15,26,95,26,Right amount
+2025-12-30,The Anam 1,38,103,38,60,192,69,Under-deployed
+2025-12-30,The Anam 2,27,71,27,40,118,41,Right amount
+2025-12-30,The Anam 3,15,56,15,28,96,27,Right amount
+2025-12-31,The Anam 1,38,103,38,69,192,69,Under-deployed
+2025-12-31,The Anam 2,27,71,27,41,118,41,Right amount
+2025-12-31,The Anam 3,15,56,15,27,96,27,Right amount
+2026-01-01,The Anam 1,34,105,32,60,191,61,Under-deployed
+2026-01-01,The Anam 2,20,70,21,32,116,34,Right amount
+2026-01-01,The Anam 3,18,59,15,31,102,25,Right amount
+2026-01-02,The Anam 1,29,101,33,56,184,63,Under-deployed
+2026-01-02,The Anam 2,18,67,21,29,111,34,Over-deployed
+2026-01-02,The Anam 3,14,58,15,25,101,26,Right amount
+2026-01-03,The Anam 1,33,102,32,63,186,61,Under-deployed
+2026-01-03,The Anam 2,20,67,20,33,111,33,Right amount
+2026-01-03,The Anam 3,15,58,15,25,101,25,Right amount
+2026-01-04,The Anam 1,25,95,32,48,173,61,Right amount
+2026-01-04,The Anam 2,15,62,20,24,103,32,Over-deployed
+2026-01-04,The Anam 3,11,54,15,19,94,26,Over-deployed
+2026-01-05,The Anam 1,30,95,30,57,173,57,Under-deployed
+2026-01-05,The Anam 2,18,62,18,29,103,29,Over-deployed
+2026-01-05,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-06,The Anam 1,29,94,30,55,171,57,Right amount
+2026-01-06,The Anam 2,19,62,19,31,103,31,Over-deployed
+2026-01-06,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-07,The Anam 1,31,95,30,59,173,57,Under-deployed
+2026-01-07,The Anam 2,18,62,18,29,103,29,Over-deployed
+2026-01-07,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-08,The Anam 1,28,94,29,55,172,56,Right amount
+2026-01-08,The Anam 2,19,62,19,31,103,31,Over-deployed
+2026-01-08,The Anam 3,14,54,14,23,93,24,Right amount
+2026-01-09,The Anam 1,36,101,29,68,184,56,Under-deployed
+2026-01-09,The Anam 2,24,67,19,39,111,31,Right amount
+2026-01-09,The Anam 3,18,58,14,31,100,24,Right amount
+2026-01-10,The Anam 1,50,109,42,102,209,77,Under-deployed
+2026-01-10,The Anam 2,20,67,20,30,111,30,Over-deployed
+2026-01-10,The Anam 3,15,58,15,27,101,26,Right amount
+2026-01-11,The Anam 1,38,102,45,68,195,82,Under-deployed
+2026-01-11,The Anam 2,15,62,20,22,103,30,Over-deployed
+2026-01-11,The Anam 3,11,54,15,19,94,26,Over-deployed
+2026-01-12,The Anam 1,42,102,42,77,195,77,Under-deployed
+2026-01-12,The Anam 2,18,62,18,27,103,27,Over-deployed
+2026-01-12,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-13,The Anam 1,42,102,42,77,195,77,Under-deployed
+2026-01-13,The Anam 2,18,62,18,27,103,27,Over-deployed
+2026-01-13,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-14,The Anam 1,43,102,43,78,195,78,Under-deployed
+2026-01-14,The Anam 2,19,62,19,29,103,29,Over-deployed
+2026-01-14,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-15,The Anam 1,43,102,43,78,195,78,Under-deployed
+2026-01-15,The Anam 2,19,62,19,29,103,29,Over-deployed
+2026-01-15,The Anam 3,14,54,14,24,94,24,Right amount
+2026-01-16,The Anam 1,50,109,43,91,208,78,Under-deployed
+2026-01-16,The Anam 2,23,67,18,35,111,27,Over-deployed
+2026-01-16,The Anam 3,18,58,14,31,101,24,Right amount
+2026-01-17,The Anam 1,45,109,45,82,208,82,Under-deployed
+2026-01-17,The Anam 2,20,67,20,30,111,30,Over-deployed
+2026-01-17,The Anam 3,15,58,15,26,101,26,Right amount
+2026-01-18,The Anam 1,37,101,45,68,194,82,Under-deployed
+2026-01-18,The Anam 2,15,62,20,22,103,30,Over-deployed
+2026-01-18,The Anam 3,12,54,16,20,94,27,Right amount
+2026-01-19,The Anam 1,41,101,41,75,194,75,Under-deployed
+2026-01-19,The Anam 2,19,62,19,29,103,29,Over-deployed
+2026-01-19,The Anam 3,15,54,15,25,93,26,Right amount
+2026-01-20,The Anam 1,35,94,42,59,172,81,Under-deployed
+2026-01-20,The Anam 2,32,68,26,45,106,42,Right amount
+2026-01-20,The Anam 3,20,54,20,35,94,34,Under-deployed
+2026-01-21,The Anam 1,40,94,40,77,172,77,Under-deployed
+2026-01-21,The Anam 2,28,68,28,45,106,45,Right amount
+2026-01-21,The Anam 3,20,54,20,34,94,34,Under-deployed
+2026-01-22,The Anam 1,39,94,39,76,173,75,Under-deployed
+2026-01-22,The Anam 2,28,68,28,45,106,45,Right amount
+2026-01-22,The Anam 3,20,54,20,34,94,34,Under-deployed
+2026-01-23,The Anam 1,46,101,39,87,185,75,Under-deployed
+2026-01-23,The Anam 2,33,73,28,53,114,45,Under-deployed
+2026-01-23,The Anam 3,24,58,20,41,101,34,Under-deployed
+2026-01-24,The Anam 1,42,101,42,81,185,81,Under-deployed
+2026-01-24,The Anam 2,30,73,30,49,114,49,Under-deployed
+2026-01-24,The Anam 3,22,58,22,38,101,38,Under-deployed
+2026-01-25,The Anam 1,35,94,42,68,172,81,Under-deployed
+2026-01-25,The Anam 2,25,68,30,41,106,49,Right amount
+2026-01-25,The Anam 3,18,54,22,31,94,38,Under-deployed
+2026-01-26,The Anam 1,39,94,39,75,172,75,Under-deployed
+2026-01-26,The Anam 2,28,68,28,45,106,45,Right amount
+2026-01-26,The Anam 3,20,54,20,34,94,34,Under-deployed
+2026-01-27,The Anam 1,39,94,39,75,172,75,Under-deployed
+2026-01-27,The Anam 2,28,68,28,45,106,45,Right amount
+2026-01-27,The Anam 3,20,54,20,34,94,34,Under-deployed
+2026-01-28,The Anam 1,39,94,39,75,172,75,Under-deployed
+2026-01-28,The Anam 2,27,67,28,44,105,45,Right amount
+2026-01-28,The Anam 3,20,54,20,34,94,34,Under-deployed
+2026-01-29,The Anam 1,39,94,39,75,172,75,Under-deployed
+2026-01-29,The Anam 2,27,67,27,44,105,44,Right amount
+2026-01-29,The Anam 3,20,54,20,34,94,34,Under-deployed
+2026-01-30,The Anam 1,45,101,38,87,186,73,Under-deployed
+2026-01-30,The Anam 2,34,73,28,62,122,45,Under-deployed
+2026-01-30,The Anam 3,25,58,21,49,105,38,Under-deployed
+2026-01-31,The Anam 1,40,101,40,77,186,77,Under-deployed
+2026-01-31,The Anam 2,30,73,30,49,122,49,Under-deployed
+2026-01-31,The Anam 3,22,58,22,40,105,40,Under-deployed
+2026-02-01,The Anam 1,24,96,29,57,185,58,Under-deployed
+2026-02-01,The Anam 2,18,65,26,29,108,43,Over-deployed
+2026-02-01,The Anam 3,20,57,21,36,103,38,Under-deployed
+2026-02-02,The Anam 1,28,96,28,56,185,56,Right amount
+2026-02-02,The Anam 2,23,65,23,38,108,38,Right amount
+2026-02-02,The Anam 3,21,57,21,38,103,38,Under-deployed
+2026-02-03,The Anam 1,27,96,27,54,185,54,Right amount
+2026-02-03,The Anam 2,23,65,23,38,108,38,Right amount
+2026-02-03,The Anam 3,21,57,21,38,103,38,Under-deployed
+2026-02-04,The Anam 1,28,96,28,51,185,51,Right amount
+2026-02-04,The Anam 2,23,65,23,38,108,38,Right amount
+2026-02-04,The Anam 3,21,57,21,38,103,38,Under-deployed
+2026-02-05,The Anam 1,28,96,28,51,185,51,Right amount
+2026-02-05,The Anam 2,23,65,23,38,108,38,Right amount
+2026-02-05,The Anam 3,21,57,21,38,103,38,Under-deployed
+2026-02-06,The Anam 1,35,103,28,64,198,51,Under-deployed
+2026-02-06,The Anam 2,28,70,23,46,116,38,Right amount
+2026-02-06,The Anam 3,25,61,21,45,110,38,Under-deployed
+2026-02-07,The Anam 1,30,103,30,54,198,54,Under-deployed
+2026-02-07,The Anam 2,25,70,25,41,116,41,Right amount
+2026-02-07,The Anam 3,22,61,22,40,110,40,Under-deployed
+2026-02-08,The Anam 1,21,95,29,39,184,53,Right amount
+2026-02-08,The Anam 2,20,65,25,34,109,41,Right amount
+2026-02-08,The Anam 3,19,57,23,33,102,41,Under-deployed
+2026-02-09,The Anam 1,26,95,26,47,184,47,Right amount
+2026-02-09,The Anam 2,24,65,24,40,109,40,Right amount
+2026-02-09,The Anam 3,21,57,21,38,102,38,Under-deployed
+2026-02-10,The Anam 1,35,103,27,56,189,51,Right amount
+2026-02-10,The Anam 2,23,64,24,29,101,37,Over-deployed
+2026-02-10,The Anam 3,21,57,21,38,102,38,Under-deployed
+2026-02-11,The Anam 1,29,103,29,55,189,55,Right amount
+2026-02-11,The Anam 2,23,64,23,36,101,36,Over-deployed
+2026-02-11,The Anam 3,21,57,21,38,102,38,Under-deployed
+2026-02-12,The Anam 1,29,103,29,55,189,55,Right amount
+2026-02-12,The Anam 2,23,64,23,36,101,36,Over-deployed
+2026-02-12,The Anam 3,21,57,21,38,102,38,Under-deployed
+2026-02-13,The Anam 1,36,110,29,68,202,55,Under-deployed
+2026-02-13,The Anam 2,28,69,23,44,109,36,Right amount
+2026-02-13,The Anam 3,25,61,21,45,109,38,Under-deployed
+2026-02-14,The Anam 1,30,110,30,57,202,57,Under-deployed
+2026-02-14,The Anam 2,25,69,25,39,109,39,Right amount
+2026-02-14,The Anam 3,22,61,22,40,109,40,Under-deployed
+2026-02-15,The Anam 1,24,103,31,46,189,59,Right amount
+2026-02-15,The Anam 2,20,64,25,31,101,39,Over-deployed
+2026-02-15,The Anam 3,18,57,22,33,102,40,Under-deployed
+2026-02-16,The Anam 1,28,103,28,53,189,53,Right amount
+2026-02-16,The Anam 2,23,64,23,36,101,36,Over-deployed
+2026-02-16,The Anam 3,21,57,21,38,102,38,Under-deployed
+2026-02-17,The Anam 1,28,103,28,53,189,53,Right amount
+2026-02-17,The Anam 2,23,64,23,36,101,36,Over-deployed
+2026-02-17,The Anam 3,21,57,21,38,102,38,Under-deployed
+2026-02-18,The Anam 1,29,102,30,56,188,57,Under-deployed
+2026-02-18,The Anam 2,24,64,24,37,101,37,Right amount
+2026-02-18,The Anam 3,21,57,21,39,103,38,Under-deployed
+2026-02-19,The Anam 1,29,102,29,55,188,55,Right amount
+2026-02-19,The Anam 2,24,64,24,37,101,37,Right amount
+2026-02-19,The Anam 3,21,57,21,38,103,38,Under-deployed
+2026-02-20,The Anam 1,38,102,38,79,198,69,Under-deployed
+2026-02-20,The Anam 2,28,75,17,51,124,28,Under-deployed
+2026-02-20,The Anam 3,16,57,16,28,102,29,Right amount
+2026-02-21,The Anam 1,38,102,38,69,198,69,Under-deployed
+2026-02-21,The Anam 2,20,75,20,33,124,33,Right amount
+2026-02-21,The Anam 3,16,57,16,29,102,29,Right amount
+2026-02-22,The Anam 1,31,95,38,55,184,69,Under-deployed
+2026-02-22,The Anam 2,15,70,20,25,116,33,Over-deployed
+2026-02-22,The Anam 3,12,53,16,22,95,29,Right amount
+2026-02-23,The Anam 1,35,95,35,64,184,64,Under-deployed
+2026-02-23,The Anam 2,19,70,19,31,116,31,Over-deployed
+2026-02-23,The Anam 3,15,53,15,27,95,27,Right amount
+2026-02-24,The Anam 1,36,95,36,66,184,66,Under-deployed
+2026-02-24,The Anam 2,19,70,19,31,116,31,Over-deployed
+2026-02-24,The Anam 3,15,53,15,27,95,27,Right amount
+2026-02-25,The Anam 1,35,94,36,64,182,66,Under-deployed
+2026-02-25,The Anam 2,19,70,19,31,116,31,Over-deployed
+2026-02-25,The Anam 3,15,53,15,27,95,27,Right amount
+2026-02-26,The Anam 1,36,95,35,66,184,64,Under-deployed
+2026-02-26,The Anam 2,19,70,19,31,116,31,Over-deployed
+2026-02-26,The Anam 3,15,53,15,27,95,27,Right amount
+2026-02-27,The Anam 1,43,102,36,79,197,66,Under-deployed
+2026-02-27,The Anam 2,24,75,19,40,125,31,Right amount
+2026-02-27,The Anam 3,19,57,15,34,102,27,Under-deployed
+2026-02-28,The Anam 1,39,102,39,71,197,71,Under-deployed
+2026-02-28,The Anam 2,20,75,20,33,125,33,Over-deployed
+2026-02-28,The Anam 3,16,57,16,29,102,29,Right amount
+2026-03-01,The Anam 1,20,96,26,40,189,48,Right amount
+2026-03-01,The Anam 2,7,62,20,7,94,38,Over-deployed
+2026-03-01,The Anam 3,15,54,18,25,95,32,Right amount
+2026-03-02,The Anam 1,43,96,43,79,189,79,Under-deployed
+2026-03-02,The Anam 2,16,62,16,24,94,24,Over-deployed
+2026-03-02,The Anam 3,17,54,17,30,95,30,Under-deployed
+2026-03-03,The Anam 1,43,96,43,79,189,79,Under-deployed
+2026-03-03,The Anam 2,16,62,16,24,94,24,Over-deployed
+2026-03-03,The Anam 3,17,54,17,30,95,30,Under-deployed
+2026-03-04,The Anam 1,24,96,24,44,189,44,Right amount
+2026-03-04,The Anam 2,16,62,16,27,94,27,Over-deployed
+2026-03-04,The Anam 3,18,54,18,33,96,32,Under-deployed
+2026-03-05,The Anam 1,25,97,24,46,191,44,Right amount
+2026-03-05,The Anam 2,16,62,16,27,94,27,Over-deployed
+2026-03-05,The Anam 3,18,54,18,32,96,32,Under-deployed
+2026-03-06,The Anam 1,31,104,24,58,205,44,Under-deployed
+2026-03-06,The Anam 2,21,67,16,35,102,27,Over-deployed
+2026-03-06,The Anam 3,21,57,18,37,101,32,Under-deployed
+2026-03-07,The Anam 1,26,104,26,48,205,48,Right amount
+2026-03-07,The Anam 2,18,67,18,30,102,30,Over-deployed
+2026-03-07,The Anam 3,20,58,19,36,103,34,Under-deployed
+2026-03-08,The Anam 1,20,97,27,35,190,50,Right amount
+2026-03-08,The Anam 2,14,63,18,20,95,27,Over-deployed
+2026-03-08,The Anam 3,13,53,18,23,94,32,Right amount
+2026-03-09,The Anam 1,25,97,25,46,190,46,Right amount
+2026-03-09,The Anam 2,17,63,17,26,95,26,Over-deployed
+2026-03-09,The Anam 3,17,53,17,30,94,30,Under-deployed
+2026-03-10,The Anam 1,25,97,25,47,191,46,Right amount
+2026-03-10,The Anam 2,15,62,16,25,94,26,Over-deployed
+2026-03-10,The Anam 3,24,54,23,38,91,41,Under-deployed
+2026-03-11,The Anam 1,25,97,25,46,191,46,Right amount
+2026-03-11,The Anam 2,16,62,16,26,94,26,Over-deployed
+2026-03-11,The Anam 3,23,54,23,41,91,41,Under-deployed
+2026-03-12,The Anam 1,24,96,25,44,189,46,Right amount
+2026-03-12,The Anam 2,16,62,16,26,94,26,Over-deployed
+2026-03-12,The Anam 3,23,54,23,41,91,41,Under-deployed
+2026-03-13,The Anam 1,32,104,24,60,205,44,Under-deployed
+2026-03-13,The Anam 2,21,67,16,33,101,26,Over-deployed
+2026-03-13,The Anam 3,27,58,23,48,98,41,Under-deployed
+2026-03-14,The Anam 1,26,104,26,48,205,48,Right amount
+2026-03-14,The Anam 2,17,67,17,28,102,27,Over-deployed
+2026-03-14,The Anam 3,24,57,25,42,96,44,Under-deployed
+2026-03-15,The Anam 1,19,97,26,34,191,48,Right amount
+2026-03-15,The Anam 2,13,62,18,21,94,29,Over-deployed
+2026-03-15,The Anam 3,21,54,24,37,91,42,Under-deployed
+2026-03-16,The Anam 1,24,97,24,44,191,44,Right amount
+2026-03-16,The Anam 2,16,62,16,26,94,26,Over-deployed
+2026-03-16,The Anam 3,23,54,23,41,91,41,Under-deployed
+2026-03-17,The Anam 1,24,97,24,44,191,44,Right amount
+2026-03-17,The Anam 2,16,62,16,26,94,26,Over-deployed
+2026-03-17,The Anam 3,23,54,23,41,91,41,Under-deployed
+2026-03-18,The Anam 1,25,97,25,46,191,46,Right amount
+2026-03-18,The Anam 2,16,62,16,37,105,26,Over-deployed
+2026-03-18,The Anam 3,23,54,23,40,91,40,Under-deployed
+2026-03-19,The Anam 1,25,97,25,45,190,46,Right amount
+2026-03-19,The Anam 2,16,62,16,26,105,26,Over-deployed
+2026-03-19,The Anam 3,22,53,23,38,89,40,Under-deployed
+2026-03-20,The Anam 1,35,97,35,65,191,64,Under-deployed
+2026-03-20,The Anam 2,34,73,23,49,117,37,Under-deployed
+2026-03-20,The Anam 3,23,53,23,43,94,38,Under-deployed
+2026-03-21,The Anam 1,35,97,35,65,192,64,Under-deployed
+2026-03-21,The Anam 2,27,73,27,43,117,43,Under-deployed
+2026-03-21,The Anam 3,23,53,23,38,94,38,Under-deployed
+2026-03-22,The Anam 1,29,90,36,52,178,66,Under-deployed
+2026-03-22,The Anam 2,22,68,27,35,109,43,Right amount
+2026-03-22,The Anam 3,19,49,23,31,87,38,Under-deployed
+2026-03-23,The Anam 1,33,90,33,60,178,60,Under-deployed
+2026-03-23,The Anam 2,25,68,25,40,109,40,Right amount
+2026-03-23,The Anam 3,21,49,21,35,87,35,Under-deployed
+2026-03-24,The Anam 1,33,90,33,60,177,61,Under-deployed
+2026-03-24,The Anam 2,25,68,25,40,109,40,Right amount
+2026-03-24,The Anam 3,21,49,21,35,87,35,Under-deployed
+2026-03-25,The Anam 1,33,90,33,61,177,61,Under-deployed
+2026-03-25,The Anam 2,25,68,25,39,108,40,Right amount
+2026-03-25,The Anam 3,21,49,21,35,87,35,Under-deployed
+2026-03-26,The Anam 1,32,89,33,59,175,61,Under-deployed
+2026-03-26,The Anam 2,26,68,26,42,108,42,Right amount
+2026-03-26,The Anam 3,21,49,21,35,87,35,Under-deployed
+2026-03-27,The Anam 1,40,97,32,75,191,59,Under-deployed
+2026-03-27,The Anam 2,31,73,26,50,116,42,Under-deployed
+2026-03-27,The Anam 3,25,53,21,42,94,35,Under-deployed
+2026-03-28,The Anam 1,35,97,35,64,191,64,Under-deployed
+2026-03-28,The Anam 2,27,73,27,44,117,43,Under-deployed
+2026-03-28,The Anam 3,22,53,22,37,94,37,Under-deployed
+2026-03-29,The Anam 1,28,90,35,50,177,64,Under-deployed
+2026-03-29,The Anam 2,22,68,27,35,109,43,Right amount
+2026-03-29,The Anam 3,20,50,23,33,89,38,Under-deployed
+2026-03-30,The Anam 1,33,90,33,51,168,60,Under-deployed
+2026-03-30,The Anam 2,25,68,25,39,108,40,Right amount
+2026-03-30,The Anam 3,24,53,21,45,95,39,Under-deployed
+2026-03-31,The Anam 1,33,90,33,60,168,60,Under-deployed
+2026-03-31,The Anam 2,25,68,25,40,108,40,Right amount
+2026-03-31,The Anam 3,22,53,22,37,95,37,Under-deployed
+2026-04-01,The Anam 1,29,84,35,60,160,68,Under-deployed
+2026-04-01,The Anam 2,20,60,28,29,94,43,Right amount
+2026-04-01,The Anam 3,9,44,18,16,80,31,Over-deployed
+2026-04-02,The Anam 1,34,85,33,66,162,64,Under-deployed
+2026-04-02,The Anam 2,25,60,25,39,94,39,Right amount
+2026-04-02,The Anam 3,15,44,15,26,80,26,Right amount
+2026-04-03,The Anam 1,40,92,33,77,175,64,Under-deployed
+2026-04-03,The Anam 2,30,65,25,47,102,39,Under-deployed
+2026-04-03,The Anam 3,19,48,15,33,87,26,Right amount
+2026-04-04,The Anam 1,35,91,36,68,173,70,Under-deployed
+2026-04-04,The Anam 2,27,65,27,42,102,42,Under-deployed
+2026-04-04,The Anam 3,17,48,17,29,87,29,Right amount
+2026-04-05,The Anam 1,29,84,36,56,159,70,Under-deployed
+2026-04-05,The Anam 2,22,60,27,34,94,42,Right amount
+2026-04-05,The Anam 3,13,44,17,22,80,29,Over-deployed
+2026-04-06,The Anam 1,33,84,33,65,160,64,Under-deployed
+2026-04-06,The Anam 2,25,60,25,39,94,39,Right amount
+2026-04-06,The Anam 3,15,44,15,26,80,26,Right amount
+2026-04-07,The Anam 1,33,84,33,64,160,64,Under-deployed
+2026-04-07,The Anam 2,25,60,25,39,94,39,Right amount
+2026-04-07,The Anam 3,15,44,15,26,80,26,Right amount
+2026-04-08,The Anam 1,33,84,33,64,160,64,Under-deployed
+2026-04-08,The Anam 2,25,60,25,39,94,39,Right amount
+2026-04-08,The Anam 3,24,52,16,43,95,28,Under-deployed
+2026-04-09,The Anam 1,33,84,33,64,160,64,Under-deployed
+2026-04-09,The Anam 2,25,60,25,39,94,39,Right amount
+2026-04-09,The Anam 3,18,52,18,31,95,31,Right amount
+2026-04-10,The Anam 1,47,99,32,90,188,62,Under-deployed
+2026-04-10,The Anam 2,24,65,19,45,108,31,Right amount
+2026-04-10,The Anam 3,27,56,23,46,101,40,Under-deployed
+2026-04-11,The Anam 1,38,99,38,74,188,74,Under-deployed
+2026-04-11,The Anam 2,20,65,20,32,107,33,Right amount
+2026-04-11,The Anam 3,25,56,25,43,101,43,Under-deployed
+2026-04-12,The Anam 1,30,91,38,58,172,74,Under-deployed
+2026-04-12,The Anam 2,16,60,21,26,99,34,Over-deployed
+2026-04-12,The Anam 3,21,52,25,36,94,43,Under-deployed
+2026-04-13,The Anam 1,35,91,35,69,173,68,Under-deployed
+2026-04-13,The Anam 2,19,60,19,31,99,31,Over-deployed
+2026-04-13,The Anam 3,15,44,23,26,80,40,Under-deployed
+2026-04-14,The Anam 1,36,92,35,70,175,68,Under-deployed
+2026-04-14,The Anam 2,19,60,19,31,99,31,Over-deployed
+2026-04-14,The Anam 3,20,44,20,34,80,34,Under-deployed
+2026-04-15,The Anam 1,36,92,36,70,175,70,Under-deployed
+2026-04-15,The Anam 2,19,60,19,31,99,31,Over-deployed
+2026-04-15,The Anam 3,20,44,20,34,80,34,Under-deployed
+2026-04-16,The Anam 1,35,91,36,68,173,70,Under-deployed
+2026-04-16,The Anam 2,19,60,19,31,99,31,Over-deployed
+2026-04-16,The Anam 3,20,44,20,35,80,35,Under-deployed
+2026-04-17,The Anam 1,44,99,36,85,188,70,Under-deployed
+2026-04-17,The Anam 2,24,65,19,40,108,31,Right amount
+2026-04-17,The Anam 3,24,48,20,41,87,34,Under-deployed
+2026-04-18,The Anam 1,38,98,39,74,186,76,Under-deployed
+2026-04-18,The Anam 2,21,65,21,34,108,34,Right amount
+2026-04-18,The Anam 3,19,55,12,34,100,21,Right amount
+2026-04-19,The Anam 1,31,91,38,61,173,74,Under-deployed
+2026-04-19,The Anam 2,16,60,21,26,100,34,Over-deployed
+2026-04-19,The Anam 3,11,52,14,18,94,24,Over-deployed
+2026-04-20,The Anam 1,36,91,36,60,166,67,Under-deployed
+2026-04-20,The Anam 2,27,61,26,43,101,42,Right amount
+2026-04-20,The Anam 3,9,47,14,12,81,25,Over-deployed
+2026-04-21,The Anam 1,36,91,36,67,166,67,Under-deployed
+2026-04-21,The Anam 2,26,61,26,42,101,42,Right amount
+2026-04-21,The Anam 3,12,47,12,22,81,22,Over-deployed
+2026-04-22,The Anam 1,37,91,37,69,166,69,Under-deployed
+2026-04-22,The Anam 2,25,60,26,40,99,42,Right amount
+2026-04-22,The Anam 3,13,48,12,24,83,22,Over-deployed
+2026-04-23,The Anam 1,36,91,36,67,166,67,Under-deployed
+2026-04-23,The Anam 2,26,60,26,42,99,42,Right amount
+2026-04-23,The Anam 3,13,48,13,23,83,23,Over-deployed
+2026-04-24,The Anam 1,44,98,37,82,179,69,Under-deployed
+2026-04-24,The Anam 2,30,65,25,50,108,41,Under-deployed
+2026-04-24,The Anam 3,16,51,13,29,89,23,Right amount
+2026-04-25,The Anam 1,39,98,39,73,179,73,Under-deployed
+2026-04-25,The Anam 2,29,66,28,47,109,46,Under-deployed
+2026-04-25,The Anam 3,13,51,13,22,88,23,Right amount
+2026-04-26,The Anam 1,33,91,40,61,166,74,Under-deployed
+2026-04-26,The Anam 2,22,60,28,36,99,46,Right amount
+2026-04-26,The Anam 3,10,48,13,18,83,23,Over-deployed
+2026-04-27,The Anam 1,37,91,37,69,166,69,Under-deployed
+2026-04-27,The Anam 2,26,60,26,42,99,42,Right amount
+2026-04-27,The Anam 3,12,48,12,22,83,22,Over-deployed
+2026-04-28,The Anam 1,36,91,36,67,166,67,Under-deployed
+2026-04-28,The Anam 2,25,60,25,42,100,41,Right amount
+2026-04-28,The Anam 3,12,48,12,22,83,22,Over-deployed
+2026-04-29,The Anam 1,36,91,36,67,166,67,Under-deployed
+2026-04-29,The Anam 2,25,60,25,41,100,41,Right amount
+2026-04-29,The Anam 3,12,48,12,22,83,22,Over-deployed
+2026-04-30,The Anam 1,46,101,36,85,184,67,Under-deployed
+2026-04-30,The Anam 2,28,62,26,45,103,42,Right amount
+2026-04-30,The Anam 3,18,54,12,31,93,21,Right amount
+2026-05-01,The Anam 1,27,99,29,57,187,54,Under-deployed
+2026-05-01,The Anam 2,33,67,28,46,103,46,Under-deployed
+2026-05-01,The Anam 3,24,54,24,44,93,44,Under-deployed
+2026-05-02,The Anam 1,18,88,29,33,166,54,Right amount
+2026-05-02,The Anam 2,23,60,30,39,93,49,Under-deployed
+2026-05-02,The Anam 3,18,48,24,30,83,40,Under-deployed
+2026-05-03,The Anam 1,18,81,25,33,153,46,Over-deployed
+2026-05-03,The Anam 2,21,54,27,34,83,44,Right amount
+2026-05-03,The Anam 3,18,45,21,30,78,35,Under-deployed
+2026-05-04,The Anam 1,23,81,23,43,153,43,Right amount
+2026-05-04,The Anam 2,24,54,24,40,83,40,Right amount
+2026-05-04,The Anam 3,19,44,20,35,76,37,Under-deployed
+2026-05-05,The Anam 1,23,81,23,43,153,43,Right amount
+2026-05-05,The Anam 2,24,54,24,40,83,40,Right amount
+2026-05-05,The Anam 3,19,44,19,35,76,35,Under-deployed
+2026-05-06,The Anam 1,23,81,23,43,153,43,Right amount
+2026-05-06,The Anam 2,14,54,14,23,83,23,Over-deployed
+2026-05-06,The Anam 3,19,44,19,35,76,35,Under-deployed
+2026-05-07,The Anam 1,23,81,23,43,153,43,Right amount
+2026-05-07,The Anam 2,24,54,24,40,83,40,Right amount
+2026-05-07,The Anam 3,19,44,19,35,76,35,Under-deployed
+2026-05-08,The Anam 1,32,89,24,60,168,45,Under-deployed
+2026-05-08,The Anam 2,30,60,24,49,92,40,Under-deployed
+2026-05-08,The Anam 3,23,48,19,42,83,35,Under-deployed
+2026-05-09,The Anam 1,26,89,26,48,168,48,Right amount
+2026-05-09,The Anam 2,26,60,26,43,92,43,Under-deployed
+2026-05-09,The Anam 3,21,48,21,38,83,38,Under-deployed
+2026-05-10,The Anam 1,18,81,26,32,152,48,Over-deployed
+2026-05-10,The Anam 2,25,59,26,42,91,43,Right amount
+2026-05-10,The Anam 3,12,45,15,23,78,28,Over-deployed
+2026-05-11,The Anam 1,24,81,24,44,152,44,Right amount
+2026-05-11,The Anam 2,26,59,26,43,91,43,Under-deployed
+2026-05-11,The Anam 3,14,45,14,26,78,26,Right amount
+2026-05-12,The Anam 1,24,81,24,44,152,44,Right amount
+2026-05-12,The Anam 2,16,49,26,28,76,43,Right amount
+2026-05-12,The Anam 3,14,45,14,26,78,26,Right amount
+2026-05-13,The Anam 1,23,81,23,43,152,43,Right amount
+2026-05-13,The Anam 2,22,49,22,36,76,36,Right amount
+2026-05-13,The Anam 3,14,45,14,26,78,26,Right amount
+2026-05-14,The Anam 1,24,82,23,45,154,43,Right amount
+2026-05-14,The Anam 2,31,59,21,50,91,35,Under-deployed
+2026-05-14,The Anam 3,14,45,14,25,77,26,Over-deployed
+2026-05-15,The Anam 1,31,89,24,58,167,45,Under-deployed
+2026-05-15,The Anam 2,31,64,26,50,98,43,Under-deployed
+2026-05-15,The Anam 3,17,48,14,32,83,26,Right amount
+2026-05-16,The Anam 1,26,89,26,48,167,48,Right amount
+2026-05-16,The Anam 2,28,64,28,47,99,46,Under-deployed
+2026-05-16,The Anam 3,15,48,15,28,83,28,Right amount
+2026-05-17,The Anam 1,18,82,25,33,154,46,Over-deployed
+2026-05-17,The Anam 2,23,59,28,38,91,46,Right amount
+2026-05-17,The Anam 3,11,44,15,21,76,28,Over-deployed
+2026-05-18,The Anam 1,23,81,24,43,152,45,Right amount
+2026-05-18,The Anam 2,17,50,26,29,77,43,Right amount
+2026-05-18,The Anam 3,14,44,14,26,76,26,Over-deployed
+2026-05-19,The Anam 1,24,81,24,45,152,45,Right amount
+2026-05-19,The Anam 2,22,50,22,36,77,36,Right amount
+2026-05-19,The Anam 3,14,44,14,26,76,26,Over-deployed
+2026-05-20,The Anam 1,23,80,24,53,158,47,Right amount
+2026-05-20,The Anam 2,27,55,22,47,89,35,Right amount
+2026-05-20,The Anam 3,23,48,19,46,87,35,Under-deployed
+2026-05-21,The Anam 1,24,80,24,47,158,47,Over-deployed
+2026-05-21,The Anam 2,24,55,24,38,89,38,Right amount
+2026-05-21,The Anam 3,21,48,21,38,87,38,Under-deployed
+2026-05-22,The Anam 1,32,88,24,63,174,47,Right amount
+2026-05-22,The Anam 2,29,60,24,46,97,38,Under-deployed
+2026-05-22,The Anam 3,25,52,21,46,95,38,Under-deployed
+2026-05-23,The Anam 1,26,88,26,51,174,51,Right amount
+2026-05-23,The Anam 2,26,60,26,41,97,41,Under-deployed
+2026-05-23,The Anam 3,22,52,22,40,95,40,Under-deployed
+2026-05-24,The Anam 1,19,81,26,37,160,51,Over-deployed
+2026-05-24,The Anam 2,21,55,26,33,89,41,Right amount
+2026-05-24,The Anam 3,18,48,22,32,87,40,Under-deployed
+2026-05-25,The Anam 1,24,81,24,47,160,47,Over-deployed
+2026-05-25,The Anam 2,24,55,24,38,89,38,Right amount
+2026-05-25,The Anam 3,21,48,21,38,87,38,Under-deployed
+2026-05-26,The Anam 1,24,81,24,47,160,47,Over-deployed
+2026-05-26,The Anam 2,24,55,24,38,89,38,Right amount
+2026-05-26,The Anam 3,21,48,21,38,87,38,Under-deployed
+2026-05-27,The Anam 1,24,81,24,47,160,47,Over-deployed
+2026-05-27,The Anam 2,24,55,24,38,89,38,Right amount
+2026-05-27,The Anam 3,21,48,21,38,87,38,Under-deployed
+2026-05-28,The Anam 1,24,81,24,46,159,47,Right amount
+2026-05-28,The Anam 2,24,55,24,38,89,38,Right amount
+2026-05-28,The Anam 3,20,48,20,37,87,37,Under-deployed
+2026-05-29,The Anam 1,31,88,24,61,173,47,Under-deployed
+2026-05-29,The Anam 2,29,60,24,47,98,38,Under-deployed
+2026-05-29,The Anam 3,24,52,20,44,94,37,Under-deployed
+2026-05-30,The Anam 1,27,88,27,46,166,53,Right amount
+2026-05-30,The Anam 2,26,60,26,35,92,41,Right amount
+2026-05-30,The Anam 3,23,52,23,43,95,42,Under-deployed
+2026-05-31,The Anam 1,19,81,26,38,153,51,Right amount
+2026-05-31,The Anam 2,21,55,26,33,84,41,Right amount
+2026-05-31,The Anam 3,18,48,22,32,87,40,Under-deployed
+2026-06-01,The Anam 1,19,73,27,34,136,51,Right amount
+2026-06-01,The Anam 2,21,56,20,38,89,33,Right amount
+2026-06-01,The Anam 3,16,45,19,22,75,34,Right amount
+2026-06-02,The Anam 1,25,73,25,47,136,47,Right amount
+2026-06-02,The Anam 2,21,56,21,35,89,35,Right amount
+2026-06-02,The Anam 3,19,46,18,34,77,32,Under-deployed
+2026-06-03,The Anam 1,25,73,25,47,136,47,Right amount
+2026-06-03,The Anam 2,21,56,21,35,89,35,Right amount
+2026-06-03,The Anam 3,17,45,18,30,75,32,Right amount
+2026-06-04,The Anam 1,25,74,24,47,138,45,Right amount
+2026-06-04,The Anam 2,21,56,21,36,90,35,Right amount
+2026-06-04,The Anam 3,18,45,18,32,75,32,Right amount
+2026-06-05,The Anam 1,32,81,25,60,151,47,Under-deployed
+2026-06-05,The Anam 2,26,61,21,43,98,35,Right amount
+2026-06-05,The Anam 3,22,49,18,39,82,32,Under-deployed
+2026-06-06,The Anam 1,27,81,27,51,151,51,Under-deployed
+2026-06-06,The Anam 2,23,61,23,37,97,38,Right amount
+2026-06-06,The Anam 3,20,49,20,35,82,35,Under-deployed
+2026-06-07,The Anam 1,19,73,27,36,136,51,Right amount
+2026-06-07,The Anam 2,18,56,23,31,90,38,Right amount
+2026-06-07,The Anam 3,16,45,20,28,75,35,Right amount
+2026-06-08,The Anam 1,25,73,25,48,137,47,Over-deployed
+2026-06-08,The Anam 2,20,56,20,32,89,33,Over-deployed
+2026-06-08,The Anam 3,18,45,18,32,75,32,Right amount
+2026-06-09,The Anam 1,25,73,25,47,137,47,Over-deployed
+2026-06-09,The Anam 2,21,56,21,35,89,35,Over-deployed
+2026-06-09,The Anam 3,18,45,18,32,75,32,Right amount
+2026-06-10,The Anam 1,32,73,32,59,136,60,Under-deployed
+2026-06-10,The Anam 2,16,51,21,28,82,35,Over-deployed
+2026-06-10,The Anam 3,18,45,18,30,75,30,Under-deployed
+2026-06-11,The Anam 1,32,73,32,60,136,60,Under-deployed
+2026-06-11,The Anam 2,19,51,19,32,82,32,Over-deployed
+2026-06-11,The Anam 3,18,45,18,30,75,30,Under-deployed
+2026-06-12,The Anam 1,39,80,32,73,149,60,Under-deployed
+2026-06-12,The Anam 2,24,56,19,40,90,32,Over-deployed
+2026-06-12,The Anam 3,22,49,18,36,81,30,Under-deployed
+2026-06-13,The Anam 1,35,80,35,65,149,65,Under-deployed
+2026-06-13,The Anam 2,21,56,21,35,90,35,Over-deployed
+2026-06-13,The Anam 3,20,49,20,35,82,34,Under-deployed
+2026-06-14,The Anam 1,28,73,35,52,136,65,Under-deployed
+2026-06-14,The Anam 2,16,51,21,26,81,35,Over-deployed
+2026-06-14,The Anam 3,16,45,20,27,75,34,Under-deployed
+2026-06-15,The Anam 1,32,73,32,60,136,60,Under-deployed
+2026-06-15,The Anam 2,19,51,19,31,81,31,Over-deployed
+2026-06-15,The Anam 3,18,45,18,30,75,30,Under-deployed
+2026-06-16,The Anam 1,32,73,32,60,136,60,Under-deployed
+2026-06-16,The Anam 2,19,51,19,33,82,32,Over-deployed
+2026-06-16,The Anam 3,18,45,18,30,75,30,Under-deployed
+2026-06-17,The Anam 1,32,73,32,60,136,60,Under-deployed
+2026-06-17,The Anam 2,19,51,19,32,82,32,Over-deployed
+2026-06-17,The Anam 3,18,45,18,30,75,30,Under-deployed
+2026-06-18,The Anam 1,32,73,32,60,136,60,Under-deployed
+2026-06-18,The Anam 2,20,52,19,33,83,32,Over-deployed
+2026-06-18,The Anam 3,18,45,18,30,75,30,Under-deployed
+2026-06-19,The Anam 1,39,80,32,74,150,60,Under-deployed
+2026-06-19,The Anam 2,24,57,19,40,91,32,Over-deployed
+2026-06-19,The Anam 3,22,49,18,37,82,30,Under-deployed
+2026-06-20,The Anam 1,27,87,20,60,171,39,Right amount
+2026-06-20,The Anam 2,27,62,22,50,104,37,Under-deployed
+2026-06-20,The Anam 3,20,49,20,38,87,33,Under-deployed
+2026-06-21,The Anam 1,14,79,22,27,155,43,Over-deployed
+2026-06-21,The Anam 2,19,57,24,32,96,40,Right amount
+2026-06-21,The Anam 3,16,45,20,26,80,33,Right amount
+2026-06-22,The Anam 1,21,80,20,41,157,39,Over-deployed
+2026-06-22,The Anam 2,22,57,22,37,96,37,Right amount
+2026-06-22,The Anam 3,19,45,19,32,80,32,Under-deployed
+2026-06-23,The Anam 1,19,79,20,37,155,39,Over-deployed
+2026-06-23,The Anam 2,12,47,22,20,79,37,Over-deployed
+2026-06-23,The Anam 3,18,45,18,30,80,30,Right amount
+2026-06-24,The Anam 1,21,80,20,41,157,39,Over-deployed
+2026-06-24,The Anam 2,28,57,18,46,95,30,Right amount
+2026-06-24,The Anam 3,19,45,19,32,80,32,Under-deployed
+2026-06-25,The Anam 1,36,80,36,71,157,71,Under-deployed
+2026-06-25,The Anam 2,22,57,22,38,96,37,Right amount
+2026-06-25,The Anam 3,19,45,19,32,80,32,Under-deployed
+2026-06-26,The Anam 1,43,87,36,85,171,71,Under-deployed
+2026-06-26,The Anam 2,26,62,21,43,104,35,Right amount
+2026-06-26,The Anam 3,23,49,19,39,87,32,Under-deployed
+2026-06-27,The Anam 1,39,87,39,77,171,77,Under-deployed
+2026-06-27,The Anam 2,23,62,23,38,104,38,Right amount
+2026-06-27,The Anam 3,20,49,20,33,87,33,Under-deployed
+2026-06-28,The Anam 1,32,80,39,62,157,76,Under-deployed
+2026-06-28,The Anam 2,18,57,23,30,96,38,Over-deployed
+2026-06-28,The Anam 3,16,45,20,26,80,33,Right amount
+2026-06-29,The Anam 1,36,80,36,70,157,70,Under-deployed
+2026-06-29,The Anam 2,21,57,21,35,96,35,Right amount
+2026-06-29,The Anam 3,18,45,18,29,79,30,Right amount
+2026-06-30,The Anam 1,30,74,36,56,145,68,Under-deployed
+2026-06-30,The Anam 2,5,47,15,8,79,25,Over-deployed
+2026-06-30,The Anam 3,14,41,18,24,73,30,Right amount
+2026-07-01,The Anam 1,40,82,32,75,160,60,Under-deployed
+2026-07-01,The Anam 2,14,45,16,16,70,25,Over-deployed
+2026-07-01,The Anam 3,15,44,12,30,81,22,Right amount
+2026-07-02,The Anam 1,20,67,35,37,131,66,Right amount
+2026-07-02,The Anam 2,15,45,15,24,70,24,Over-deployed
+2026-07-02,The Anam 3,13,44,13,23,81,23,Over-deployed
+2026-07-03,The Anam 1,36,74,29,69,145,55,Under-deployed
+2026-07-03,The Anam 2,20,50,15,32,78,24,Over-deployed
+2026-07-03,The Anam 3,17,48,13,30,88,23,Right amount
+2026-07-04,The Anam 1,45,88,31,86,172,59,Under-deployed
+2026-07-04,The Anam 2,16,50,16,25,78,25,Over-deployed
+2026-07-04,The Anam 3,14,48,14,25,88,25,Right amount
+2026-07-05,The Anam 1,30,81,37,56,158,70,Under-deployed
+2026-07-05,The Anam 2,11,45,16,17,70,25,Over-deployed
+2026-07-05,The Anam 3,10,44,14,18,81,25,Over-deployed
+2026-07-06,The Anam 1,34,81,34,64,158,64,Under-deployed
+2026-07-06,The Anam 2,15,45,15,24,70,24,Over-deployed
+2026-07-06,The Anam 3,13,44,13,23,81,23,Over-deployed
+2026-07-07,The Anam 1,34,81,34,64,158,64,Under-deployed
+2026-07-07,The Anam 2,15,45,15,24,70,24,Over-deployed
+2026-07-07,The Anam 3,13,44,13,23,81,23,Over-deployed
+2026-07-08,The Anam 1,34,81,34,65,159,64,Under-deployed
+2026-07-08,The Anam 2,15,45,15,23,70,23,Over-deployed
+2026-07-08,The Anam 3,13,44,13,23,81,23,Over-deployed
+2026-07-09,The Anam 1,34,81,34,64,159,64,Under-deployed
+2026-07-09,The Anam 2,15,45,15,23,70,23,Over-deployed
+2026-07-09,The Anam 3,13,44,13,23,81,23,Over-deployed
+2026-07-10,The Anam 1,19,75,25,35,147,47,Over-deployed
+2026-07-10,The Anam 2,24,50,19,43,83,30,Right amount
+2026-07-10,The Anam 3,17,48,13,28,87,22,Right amount
+2026-07-11,The Anam 1,23,75,23,43,147,43,Over-deployed
+2026-07-11,The Anam 2,21,50,21,33,83,33,Right amount
+2026-07-11,The Anam 3,14,48,14,24,87,24,Right amount

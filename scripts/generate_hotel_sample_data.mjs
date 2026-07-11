@@ -20,6 +20,8 @@ const PROPERTIES = [
     rooms: 120,
     baseOccupancy: 0.68,
     baseAdrVnd: 4_700_000,
+    averageGuestsPerRoom: 1.9,
+    staffingCapacity: 52,
     cancellationRate: 0.035,
     segmentWeights: [0.25, 0.24, 0.14, 0.17, 0.20],
   },
@@ -32,6 +34,8 @@ const PROPERTIES = [
     rooms: 85,
     baseOccupancy: 0.64,
     baseAdrVnd: 2_650_000,
+    averageGuestsPerRoom: 1.6,
+    staffingCapacity: 41,
     cancellationRate: 0.03,
     segmentWeights: [0.18, 0.18, 0.30, 0.18, 0.16],
   },
@@ -44,6 +48,8 @@ const PROPERTIES = [
     rooms: 64,
     baseOccupancy: 0.71,
     baseAdrVnd: 3_350_000,
+    averageGuestsPerRoom: 1.75,
+    staffingCapacity: 29,
     cancellationRate: 0.045,
     segmentWeights: [0.28, 0.23, 0.10, 0.18, 0.21],
   },
@@ -314,6 +320,90 @@ function leadTimeDays(property, slice, date) {
   );
 }
 
+function guestsStaying(property, date, bookingsStaying) {
+  const noise = (seededUnit("guest-density", property.name, date) - 0.5) * 0.18;
+  return clamp(
+    Math.round(bookingsStaying * (property.averageGuestsPerRoom + noise)),
+    bookingsStaying,
+    bookingsStaying * 4,
+  );
+}
+
+function staffingStatus(property, date, flow) {
+  const dayOfWeek = parseDate(date).getUTCDay();
+  const weekendPressure = dayOfWeek === 5 || dayOfWeek === 6 ? 1.4 : 0;
+  const guestTurnover = flow.guests_checking_in + flow.guests_checking_out;
+  const bookingTurnover = flow.bookings_checking_in + flow.bookings_checking_out;
+  const nonlinearWorkload =
+    0.8 * Math.sqrt(flow.guests_staying)
+    + 0.15 * Math.pow(guestTurnover, 1.16)
+    + 0.1 * Math.pow(bookingTurnover, 1.12)
+    + property.rooms * 0.012
+    + weekendPressure;
+  const labelNoise = (seededUnit("staffing-label-noise", property.name, date) - 0.5) * 0.12;
+  const staffingPressure = nonlinearWorkload / property.staffingCapacity + labelNoise;
+
+  if (staffingPressure > 1.08) return "Under-deployed";
+  if (staffingPressure < 0.88) return "Over-deployed";
+  return "Right amount";
+}
+
+function buildGuestFlowRows() {
+  const rows = [];
+  for (const date of dateRange(START_DATE, END_DATE)) {
+    const previousDate = addDays(date, -1);
+    for (const property of PROPERTIES) {
+      const previousBookings = finalRoomNights(property, previousDate);
+      const bookingsStaying = finalRoomNights(property, date);
+      const turnoverRate = 0.25 + seededUnit("turnover", property.name, date) * 0.2;
+      const minimumCheckouts = Math.max(0, previousBookings - bookingsStaying);
+      const bookingsCheckingOut = clamp(
+        Math.max(minimumCheckouts, Math.round(previousBookings * turnoverRate)),
+        0,
+        previousBookings,
+      );
+      const bookingsCheckingIn = bookingsStaying - previousBookings + bookingsCheckingOut;
+
+      const previousGuests = guestsStaying(property, previousDate, previousBookings);
+      const currentGuests = guestsStaying(property, date, bookingsStaying);
+      const guestChange = currentGuests - previousGuests;
+      const minimumGuestCheckouts = Math.max(bookingsCheckingOut, bookingsCheckingIn - guestChange);
+      const maximumGuestCheckouts = Math.min(
+        bookingsCheckingOut * 4,
+        bookingsCheckingIn * 4 - guestChange,
+      );
+      if (minimumGuestCheckouts > maximumGuestCheckouts) {
+        throw new Error("Unable to create consistent guest flow for " + property.name + " on " + date);
+      }
+      const targetGuestCheckouts = Math.round(
+        bookingsCheckingOut
+          * (property.averageGuestsPerRoom
+            + (seededUnit("departing-guest-density", property.name, date) - 0.5) * 0.18),
+      );
+      const guestsCheckingOut = clamp(
+        targetGuestCheckouts,
+        Math.ceil(minimumGuestCheckouts),
+        Math.floor(maximumGuestCheckouts),
+      );
+      const guestsCheckingIn = guestChange + guestsCheckingOut;
+
+      const flow = {
+        date,
+        property: property.name,
+        bookings_checking_in: bookingsCheckingIn,
+        bookings_staying: bookingsStaying,
+        bookings_checking_out: bookingsCheckingOut,
+        guests_checking_in: guestsCheckingIn,
+        guests_staying: currentGuests,
+        guests_checking_out: guestsCheckingOut,
+      };
+      flow.staffing_status = staffingStatus(property, date, flow);
+      rows.push(flow);
+    }
+  }
+  return rows;
+}
+
 function buildRows() {
   const rows = [];
   for (const date of dateRange(START_DATE, END_DATE)) {
@@ -473,6 +563,35 @@ function writeRoomCsv() {
   console.log("Generated " + rows.length + " rows in " + outputPath);
 }
 
+function writeGuestFlowCsv(rows) {
+  const headers = [
+    "date",
+    "property",
+    "bookings_checking_in",
+    "bookings_staying",
+    "bookings_checking_out",
+    "guests_checking_in",
+    "guests_staying",
+    "guests_checking_out",
+    "staffing_status",
+  ];
+  const lines = [
+    headers.join(","),
+    ...rows.map((row) => headers.map((header) => escapeCsv(row[header])).join(",")),
+  ];
+  const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
+  const outputPath = path.resolve(
+    scriptDirectory,
+    "..",
+    "data",
+    "sample",
+    "the_anam_daily_guest_flow.csv",
+  );
+  fs.writeFileSync(outputPath, lines.join("\n") + "\n", "utf8");
+  console.log("Generated " + rows.length.toLocaleString() + " rows in " + outputPath);
+}
+
 writeCsv(buildRows());
 writePropertyCsv();
 writeRoomCsv();
+writeGuestFlowCsv(buildGuestFlowRows());

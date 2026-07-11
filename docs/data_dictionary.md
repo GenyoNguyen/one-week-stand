@@ -1,6 +1,6 @@
 # Hotel Daily Sample Data
 
-The sample consists of three related CSV files:
+The sample consists of four related CSV files:
 
 data/sample/the_anam_daily_reservation_performance.csv
 
@@ -8,11 +8,15 @@ data/sample/the_anam_properties.csv
 
 data/sample/the_anam_rooms.csv
 
+data/sample/the_anam_daily_guest_flow.csv
+
 Each row represents one property, one stay date, and one commercial slice defined by market segment, source, channel, and guest nationality. There are five commercial slices per property and date.
 
 The property file contains one row per property. The locations provided by the user are Cam Ranh, Khanh Hoa; Mui Ne, Binh Thuan; and Ho Chi Minh City.
 
 The room file contains one synthetic row per physical room. It joins to the other files through property and contains no reservation or guest identity.
+
+The guest-flow file contains one row per property and date for operational staffing. It joins to the performance file using property and date. In this synthetic dataset, one in-house booking represents one occupied room.
 
 The data is entirely synthetic and contains no guest names, booking references, emails, phone numbers, addresses, or other identifiable guest data.
 
@@ -72,6 +76,22 @@ The observed period is 2025-07-11 through 2026-07-11:
 | max_guests | Count | Maximum sample guest capacity |
 | size_sqm | Square metres | Sample room size |
 | base_rate_vnd | VND | Synthetic base nightly rate before daily pricing adjustments |
+
+## Daily Guest Flow Columns
+
+| Column | Unit | Meaning |
+| --- | --- | --- |
+| date | YYYY-MM-DD | Observed hotel date |
+| property | Text | Property name used to join with the other files |
+| bookings_checking_in | Count | Bookings arriving on the date |
+| bookings_staying | Count | In-house bookings occupying rooms on the date |
+| bookings_checking_out | Count | Bookings departing on the date |
+| guests_checking_in | Count | Guests arriving on the date |
+| guests_staying | Count | Total in-house guests on the date |
+| guests_checking_out | Count | Guests departing on the date |
+| staffing_status | Category | Synthetic label: Under-deployed, Right amount, or Over-deployed |
+
+The staffing label is generated from a nonlinear workload score using in-house guests, guest turnover, booking turnover, property size, and weekend pressure. Small deterministic noise is added before applying the three label thresholds. It is intended as sample training data, not as a real staffing policy.
 
 ## Direct Calculations
 
