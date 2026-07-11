@@ -1,4 +1,5 @@
-import { describe, expect, test } from 'bun:test';
+import { readFile } from 'node:fs/promises';
+import { describe, expect, test } from 'vitest';
 import * as XLSX from 'xlsx';
 
 import {
@@ -9,6 +10,7 @@ import {
 } from './tabular.js';
 
 const pmsHeaders = HOTEL_SCHEMAS.find((schema) => schema.id === 'pms-daily-export').columns;
+const sampleFile = (filename) => readFile(new URL(`../../../data/sample/${filename}`, import.meta.url));
 
 describe('tabular upload conversion', () => {
   test('converts quoted CSV data into an escaped Markdown file', async () => {
@@ -24,7 +26,7 @@ describe('tabular upload conversion', () => {
     expect(result.filename).toBe('daily_export.md');
     expect(result.markdown).toContain('Brand,<br>Direct');
     expect(result.markdown).toContain('Partner \\| Desk');
-    expect(result.markdownFile.type).toStartWith('text/markdown');
+    expect(result.markdownFile.type).toMatch(/^text\/markdown/);
   });
 
   test('reads every XLSX sheet and selects the sheet matching the hotel schema', async () => {
@@ -57,9 +59,9 @@ describe('tabular upload conversion', () => {
   });
 
   test('accepts the repository canonical performance export', async () => {
-    const sample = Bun.file('../data/sample/the_anam_daily_reservation_performance.csv');
+    const sample = await sampleFile('the_anam_daily_reservation_performance.csv');
     const result = await convertTabularFile(
-      new File([await sample.arrayBuffer()], 'the_anam_daily_reservation_performance.csv')
+      new File([sample], 'the_anam_daily_reservation_performance.csv')
     );
 
     expect(result.ok).toBe(true);
@@ -75,8 +77,8 @@ describe('tabular upload conversion', () => {
     ];
 
     for (const [filename, schemaId] of fixtures) {
-      const sample = Bun.file(`../data/sample/${filename}`);
-      const result = await convertTabularFile(new File([await sample.arrayBuffer()], filename));
+      const sample = await sampleFile(filename);
+      const result = await convertTabularFile(new File([sample], filename));
       expect(result.ok).toBe(true);
       expect(result.matchedSchema.id).toBe(schemaId);
     }
@@ -140,8 +142,8 @@ describe('tabular upload conversion', () => {
     ];
     const files = await Promise.all(
       fixtureNames.map(async (filename) => {
-        const sample = Bun.file(`../data/sample/${filename}`);
-        return new File([await sample.arrayBuffer()], filename);
+        const sample = await sampleFile(filename);
+        return new File([sample], filename);
       })
     );
     const result = await convertTabularFiles(files);

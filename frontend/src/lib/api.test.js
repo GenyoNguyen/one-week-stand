@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test } from 'bun:test';
+import { afterEach, describe, expect, test } from 'vitest';
 
 import {
   getForecast,
@@ -43,6 +43,9 @@ describe('forecast API client', () => {
     expect(captured.options.body.get('data_profile')).toBe('hotel');
     expect(captured.options.body.get('additional_context')).toContain('daily.xlsx');
     expect(captured.options.body.get('additional_context')).toContain('properties.csv');
+    expect(captured.options.body.get('output_locale')).toBe('en');
+    expect(captured.options.body.get('report_prompt')).toContain('evidence-backed');
+    expect(captured.options.body.get('report_prompt')).toContain('Do not invent forecast intervals');
     expect(job.job_id).toBe('forecast_abcdef123456');
   });
 
@@ -83,7 +86,7 @@ describe('forecast API client', () => {
 
     const job = await getLatestForecast();
 
-    expect(capturedUrl).toBe('/api/forecast/latest');
+    expect(capturedUrl).toBe('/api/forecast/latest?data_profile=hotel');
     expect(job.status).toBe('completed');
   });
 
@@ -117,5 +120,14 @@ describe('forecast API client', () => {
       expect(error.message).toBe('Unauthorized');
       expect(error.status).toBe(401);
     }
+  });
+
+  test('rejects successful HTTP responses with malformed API envelopes', async () => {
+    globalThis.fetch = async () => new Response('not-json', {
+      status: 200,
+      headers: { 'content-type': 'text/plain' }
+    });
+
+    await expect(getLatestForecast()).rejects.toThrow('malformed response envelope');
   });
 });
