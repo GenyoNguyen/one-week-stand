@@ -1,6 +1,6 @@
 <script>
-  // Booking pace curve, "emphasis" form: this year in accent, last year in
-  // context gray. X axis runs from 20 weeks out down to arrival.
+  // Booking pace comparison. Date-based feeds are a current arrival-week
+  // snapshot; only explicitly week-indexed feeds are described as a curve.
   import { scaleLinear } from 'd3-scale';
   import { line as d3line, curveMonotoneX } from 'd3-shape';
   import { GRAY_CONTEXT } from '../lib/constants.js';
@@ -9,6 +9,7 @@
   export let points = []; // [{weeksOut, ty|null, ly}]
   export let currentWeeksOut = 4;
   export let monthLabel = '';
+  export let snapshot = false;
   export let height = 240;
 
   let width = 600;
@@ -47,7 +48,9 @@
     on:mousemove={onMove}
     on:mouseleave={() => (hover = null)}
     role="img"
-    aria-label="Booking pace for {monthLabel}: cumulative room nights on the books, this year versus same time last year"
+    aria-label={snapshot
+      ? `Current booking pace snapshot for ${monthLabel}: room nights on the books versus same-time-last-year by arrival lead`
+      : `Booking pace for ${monthLabel}: cumulative room nights on the books, this year versus same time last year`}
   >
     <g transform="translate({m.left},{m.top})">
       {#each yTicks as v}
@@ -55,9 +58,10 @@
         <text x="-8" y={y(v)} dy="3" class="tick r">{fmtInt(v)}</text>
       {/each}
 
-      <!-- today marker -->
-      <line x1={x(currentWeeksOut)} x2={x(currentWeeksOut)} y1="0" y2={ih} class="today" />
-      <text x={x(currentWeeksOut)} y="-4" class="tick c today-label">today</text>
+      {#if !snapshot}
+        <line x1={x(currentWeeksOut)} x2={x(currentWeeksOut)} y1="0" y2={ih} class="today" />
+        <text x={x(currentWeeksOut)} y="-4" class="tick c today-label">today</text>
+      {/if}
 
       <path d={lyLine} class="ly" style="stroke:{GRAY_CONTEXT}" />
       <path d={tyLine} class="ty" />
@@ -66,11 +70,11 @@
       {#if tyEnd}
         <circle cx={x(tyEnd.weeksOut)} cy={y(tyEnd.ty)} r="3" class="ty-dot" />
         <text x={x(tyEnd.weeksOut) + 8} y={y(tyEnd.ty)} dy="3" class="lbl ty-lbl">
-          This year · {fmtInt(tyEnd.ty)}
+          {snapshot ? 'OTB' : 'This year'} · {fmtInt(tyEnd.ty)}
         </text>
       {/if}
       <text x={x(0) + 8} y={y(lyEnd.ly)} dy="3" class="lbl ly-lbl">
-        Last year · {fmtInt(lyEnd.ly)}
+        {snapshot ? 'STLY OTB' : 'Last year'} · {fmtInt(lyEnd.ly)}
       </text>
 
       {#each [20, 16, 12, 8, 4, 0] as w}
@@ -87,13 +91,17 @@
     <div class="tooltip" style="left:{Math.min(hover.x + m.left + 10, width - 175)}px; top:{m.top}px">
       <div class="t-date">{hover.p.weeksOut} weeks before arrival</div>
       {#if hover.p.ty != null}
-        <div class="t-row"><span class="sw ty-sw"></span>This year <b class="num">{fmtInt(hover.p.ty)} rn</b></div>
+        <div class="t-row"><span class="sw ty-sw"></span>{snapshot ? 'OTB' : 'This year'} <b class="num">{fmtInt(hover.p.ty)} rn</b></div>
       {/if}
-      <div class="t-row"><span class="sw ly-sw"></span>Last year <b class="num">{fmtInt(hover.p.ly)} rn</b></div>
+      <div class="t-row"><span class="sw ly-sw"></span>{snapshot ? 'STLY OTB' : 'Last year'} <b class="num">{fmtInt(hover.p.ly)} rn</b></div>
     </div>
   {/if}
 </div>
-<div class="caption">Cumulative room nights on the books for {monthLabel} arrivals</div>
+<div class="caption">
+  {snapshot
+    ? `Current OTB snapshot aggregated by arrival lead for ${monthLabel}; this is not a historical cumulative curve.`
+    : `Cumulative room nights on the books for ${monthLabel} arrivals`}
+</div>
 
 <style>
   .wrap {

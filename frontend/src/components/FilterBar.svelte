@@ -1,10 +1,39 @@
 <script>
   import { PROPERTIES, COMPARE_MODES, HORIZONS, DATA_ASOF, DATA_SOURCE } from '../lib/constants.js';
   import { propertyFilter, selectedProperty, horizon, compareMode, currentView } from '../lib/stores.js';
+  import { dashboardMetadataStore } from '../lib/dashboard-store.js';
+
+  const env = import.meta.env || {};
+  const demoMode = env.VITE_DASHBOARD_DEMO === 'true' || env.VITE_DEMO_MODE === 'true';
 
   // only show controls that actually apply to the current view — a visible
   // 30/60/90 switch on views that ignore it teaches users the wrong model
   $: showHorizon = $currentView === 'forecast';
+  $: propertyOptions = $dashboardMetadataStore?.properties?.length
+    ? $dashboardMetadataStore.properties
+    : PROPERTIES;
+  $: if (
+    $dashboardMetadataStore?.properties?.length
+    && $propertyFilter !== 'ALL'
+    && !propertyOptions.some((property) => property.id === $propertyFilter)
+  ) {
+    propertyFilter.set('ALL');
+  }
+  $: freshnessPrefix = $dashboardMetadataStore?.asOfBasis === 'forecast_job_submission_time'
+    ? 'Uploaded'
+    : 'Data to';
+  $: freshness = $dashboardMetadataStore
+    ? `${freshnessPrefix} ${new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        timeZone: $dashboardMetadataStore.timezone || 'Asia/Ho_Chi_Minh'
+      }).format($dashboardMetadataStore.asOf)} · ${$dashboardMetadataStore.sourceLabel} · ${$dashboardMetadataStore.currency}`
+    : demoMode
+      ? `Data to ${DATA_ASOF} · ${DATA_SOURCE}`
+      : 'No dashboard result selected';
 
   // property is ONE state: every control that picks a property writes both
   // stores, so the global select and the Property-view tabs never disagree
@@ -17,7 +46,7 @@
   <div class="group">
     <select class="prop" bind:value={$propertyFilter} on:change={onPropChange} aria-label="Property">
       <option value="ALL">All properties</option>
-      {#each PROPERTIES as p}
+      {#each propertyOptions as p}
         <option value={p.id}>{p.name}</option>
       {/each}
     </select>
@@ -39,7 +68,7 @@
     </div>
   </div>
 
-  <div class="fresh num">Data to {DATA_ASOF} · {DATA_SOURCE}</div>
+  <div class="fresh num">{freshness}</div>
 </div>
 
 <style>
