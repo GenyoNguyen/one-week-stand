@@ -25,8 +25,8 @@
   $: hovered = hover ? items.find((i) => i.label === hover) : null;
 </script>
 
-<svg width={size} height={size} viewBox="0 0 {size} {size}" role="img" aria-label={ariaLabel}>
-  <g transform="translate({r},{r})">
+<svg width={size} height={size} viewBox="0 0 {size} {size}" role="group" aria-label={ariaLabel}>
+  <g transform="translate({r},{r})" role="listbox" aria-label={ariaLabel} aria-orientation="horizontal">
     {#each segs as s (s.data.label)}
       <path
         d={arcGen(s)}
@@ -34,7 +34,8 @@
         class="seg"
         class:dim={hover && hover !== s.data.label}
         tabindex="0"
-        role="img"
+        role="option"
+        aria-selected={hover === s.data.label}
         on:mouseenter={() => (hover = s.data.label)}
         on:mouseleave={() => (hover = null)}
         on:focus={() => (hover = s.data.label)}

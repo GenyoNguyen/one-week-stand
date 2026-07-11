@@ -11,10 +11,23 @@ PROJECT_ID = "proj_012345abcdef"
 
 @pytest.fixture
 def mcp_client(tmp_path, monkeypatch):
-    project_dir = tmp_path / "projects" / PROJECT_ID
+    project_dir = tmp_path / "projects" / PROJECT_ID / "files"
     project_dir.mkdir(parents=True)
     (project_dir / "hotel.csv").write_text(
         "date,rooms,revenue\n2026-07-11,42,12345\n",
+        encoding="utf-8",
+    )
+    (project_dir / "channels.txt").write_text(
+        "property | channel\nThe Anam 1 | Booking.com\n",
+        encoding="utf-8",
+    )
+    (project_dir.parent / "project.json").write_text(
+        json.dumps({
+            "files": [
+                {"stored_filename": "hotel.csv", "filename": "hotel-source.csv"},
+                {"stored_filename": "channels.txt", "filename": "channel-source.txt"},
+            ]
+        }),
         encoding="utf-8",
     )
 
@@ -52,9 +65,9 @@ def test_stdio_server_lists_and_calls_tools(mcp_client):
             {"query": "rooms revenue", "project_id": PROJECT_ID},
         )
     )
-    assert search["files_scanned"] == 1
+    assert search["files_scanned"] == 2
     assert search["match_count"] == 1
-    assert search["matches"][0]["path"] == f"projects/{PROJECT_ID}/hotel.csv"
+    assert search["matches"][0]["source"] == "hotel-source.csv"
 
     table = json.loads(
         mcp_client.call_tool(
@@ -65,6 +78,26 @@ def test_stdio_server_lists_and_calls_tools(mcp_client):
     assert table["type"] == "structured_table"
     assert table["rows"] == [{"claim": "Demand is up", "confidence": 0.9}]
     assert "| Demand is up | 0.9 |" in table["markdown"]
+
+
+def test_search_normalizes_punctuation_and_returns_each_source_preview(mcp_client):
+    search = json.loads(
+        mcp_client.call_tool(
+            "search_data_files",
+            {"query": "rooms, revenue.", "project_id": PROJECT_ID},
+        )
+    )
+
+    assert search["match_count"] == 1
+    assert search["matches"][0]["source"] == "hotel-source.csv"
+    previews = {preview["source"]: preview["units"] for preview in search["source_previews"]}
+    assert set(previews) == {"hotel-source.csv", "channel-source.txt"}
+    assert previews["hotel-source.csv"][0] == {
+        "location_type": "line",
+        "location": 1,
+        "snippet": "date | rooms | revenue",
+    }
+    assert previews["channel-source.txt"][1]["snippet"] == "The Anam 1 | Booking.com"
 
 
 def test_search_rejects_project_path_traversal(mcp_client):
