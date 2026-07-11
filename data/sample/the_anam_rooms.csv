@@ -1,0 +1,270 @@
+property,room_id,room_type,floor,bed_type,max_guests,size_sqm,base_rate_vnd
+The Anam 1,ANAM1-001,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-002,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-003,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-004,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-005,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-006,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-007,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-008,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-009,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-010,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-011,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-012,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-013,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-014,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-015,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-016,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-017,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-018,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-019,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-020,Deluxe King,1,King,2,42,4230000
+The Anam 1,ANAM1-021,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-022,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-023,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-024,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-025,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-026,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-027,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-028,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-029,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-030,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-031,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-032,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-033,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-034,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-035,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-036,Deluxe King,2,King,2,42,4230000
+The Anam 1,ANAM1-037,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-038,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-039,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-040,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-041,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-042,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-043,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-044,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-045,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-046,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-047,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-048,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-049,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-050,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-051,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-052,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-053,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-054,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-055,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-056,Deluxe Twin,1,Twin,2,42,4230000
+The Anam 1,ANAM1-057,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-058,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-059,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-060,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-061,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-062,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-063,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-064,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-065,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-066,Deluxe Twin,2,Twin,2,42,4230000
+The Anam 1,ANAM1-067,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-068,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-069,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-070,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-071,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-072,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-073,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-074,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-075,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-076,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-077,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-078,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-079,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-080,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-081,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-082,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-083,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-084,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-085,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-086,Suite,1,King,3,68,5875000
+The Anam 1,ANAM1-087,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-088,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-089,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-090,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-091,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-092,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-093,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-094,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-095,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-096,Suite,2,King,3,68,5875000
+The Anam 1,ANAM1-097,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-098,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-099,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-100,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-101,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-102,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-103,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-104,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-105,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-106,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-107,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-108,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-109,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-110,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-111,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-112,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-113,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-114,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-115,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-116,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-117,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-118,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-119,Villa,1,King,4,110,8225000
+The Anam 1,ANAM1-120,Villa,1,King,4,110,8225000
+The Anam 2,ANAM2-001,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-002,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-003,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-004,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-005,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-006,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-007,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-008,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-009,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-010,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-011,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-012,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-013,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-014,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-015,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-016,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-017,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-018,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-019,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-020,Deluxe King,1,King,2,42,2385000
+The Anam 2,ANAM2-021,Deluxe King,2,King,2,42,2385000
+The Anam 2,ANAM2-022,Deluxe King,2,King,2,42,2385000
+The Anam 2,ANAM2-023,Deluxe King,2,King,2,42,2385000
+The Anam 2,ANAM2-024,Deluxe King,2,King,2,42,2385000
+The Anam 2,ANAM2-025,Deluxe King,2,King,2,42,2385000
+The Anam 2,ANAM2-026,Deluxe King,2,King,2,42,2385000
+The Anam 2,ANAM2-027,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-028,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-029,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-030,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-031,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-032,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-033,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-034,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-035,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-036,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-037,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-038,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-039,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-040,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-041,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-042,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-043,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-044,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-045,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-046,Deluxe Twin,1,Twin,2,42,2385000
+The Anam 2,ANAM2-047,Deluxe Twin,2,Twin,2,42,2385000
+The Anam 2,ANAM2-048,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-049,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-050,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-051,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-052,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-053,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-054,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-055,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-056,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-057,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-058,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-059,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-060,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-061,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-062,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-063,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-064,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-065,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-066,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-067,Suite,1,King,3,68,3313000
+The Anam 2,ANAM2-068,Suite,2,King,3,68,3313000
+The Anam 2,ANAM2-069,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-070,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-071,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-072,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-073,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-074,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-075,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-076,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-077,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-078,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-079,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-080,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-081,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-082,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-083,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-084,Villa,1,King,4,110,4638000
+The Anam 2,ANAM2-085,Villa,1,King,4,110,4638000
+The Anam 3,ANAM3-001,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-002,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-003,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-004,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-005,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-006,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-007,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-008,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-009,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-010,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-011,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-012,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-013,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-014,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-015,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-016,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-017,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-018,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-019,Deluxe King,1,King,2,42,3015000
+The Anam 3,ANAM3-020,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-021,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-022,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-023,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-024,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-025,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-026,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-027,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-028,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-029,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-030,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-031,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-032,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-033,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-034,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-035,Deluxe Twin,1,Twin,2,42,3015000
+The Anam 3,ANAM3-036,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-037,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-038,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-039,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-040,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-041,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-042,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-043,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-044,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-045,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-046,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-047,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-048,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-049,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-050,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-051,Suite,1,King,3,68,4188000
+The Anam 3,ANAM3-052,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-053,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-054,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-055,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-056,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-057,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-058,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-059,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-060,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-061,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-062,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-063,Villa,1,King,4,110,5863000
+The Anam 3,ANAM3-064,Villa,1,King,4,110,5863000
