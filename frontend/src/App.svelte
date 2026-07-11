@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import FilterBar from './components/FilterBar.svelte';
+  import AnamLogo from './components/AnamLogo.svelte';
   import DailyOverview from './routes/DailyOverview.svelte';
   import DemandForecast from './routes/DemandForecast.svelte';
   import PropertyView from './routes/PropertyView.svelte';
@@ -66,6 +67,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="brand">
+      <AnamLogo size={48} color="var(--gold)" />
       <div class="brand-name">The Anam</div>
       <div class="brand-sub">Commercial Intelligence</div>
     </div>
@@ -98,7 +100,7 @@
 <style>
   .app {
     display: grid;
-    grid-template-columns: 218px 1fr;
+    grid-template-columns: 232px 1fr;
     min-height: 100vh;
   }
   .sidebar {
@@ -111,24 +113,30 @@
     top: 0;
     height: 100vh;
   }
+  /* brand lockup: emblem above a Trajan-style wordmark, as on the real logo */
   .brand {
-    padding: 2px 10px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    padding: 10px 10px 18px;
     border-bottom: 1px solid rgba(236, 231, 220, 0.12);
     margin-bottom: 14px;
   }
   .brand-name {
-    font-family: var(--font-display);
-    font-size: 21px;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    color: var(--gold);
+    font-family: 'Cinzel', var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c9a25e;
   }
   .brand-sub {
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--sidebar-muted);
-    margin-top: 3px;
   }
   nav {
     display: flex;
@@ -143,8 +151,7 @@
     text-align: left;
     background: none;
     border: none;
-    border-left: 2px solid transparent;
-    border-radius: 0 var(--radius) var(--radius) 0;
+    border-radius: var(--radius);
     color: var(--sidebar-muted);
     font-size: 13px;
     font-weight: 500;
@@ -155,9 +162,8 @@
     background: rgba(236, 231, 220, 0.06);
   }
   .nav-item.active {
-    color: var(--sidebar-ink);
-    background: rgba(236, 231, 220, 0.08);
-    border-left-color: var(--gold);
+    color: #ecd9a8;
+    background: rgba(201, 154, 60, 0.14);
   }
   .side-foot {
     margin-top: auto;
