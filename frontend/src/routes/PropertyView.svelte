@@ -2,7 +2,7 @@
   import KpiCard from '../components/KpiCard.svelte';
   import PaceChart from '../components/PaceChart.svelte';
   import Heatmap from '../components/Heatmap.svelte';
-  import StackedBar from '../components/StackedBar.svelte';
+  import DonutChart from '../components/DonutChart.svelte';
   import { getSeries, getPaceCurve, getPickupCalendar, getSegmentMix } from '../lib/api.js';
   import { selectedProperty, propertyFilter, compareMode } from '../lib/stores.js';
   import { PROPERTIES, SERIES } from '../lib/constants.js';
@@ -50,6 +50,7 @@
   $: cmpOcc = today ? ($compareMode === 'budget' ? today.budgetOcc : today.lyOcc) : 0;
   $: cmpAdr = today ? ($compareMode === 'budget' ? today.budgetAdr : today.lyAdr) : 0;
   $: cmpLabel = $compareMode === 'budget' ? 'vs budget' : 'vs last year';
+  $: otbRn30 = next30.reduce((s, r) => s + r.roomsSold, 0);
   $: pu7next30 = next30.reduce((s, r) => s + r.pu7, 0);
   $: cxl7next30 = next30.reduce((s, r) => s + r.cxl7, 0);
   // trailing norm = the pre-spike baseline the generator uses (~2% of OTB)
@@ -175,12 +176,16 @@
 
     <section class="panel">
       <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
-      <div class="panel-body">
-        <StackedBar
+      <div class="panel-body mix-body">
+        <DonutChart
           items={mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
-          height={26}
+          size={190}
+          thickness={28}
+          centerValue="{fmtInt(otbRn30)} rn"
+          centerLabel="on the books"
+          ariaLabel="{prop.name} segment mix for the next 30 days on the books"
         />
-        <div class="legend">
+        <div class="legend mix-legend">
           {#each mix as m, i}
             <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
           {/each}
@@ -255,6 +260,12 @@
   .panel-body {
     padding: 10px 16px 14px;
   }
+  .mix-body {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+  }
   .legend {
     display: flex;
     gap: 16px;
@@ -262,6 +273,12 @@
     font-size: 11.5px;
     color: var(--ink-2);
     flex-wrap: wrap;
+  }
+  .mix-legend {
+    margin-top: 0;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12.5px;
   }
   .legend span {
     display: inline-flex;

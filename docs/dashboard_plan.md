@@ -131,10 +131,10 @@ Nguyên tắc pairing: nhảy cỡ ≥3x giữa hero và body; đậm nhạt tư
 ### V3 — Property View (chọn 1 trong 3 cơ sở)
 - **Pace curve** (dạng *emphasis*): đường booking curve năm nay màu accent, cùng-kỳ-năm-ngoái màu xám — trả lời "đang nhanh hay chậm hơn LY?".
 - **Pickup heatmap**: ngày lưu trú × tuần lead time, sequential 1 hue.
-- Segment mix stacked bar ngang + KPI row của property đó.
+- Segment mix dạng donut (cung tách khe, bo góc, tâm hiện tổng OTB; đổi từ stacked bar theo yêu cầu owner 11/07) + KPI row của property đó.
 
 ### V4 — Segment / Channel View
-- Stacked bar ngang cho mix (segment nhiều/tên dài → nằm ngang).
+- Donut chart cho mix theo từng property (5 segment, gap + bo góc, legend chung, bảng số fallback giữ nguyên; đổi từ stacked bar theo yêu cầu owner 11/07).
 - Đường trend theo segment (≤6 đường, direct label, legend luôn có).
 - Bảng channel: room nights, revenue, ADR, **cancellation rate**, delta vs LY.
 
