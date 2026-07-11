@@ -15,6 +15,19 @@ Open **http://localhost:5173/#daily**. The demo runs fully offline (self-hosted 
 
 Production build: `npm run build --prefix frontend` → static files in `frontend/dist` (~500 KB total).
 
+## Quick start (MiroFish services)
+
+The project-level launcher reads `.env`, installs missing dependencies, and
+starts the MiroFish frontend and backend with hot reload:
+
+```bash
+./run.sh
+```
+
+Every normal launch stops the previous managed instance first. Use
+`./run.sh --setup-only` to install dependencies without starting services,
+`./run.sh --skip-install` for a quick restart, or `./run.sh --stop` to stop it.
+
 ## Project structure
 
 | Part | What | Where | Status |
