@@ -1,9 +1,10 @@
-FROM python:3.11
+FROM node:22-bookworm-slim AS node-runtime
 
-# 安装 Node.js （满足 >=18）及必要工具
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends nodejs npm \
-  && rm -rf /var/lib/apt/lists/*
+FROM python:3.11-bookworm
+
+# Vite 7 requires Node.js >=20.19. Reuse the official Node runtime instead of
+# Debian's older nodejs package.
+COPY --from=node-runtime /usr/local/ /usr/local/
 
 # 从 uv 官方镜像复制 uv
 COPY --from=ghcr.io/astral-sh/uv:0.9.26 /uv /uvx /bin/
