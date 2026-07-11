@@ -10,7 +10,7 @@ data/sample/the_anam_rooms.csv
 
 Each row represents one property, one stay date, and one commercial slice defined by market segment, source, channel, and guest nationality. There are five commercial slices per property and date.
 
-The property file contains one row per property. Cam Ranh, Khanh Hoa and Mui Ne, Binh Thuan were provided by the user. The Anam 3 remains marked TBD instead of assigning an unsupported location.
+The property file contains one row per property. The locations provided by the user are Cam Ranh, Khanh Hoa; Mui Ne, Binh Thuan; and Ho Chi Minh City.
 
 The room file contains one synthetic row per physical room. It joins to the other files through property and contains no reservation or guest identity.
 

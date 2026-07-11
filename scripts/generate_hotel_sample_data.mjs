@@ -36,8 +36,8 @@ const PROPERTIES = [
   },
   {
     name: "The Anam 3",
-    city: "TBD",
-    province: "TBD",
+    city: "Ho Chi Minh City",
+    province: "Ho Chi Minh City",
     country: "Vietnam",
     propertyType: "TBD",
     rooms: 64,
