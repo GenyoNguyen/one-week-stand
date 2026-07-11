@@ -18,8 +18,10 @@ from typing import Any, Dict, List, Optional
 from ..config import Config
 from ..models.project import ProjectManager, ProjectStatus
 from ..utils.file_parser import FileParser
+from ..utils.locale import set_locale
 from ..utils.logger import get_logger
 from .graph_builder import GraphBuilderService
+from .hotel_dashboard import build_hotel_dashboard
 from .ontology_generator import OntologyGenerator
 from .report_agent import ReportAgent, ReportManager, ReportStatus
 from .simulation_manager import SimulationManager, SimulationStatus
@@ -455,12 +457,18 @@ class ForecastService:
         return ForecastJobStore.get(job_id)
 
     @classmethod
-    def get_latest_completed_job(cls) -> Optional[ForecastJob]:
+    def get_latest_completed_job(
+        cls, data_profile: Optional[str] = None
+    ) -> Optional[ForecastJob]:
         return next(
             (
                 job
                 for job in ForecastJobStore.list(limit=200)
                 if job.status == ForecastStatus.COMPLETED and job.report_id
+                and (
+                    data_profile is None
+                    or job.options.get("data_profile", "generic") == data_profile
+                )
             ),
             None,
         )
@@ -473,9 +481,24 @@ class ForecastService:
         report = ReportManager.get_report(job.report_id)
         if not report:
             raise RuntimeError(f"Completed forecast report is missing: {job.report_id}")
+        project = ProjectManager.get_project(job.project_id)
+        source_files = project.files if project else []
+        dashboard_output = build_hotel_dashboard(
+            job_id=job.job_id,
+            project_id=job.project_id,
+            file_paths=job.file_paths,
+            source_files=source_files,
+            created_at=job.created_at,
+            completed_at=job.completed_at,
+            output_locale=job.options.get(
+                "output_locale",
+                "en" if job.options.get("data_profile") == "hotel" else "zh",
+            ),
+        )
         return {
             "job": job.to_public_dict(),
             "report": report.to_dict(),
+            "dashboard_output": dashboard_output,
         }
 
     @classmethod
@@ -504,6 +527,13 @@ class ForecastService:
     ) -> None:
         try:
             job = ForecastJobStore.get(job_id)
+            if job:
+                set_locale(
+                    job.options.get(
+                        "output_locale",
+                        "en" if job.options.get("data_profile") == "hotel" else "zh",
+                    )
+                )
             queued_progress = job.progress if (resume_graph or resume_report) and job else 0
             queued_message = (
                 "Waiting to resume graph processing" if resume_graph else
