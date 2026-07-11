@@ -1,0 +1,235 @@
+/* self-hosted Fraunces + IBM Plex Sans (incl. Vietnamese subsets) — the demo
+   must keep its typography with no network */
+@import './fonts.css';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — "morning briefing ledger"
+   Palette validated with dataviz validate_palette.js (light, all checks pass)
+--------------------------------------------------------------------------- */
+:root {
+  /* surfaces */
+  --paper: #faf8f5;
+  --panel: #ffffff;
+  --panel-tint: #f4f1ea;
+  --hairline: #e7e2d9;
+  --hairline-strong: #d8d2c6;
+
+  /* ink */
+  --ink: #1c1b18;
+  --ink-2: #5f5b52;
+  --ink-3: #948e82;
+
+  /* brand */
+  --accent: #0b8a76;
+  --accent-ink: #075e51;
+  --accent-soft: #e2efec;
+  --gold: #a8823c;
+
+  /* sidebar */
+  --sidebar: #16211d;
+  --sidebar-ink: #ece7dc;
+  --sidebar-muted: #8b9a92;
+
+  /* categorical series — fixed order, never cycled */
+  --c1: #0b8a76;
+  --c2: #c2540a;
+  --c3: #2e62b8;
+  --c4: #a03a6b;
+  --c5: #5f8321;
+  --c6: #7a52c7;
+
+  /* status — reserved, always paired with icon + label */
+  --good: #25764b;
+  --good-soft: #e3efe7;
+  --watch: #8a6400;
+  --watch-soft: #f5edd6;
+  --risk: #ae2e24;
+  --risk-soft: #f7e6e4;
+
+  /* type */
+  --font-ui: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+
+  --radius: 3px;
+  --radius-panel: 4px;
+  --shadow-pop: 0 6px 24px rgba(28, 27, 24, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---- shared primitives ------------------------------------------------- */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-panel);
+}
+
+.kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.view-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.view-sub {
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+/* deltas — colour + arrow glyph, never colour alone */
+.delta {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.delta.pos {
+  color: var(--good);
+}
+.delta.neg {
+  color: var(--risk);
+}
+.delta.flat {
+  color: var(--ink-3);
+}
+
+/* data tables — dense but calm */
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+table.data th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--hairline-strong);
+  white-space: nowrap;
+}
+table.data td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--hairline);
+  font-variant-numeric: tabular-nums;
+}
+table.data th.r,
+table.data td.r {
+  text-align: right;
+}
+table.data tbody tr:hover {
+  background: var(--panel-tint);
+}
+
+/* one orchestrated reveal per view load — not scattered micro-animations */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal > * {
+  animation: rise 0.45s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+.reveal > *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+.reveal > *:nth-child(3) {
+  animation-delay: 0.1s;
+}
+.reveal > *:nth-child(4) {
+  animation-delay: 0.15s;
+}
+.reveal > *:nth-child(5) {
+  animation-delay: 0.2s;
+}
+.reveal > *:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+/* loading skeleton */
+@keyframes shimmer {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+.skeleton {
+  border-radius: var(--radius);
+  background: var(--hairline);
+  animation: shimmer 0.9s ease-in-out infinite alternate;
+}
+
+/* status tag */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.tag.risk {
+  color: var(--risk);
+  background: var(--risk-soft);
+}
+.tag.watch {
+  color: var(--watch);
+  background: var(--watch-soft);
+}
+.tag.opportunity {
+  color: var(--good);
+  background: var(--good-soft);
+}
