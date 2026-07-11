@@ -116,7 +116,7 @@
   .undo {
     background: none;
     border: none;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-size: 11.5px;
     font-weight: 600;
     padding: 0;
@@ -170,7 +170,7 @@
     padding-bottom: 2px;
   }
   .action {
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--gold);
     padding: 4px 0 4px 12px;
     display: flex;
     flex-direction: column;
@@ -182,7 +182,7 @@
   }
   .impact {
     font-size: 12px;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-weight: 600;
   }
   footer {
@@ -191,16 +191,17 @@
     margin-top: 2px;
   }
   button.primary {
-    background: var(--accent);
+    background: var(--primary);
     color: #fff;
     border: none;
     border-radius: var(--radius);
     padding: 6px 14px;
     font-size: 12.5px;
     font-weight: 600;
+    box-shadow: var(--shadow-card);
   }
   button.primary:hover {
-    background: var(--accent-ink);
+    background: var(--primary-hover);
   }
   button.ghost {
     background: none;

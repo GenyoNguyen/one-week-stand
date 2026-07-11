@@ -290,15 +290,15 @@ export function paceCurve(propertyId) {
   return { points, currentWeeksOut, monthLabel: 'August 2026' };
 }
 
-// ---- 7-day pickup by stay date, calendar layout (next 6 weeks) ------------
+// ---- 7-day pickup by stay date, calendar layout (next 8 weeks) ------------
 export function pickupCalendar(propertyId) {
-  const rows = daily(propertyId).filter((r) => r.lead > 0 && r.lead <= 42);
+  const rows = daily(propertyId).filter((r) => r.lead > 0 && r.lead <= 56);
   const byDate = new Map();
   for (const r of rows) {
     const k = r.date.toDateString();
     byDate.set(k, (byDate.get(k) || 0) + r.pu7);
   }
-  return Array.from({ length: 42 }, (_, i) => {
+  return Array.from({ length: 56 }, (_, i) => {
     const date = addDays(TODAY, i + 1);
     return { date, pu7: byDate.get(date.toDateString()) || 0 };
   });

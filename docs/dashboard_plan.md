@@ -131,10 +131,10 @@ Nguyên tắc pairing: nhảy cỡ ≥3x giữa hero và body; đậm nhạt tư
 ### V3 — Property View (chọn 1 trong 3 cơ sở)
 - **Pace curve** (dạng *emphasis*): đường booking curve năm nay màu accent, cùng-kỳ-năm-ngoái màu xám — trả lời "đang nhanh hay chậm hơn LY?".
 - **Pickup heatmap**: ngày lưu trú × tuần lead time, sequential 1 hue.
-- Segment mix stacked bar ngang + KPI row của property đó.
+- Segment mix dạng donut (cung tách khe, bo góc, tâm hiện tổng OTB; đổi từ stacked bar theo yêu cầu owner 11/07) + KPI row của property đó.
 
 ### V4 — Segment / Channel View
-- Stacked bar ngang cho mix (segment nhiều/tên dài → nằm ngang).
+- Donut chart cho mix theo từng property (5 segment, gap + bo góc, legend chung, bảng số fallback giữ nguyên; đổi từ stacked bar theo yêu cầu owner 11/07).
 - Đường trend theo segment (≤6 đường, direct label, legend luôn có).
 - Bảng channel: room nights, revenue, ADR, **cancellation rate**, delta vs LY.
 
@@ -186,7 +186,7 @@ Ghi chú: các file docs trên đã có sẵn (rỗng) trong `docs/` — đều 
 ## 8. Checklist "không trông như AI code" (soát trước khi nộp)
 
 - [ ] Không Inter/Roboto/system font; Fraunces + IBM Plex Sans load đúng (kể cả tiếng Việt có dấu)
-- [ ] Không gradient tím; không shadow mặc định; bo góc ≤4px
+- [ ] Không gradient tím; shadow 2 lớp mức whisper; bo góc 10px card / 6px control (quyết định owner 11/07: hướng shadcn-admin + brand The Anam — logo sunburst thật, wordmark + tiêu đề Cinzel caps, gold/charcoal cho toàn bộ lớp điều hướng/điều khiển, teal chỉ dành cho dữ liệu/chart)
 - [ ] Không emoji ở bất kỳ đâu trong UI; icon 1 bộ duy nhất (Lucide, stroke 1.5px)
 - [ ] Không card grid đều nhau — layout có hierarchy 2/3–1/3
 - [ ] Mọi con số: tabular, căn phải, có đơn vị, có ngữ cảnh so sánh (vs budget/LY/OTB)

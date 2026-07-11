@@ -1,5 +1,5 @@
 <script>
-  import StackedBar from '../components/StackedBar.svelte';
+  import DonutChart from '../components/DonutChart.svelte';
   import { getSegments, getSegmentMix, getChannels, getNationalities } from '../lib/api.js';
   import { propertyFilter } from '../lib/stores.js';
   import { PROPERTIES, SEGMENTS, SERIES } from '../lib/constants.js';
@@ -47,20 +47,21 @@
     <div class="skeleton" style="height:160px"></div>
     <div class="skeleton" style="height:300px"></div>
   {:else}
-    <section class="panel">
+    <section class="two">
+      <div class="panel">
       <div class="panel-head"><h2 class="kicker">Segment mix by property</h2></div>
       <div class="panel-body mixes">
-        {#each mixRows as row (row.property.id)}
-          <div class="mix-row">
-            <span class="mix-label">{row.property.short}</span>
-            <div class="mix-bar">
-              <StackedBar
-                items={row.mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
-                height={22}
-              />
-            </div>
-          </div>
-        {/each}
+        <div class="donuts">
+          {#each mixRows as row (row.property.id)}
+            <DonutChart
+              items={row.mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
+              size={140}
+              thickness={24}
+              centerValue={row.property.short}
+              ariaLabel="{row.property.name} segment mix, next 30 days on the books"
+            />
+          {/each}
+        </div>
         <div class="legend">
           {#each SEGMENTS as s, i}
             <span><i style="background:{SERIES[i]}"></i>{s}</span>
@@ -90,9 +91,8 @@
           </table>
         </details>
       </div>
-    </section>
+      </div>
 
-    <section class="two">
       <div class="panel">
         <div class="panel-head"><h2 class="kicker">By segment — {scopeName}</h2></div>
         <table class="data">
@@ -120,7 +120,9 @@
           </tbody>
         </table>
       </div>
+    </section>
 
+    <section class="row2">
       <div class="panel">
         <div class="panel-head">
           <h2 class="kicker">Top source markets — all properties</h2>
@@ -142,10 +144,9 @@
           <div class="foot">Share of forward room nights · Δ vs last year</div>
         </div>
       </div>
-    </section>
 
-    <section class="panel">
-      <div class="panel-head"><h2 class="kicker">By channel — all properties</h2></div>
+      <div class="panel">
+        <div class="panel-head"><h2 class="kicker">By channel — all properties</h2></div>
       <table class="data">
         <thead>
           <tr>
@@ -174,7 +175,8 @@
             </tr>
           {/each}
         </tbody>
-      </table>
+        </table>
+      </div>
     </section>
   {/if}
 </div>
@@ -193,38 +195,38 @@
   }
   .two {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: 12px;
-    align-items: start;
+    align-items: stretch;
   }
   .two .panel {
+    min-width: 0;
+  }
+  .row2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+  .row2 .panel {
     min-width: 0;
   }
   .mixes {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
   }
-  .mix-row {
+  .donuts {
     display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .mix-label {
-    width: 76px;
-    font-size: 12.5px;
-    font-weight: 600;
-    text-align: right;
-    color: var(--ink-2);
-  }
-  .mix-bar {
-    flex: 1;
+    gap: 24px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 6px 0 2px;
   }
   .legend {
     display: flex;
     gap: 16px;
-    margin-top: 4px;
-    padding-left: 88px;
+    justify-content: center;
     font-size: 11.5px;
     color: var(--ink-2);
     flex-wrap: wrap;
@@ -295,7 +297,7 @@
   }
   .fallback summary {
     font-size: 11.5px;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-weight: 600;
     cursor: pointer;
   }

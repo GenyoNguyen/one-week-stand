@@ -2,7 +2,7 @@
   import KpiCard from '../components/KpiCard.svelte';
   import PaceChart from '../components/PaceChart.svelte';
   import Heatmap from '../components/Heatmap.svelte';
-  import StackedBar from '../components/StackedBar.svelte';
+  import DonutChart from '../components/DonutChart.svelte';
   import { getSeries, getPaceCurve, getPickupCalendar, getSegmentMix } from '../lib/api.js';
   import { selectedProperty, propertyFilter, compareMode } from '../lib/stores.js';
   import { PROPERTIES, SERIES } from '../lib/constants.js';
@@ -50,6 +50,7 @@
   $: cmpOcc = today ? ($compareMode === 'budget' ? today.budgetOcc : today.lyOcc) : 0;
   $: cmpAdr = today ? ($compareMode === 'budget' ? today.budgetAdr : today.lyAdr) : 0;
   $: cmpLabel = $compareMode === 'budget' ? 'vs budget' : 'vs last year';
+  $: otbRn30 = next30.reduce((s, r) => s + r.roomsSold, 0);
   $: pu7next30 = next30.reduce((s, r) => s + r.pu7, 0);
   $: cxl7next30 = next30.reduce((s, r) => s + r.cxl7, 0);
   // trailing norm = the pre-spike baseline the generator uses (~2% of OTB)
@@ -118,11 +119,12 @@
     </section>
 
     <section class="grid">
-      <div class="panel">
-        <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
-        <div class="panel-body">
-          <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
-          <details class="fallback">
+      <div class="col">
+        <div class="panel">
+          <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
+          <div class="panel-body">
+            <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
+            <details class="fallback">
             <summary>View as table</summary>
             <table class="data">
               <thead>
@@ -142,11 +144,52 @@
                 {/each}
               </tbody>
             </table>
-          </details>
+            </details>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
+          <div class="panel-body mix-body">
+            <DonutChart
+              items={mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
+              size={164}
+              thickness={25}
+              centerValue="{fmtInt(otbRn30)} rn"
+              centerLabel="on the books"
+              ariaLabel="{prop.name} segment mix for the next 30 days on the books"
+            />
+            <div class="legend mix-legend">
+              {#each mix as m, i}
+                <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
+              {/each}
+            </div>
+            <details class="fallback mix-fallback">
+              <summary>View as table</summary>
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>Segment</th>
+                    <th class="r">Share</th>
+                    <th class="r">Room nights</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {#each mix as m (m.segment)}
+                    <tr>
+                      <td>{m.segment}</td>
+                      <td class="r">{fmtPct(m.share)}</td>
+                      <td class="r">{fmtInt(m.share * otbRn30)}</td>
+                    </tr>
+                  {/each}
+                </tbody>
+              </table>
+            </details>
+          </div>
         </div>
       </div>
 
-      <div class="panel">
+      <div class="panel heat">
         <div class="panel-head"><h2 class="kicker">7-day pickup by stay date</h2></div>
         <div class="panel-body">
           <Heatmap cells={calendar} />
@@ -172,21 +215,6 @@
         </div>
       </div>
     </section>
-
-    <section class="panel">
-      <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
-      <div class="panel-body">
-        <StackedBar
-          items={mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
-          height={26}
-        />
-        <div class="legend">
-          {#each mix as m, i}
-            <span><i style="background:{SERIES[i]}"></i>{m.segment} <b class="num">{fmtPct(m.share)}</b></span>
-          {/each}
-        </div>
-      </div>
-    </section>
   {/if}
 </div>
 
@@ -205,15 +233,17 @@
   }
   .tabs {
     display: inline-flex;
-    border: 1px solid var(--hairline-strong);
+    gap: 2px;
+    border: 1px solid var(--hairline);
     border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--panel);
+    padding: 2px;
+    background: var(--panel-tint);
   }
   .tabs button {
     border: none;
     background: none;
-    padding: 6px 14px;
+    border-radius: calc(var(--radius) - 2px);
+    padding: 5px 14px;
     font-size: 12.5px;
     font-weight: 500;
     color: var(--ink-2);
@@ -221,13 +251,11 @@
     align-items: center;
     gap: 6px;
   }
-  .tabs button + button {
-    border-left: 1px solid var(--hairline);
-  }
   .tabs button.active {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
+    background: var(--panel);
+    color: var(--gold-ink);
     font-weight: 600;
+    box-shadow: var(--shadow-card);
   }
   .dot {
     width: 7px;
@@ -244,9 +272,28 @@
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     gap: 12px;
-    align-items: start;
+    align-items: stretch; /* columns share one bottom edge */
   }
   .grid .panel {
+    min-width: 0;
+  }
+  .heat {
+    display: flex;
+    flex-direction: column;
+  }
+  .heat .panel-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .heat .fallback {
+    margin-top: auto; /* pin the table link to the panel's bottom */
+  }
+  /* left column stacks pace + segment mix to balance the tall heatmap */
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     min-width: 0;
   }
   .panel-head {
@@ -255,6 +302,15 @@
   .panel-body {
     padding: 10px 16px 14px;
   }
+  .mix-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 44px;
+    flex-wrap: wrap;
+    padding-top: 6px;
+    padding-bottom: 12px;
+  }
   .legend {
     display: flex;
     gap: 16px;
@@ -262,6 +318,21 @@
     font-size: 11.5px;
     color: var(--ink-2);
     flex-wrap: wrap;
+  }
+  .mix-legend {
+    margin-top: 0;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12.5px;
+  }
+  /* full-width row beneath the donut + legend (mix-body wraps) */
+  .mix-fallback {
+    flex-basis: 100%;
+    margin-top: 0;
+  }
+  .mix-fallback table {
+    max-width: 340px;
+    margin: 8px auto 0;
   }
   .legend span {
     display: inline-flex;
@@ -279,7 +350,7 @@
   }
   .fallback summary {
     font-size: 11.5px;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-weight: 600;
     cursor: pointer;
   }

@@ -1,5 +1,6 @@
 <script>
   import KpiCard from '../components/KpiCard.svelte';
+  import AnamLogo from '../components/AnamLogo.svelte';
   import ForecastChart from '../components/ForecastChart.svelte';
   import PropertyTable from '../components/PropertyTable.svelte';
   import RecommendationPanel from '../components/RecommendationPanel.svelte';
@@ -125,6 +126,9 @@
   {:else}
     <section class="hero-band">
       <div class="hero panel">
+        <div class="hero-mark" aria-hidden="true">
+          <AnamLogo size={148} color="#c99a3c" opacity={0.15} />
+        </div>
         <div class="kicker">RevPAR tonight</div>
         <div class="hero-num num">{fmtMoneyFull(today.revpar)}</div>
         <div class="hero-deltas">
@@ -238,27 +242,40 @@
     flex-direction: column;
     gap: 18px;
   }
+  /* hero owns a tall left card (logo proportions); KPIs form a 2x2 grid */
   .hero-band {
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) repeat(4, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.15fr) repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
   .hero {
-    padding: 14px 18px;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 22px 16px;
     background: var(--sidebar);
     border-color: var(--sidebar);
     color: var(--sidebar-ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-mark {
+    position: absolute;
+    right: -10px;
+    bottom: -30px;
+    pointer-events: none;
   }
   .hero .kicker {
-    color: var(--sidebar-muted);
+    color: #d3b475; /* brand gold on the charcoal card */
   }
   .hero-num {
     font-family: var(--font-display);
-    font-size: 46px;
-    font-weight: 500;
-    line-height: 1.1;
+    font-size: 58px;
+    font-weight: 400;
+    line-height: 1.05;
     letter-spacing: -0.01em;
-    margin: 4px 0 6px;
+    margin: 10px 0;
   }
   .hero-deltas {
     display: flex;
@@ -301,7 +318,7 @@
   .linkish {
     background: none;
     border: none;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-size: 12px;
     font-weight: 600;
     padding: 0;
@@ -315,7 +332,7 @@
     background: var(--panel-tint);
   }
   .alert-link:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--gold);
     outline-offset: 1px;
   }
   .props {
@@ -329,7 +346,7 @@
   }
   .fallback summary {
     font-size: 11.5px;
-    color: var(--accent-ink);
+    color: var(--gold-ink);
     font-weight: 600;
     cursor: pointer;
   }
