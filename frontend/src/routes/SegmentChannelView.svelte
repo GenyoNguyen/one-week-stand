@@ -1,6 +1,8 @@
 <script>
   import DonutChart from '../components/DonutChart.svelte';
+  import DashboardDataState from '../components/DashboardDataState.svelte';
   import { getSegments, getSegmentMix, getChannels, getNationalities } from '../lib/api.js';
+  import { dashboardMetadataStore, invalidateDashboard } from '../lib/dashboard-store.js';
   import { propertyFilter } from '../lib/stores.js';
   import { PROPERTIES, SEGMENTS, SERIES } from '../lib/constants.js';
   import {
@@ -18,23 +20,41 @@
   let mixRows = [];
   let chans = [];
   let nats = [];
+  let loadError = null;
 
   let seq = 0; // drop stale responses if filters change mid-flight
   async function load(pid) {
     const my = ++seq;
     loading = true;
-    const res = await Promise.all([getSegments(pid), getSegmentMix(), getChannels(), getNationalities()]);
-    if (my !== seq) return;
-    [segs, mixRows, chans, nats] = res;
-    loading = false;
+    loadError = null;
+    try {
+      const res = await Promise.all([getSegments(pid), getSegmentMix(), getChannels(), getNationalities()]);
+      if (my !== seq) return;
+      [segs, mixRows, chans, nats] = res;
+    } catch (error) {
+      if (my !== seq) return;
+      loadError = error;
+      segs = [];
+      mixRows = [];
+      chans = [];
+      nats = [];
+    } finally {
+      if (my === seq) loading = false;
+    }
   }
   $: load($propertyFilter);
 
   $: scopeName =
     $propertyFilter === 'ALL'
       ? 'all properties'
-      : PROPERTIES.find((p) => p.id === $propertyFilter)?.name;
+      : ($dashboardMetadataStore?.properties || PROPERTIES)
+          .find((p) => p.id === $propertyFilter)?.name || $propertyFilter;
   $: maxNat = Math.max(...nats.map((n) => n.share), 0.01);
+
+  function retry() {
+    invalidateDashboard();
+    void load($propertyFilter);
+  }
 </script>
 
 <div class="view reveal">
@@ -46,12 +66,16 @@
   {#if loading}
     <div class="skeleton" style="height:160px"></div>
     <div class="skeleton" style="height:300px"></div>
+  {:else if loadError}
+    <DashboardDataState error={loadError} onRetry={retry} />
+  {:else if !segs.length && !mixRows.length && !chans.length && !nats.length}
+    <DashboardDataState empty />
   {:else}
     <section class="two">
       <div class="panel">
       <div class="panel-head"><h2 class="kicker">Segment mix by property</h2></div>
       <div class="panel-body mixes">
-        <div class="donuts">
+        {#if mixRows.length}<div class="donuts">
           {#each mixRows as row (row.property.id)}
             <DonutChart
               items={row.mix.map((m, i) => ({ label: m.segment, share: m.share, color: SERIES[i] }))}
@@ -61,7 +85,7 @@
               ariaLabel="{row.property.name} segment mix, next 30 days on the books"
             />
           {/each}
-        </div>
+        </div>{:else}<DashboardDataState empty />{/if}
         <div class="legend">
           {#each SEGMENTS as s, i}
             <span><i style="background:{SERIES[i]}"></i>{s}</span>
@@ -141,6 +165,7 @@
               </span>
             </div>
           {/each}
+          {#if !nats.length}<DashboardDataState empty />{/if}
           <div class="foot">Share of forward room nights · Δ vs last year</div>
         </div>
       </div>
@@ -154,7 +179,7 @@
             <th class="r">Room nights</th>
             <th class="r">ADR</th>
             <th class="r">Revenue</th>
-            <th class="r">Cxl rate (prev)</th>
+            <th class="r">Cxl rate</th>
             <th class="r">RN vs LY</th>
           </tr>
         </thead>
@@ -167,7 +192,7 @@
               <td class="r">{fmtMoney(c.revenue)}</td>
               <td class="r">
                 <span class:spike={c.cxlRate > c.cxlPrev * 1.5}>{fmtPct(c.cxlRate)}</span>
-                <span class="muted">({fmtPct(c.cxlPrev)})</span>
+                {#if Number.isFinite(c.cxlPrev)}<span class="muted">({fmtPct(c.cxlPrev)} prev)</span>{/if}
               </td>
               <td class="r">
                 <span class="delta {deltaClass(c.deltaLy)}">{deltaArrow(c.deltaLy)} {fmtDelta(c.deltaLy)}</span>

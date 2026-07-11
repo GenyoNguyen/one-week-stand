@@ -1,8 +1,8 @@
 <script>
   import { onDestroy, onMount } from 'svelte';
 
-  import { PROPERTIES, DATA_ASOF, DATA_SOURCE } from '../lib/constants.js';
   import { fmtInt } from '../lib/formatters.js';
+  import { activeDashboard, loadActiveDashboard, setActiveForecast } from '../lib/dashboard-store.js';
   import {
     getForecast,
     getLatestForecast,
@@ -35,9 +35,30 @@
   $: canResumeForecast = Boolean(forecastJob?.resumable);
   $: resumeStage = forecastJob?.resume_stage
     || (forecastJob?.failed_stage === 'report' ? 'report' : 'graph');
+  $: ingestDashboard = $activeDashboard.dashboard;
+  $: ingestStatus = ingestDashboard?.raw?.data_status || null;
+  $: ingestRows = (ingestDashboard?.metadata?.properties || []).map((property) => {
+    const freshness = (ingestStatus?.freshness || []).find((item) => item.property === property.id);
+    const stayDates = new Set(
+      ingestDashboard.daily
+        .filter((row) => row.property === property.id)
+        .map((row) => row.date.getTime())
+    ).size;
+    return {
+      property,
+      source: ingestDashboard.metadata.sourceFiles.join(', ') || ingestDashboard.metadata.sourceLabel,
+      received: freshness?.received_at || ingestDashboard.metadata.asOf,
+      stayDates,
+      freshness
+    };
+  });
+  $: ingestWarnings = Array.isArray(ingestStatus?.warnings) ? ingestStatus.warnings : [];
 
   onMount(() => {
     loadProjects();
+    // Populate the status table from the selected/latest completed hotel result.
+    // A missing result is normal before the first upload.
+    void loadActiveDashboard().catch(() => {});
     const jobId = sessionStorage.getItem(FORECAST_STORAGE_KEY);
     if (jobId?.startsWith('forecast_')) {
       const sequence = ++requestSequence;
@@ -140,9 +161,24 @@
   function openProject(project) {
     if (!project?.job_id) return;
     selectedProjectId = project.job_id;
-    const url = `${location.origin}${location.pathname}#report/${encodeURIComponent(project.job_id)}`;
-    const reportWindow = window.open(url, '_blank', 'noopener,noreferrer');
-    if (!reportWindow) location.hash = `report/${encodeURIComponent(project.job_id)}`;
+    location.hash = `report/${encodeURIComponent(project.job_id)}`;
+  }
+
+  function useInDashboard(project = selectedProject || forecastJob) {
+    if (!project?.job_id) return;
+    void setActiveForecast(project.job_id);
+    location.hash = 'daily';
+  }
+
+  function formatReceived(value) {
+    if (!value) return 'Timestamp unavailable';
+    const date = value instanceof Date ? value : new Date(value);
+    if (Number.isNaN(date.getTime())) return 'Timestamp unavailable';
+    return new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+      timeZone: ingestDashboard?.metadata?.timezone || 'Asia/Ho_Chi_Minh'
+    }).format(date);
   }
 
   async function restoreLatestForecast() {
@@ -200,11 +236,8 @@
   }
 
   function friendlyForecastError(error) {
-    if (error?.status === 401) {
-      return 'Forecast API authentication failed. Restart Vite after configuring FORECAST_API_KEY.';
-    }
     if (error?.status === 503) {
-      return 'Forecast service is disabled until FORECAST_API_KEY is configured in mirofish/.env.';
+      return 'The forecast service is temporarily unavailable.';
     }
     return error?.message || 'The forecast service could not be reached.';
   }
@@ -415,13 +448,6 @@
     URL.revokeObjectURL(a.href);
   }
 
-  // Ingest status remains demo data until the PMS status endpoint lands.
-  const STATUS = PROPERTIES.map((p, i) => ({
-    property: p,
-    lastImport: DATA_ASOF,
-    rows: [214, 213, 215][i] * 1, // one row per stay date in the daily export window
-    status: 'ok'
-  }));
 </script>
 
 <div class="view reveal">
@@ -438,22 +464,58 @@
           <th>Property</th>
           <th>Source</th>
           <th>Received</th>
-          <th class="r">Rows</th>
+          <th class="r">Stay dates</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        {#each STATUS as s (s.property.id)}
+        {#each ingestRows as s (s.property.id)}
           <tr>
             <td><span class="dot" style="background:{s.property.color}"></span>{s.property.name}</td>
-            <td>{DATA_SOURCE}</td>
-            <td>{s.lastImport}</td>
-            <td class="r">{fmtInt(s.rows)}</td>
-            <td><span class="tag opportunity">OK</span></td>
+            <td>{s.source}</td>
+            <td title={s.freshness?.reason || ''}>{formatReceived(s.received)}</td>
+            <td class="r">{fmtInt(s.stayDates)}</td>
+            <td>
+              {#if ingestStatus?.status === 'ready'}
+                <span class="tag opportunity">Accepted</span>
+              {:else}
+                <span class="tag watch">Partial</span>
+              {/if}
+            </td>
+          </tr>
+        {:else}
+          <tr>
+            <td colspan="5" class="empty-status">
+              {#if $activeDashboard.status === 'loading'}
+                Loading the latest completed hotel result…
+              {:else}
+                No completed hotel result is selected yet. Upload data to create one.
+              {/if}
+            </td>
           </tr>
         {/each}
       </tbody>
     </table>
+    {#if ingestStatus}
+      <div class="ingest-summary">
+        <span><b>{fmtInt(ingestStatus.accepted_rows)}</b> source rows accepted</span>
+        <span><b>{fmtInt(ingestStatus.rejected_rows)}</b> rejected</span>
+        {#if ingestStatus.missing_feeds?.length}
+          <span>Missing feeds: {ingestStatus.missing_feeds.join(', ')}</span>
+        {/if}
+        {#if ingestStatus.optional_missing_feeds?.length}
+          <span>Optional feeds not uploaded: {ingestStatus.optional_missing_feeds.join(', ')}</span>
+        {/if}
+        {#if ingestWarnings.length}
+          <details>
+            <summary>{ingestWarnings.length} data note{ingestWarnings.length === 1 ? '' : 's'}</summary>
+            <ul>
+              {#each ingestWarnings as warning}<li>{warning}</li>{/each}
+            </ul>
+          </details>
+        {/if}
+      </div>
+    {/if}
   </section>
 
   <section class="grid">
@@ -571,11 +633,12 @@
               <b>Forecast project is ready</b>
             </p>
             <p class="hint job-meta">
-              Open the project tab on the right to view the report and structured result.
+              Review the generated narrative and evidence assessment, or use this completed job in the dashboard.
             </p>
             <div class="actions">
               {#if selectedProject}
                 <button class="primary" on:click={() => openProject(selectedProject)}>Open report</button>
+                <button class="ghost dashboard-action" on:click={() => useInDashboard(selectedProject)}>Use in dashboard</button>
               {/if}
               <button class="ghost" on:click={reset}>Upload another file</button>
             </div>
@@ -691,6 +754,30 @@
     height: 8px;
     border-radius: 50%;
     margin-right: 7px;
+  }
+  .empty-status {
+    padding: 18px 16px;
+    color: var(--ink-3);
+    text-align: center;
+  }
+  .ingest-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding: 9px 16px 13px;
+    border-top: 1px solid var(--hairline);
+    color: var(--ink-3);
+    font-size: 11.5px;
+  }
+  .ingest-summary details {
+    flex-basis: 100%;
+  }
+  .ingest-summary summary {
+    cursor: pointer;
+  }
+  .ingest-summary ul {
+    margin: 6px 0 0;
+    padding-left: 18px;
   }
   .linkish {
     background: none;
