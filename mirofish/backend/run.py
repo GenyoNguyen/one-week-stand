@@ -37,7 +37,10 @@ def main():
     app = create_app()
     
     # 获取运行配置
-    host = os.environ.get('FLASK_HOST', '0.0.0.0')
+    # Forecast endpoints are intentionally unauthenticated for this local app.
+    # Keep the default listener on loopback; deployments can opt into another
+    # bind address and put authentication at their reverse proxy.
+    host = os.environ.get('FLASK_HOST', '127.0.0.1')
     port = int(os.environ.get('FLASK_PORT', 5001))
     debug = Config.DEBUG
     use_reloader = os.environ.get(

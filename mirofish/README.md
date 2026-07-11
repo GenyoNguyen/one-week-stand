@@ -217,17 +217,14 @@ The forecast service runs the complete pipeline without frontend step orchestrat
 
 `upload -> ontology -> graph -> agent preparation -> simulation -> MCP source verification -> structured table -> final report`
 
-Configure a service API key before starting the backend:
-
-```env
-FORECAST_API_KEY=replace-with-a-long-random-secret
-```
+The development forecast API is intended for localhost use and does not require
+a separate application key. It binds to loopback by default. Add authentication
+at a reverse proxy before exposing these endpoints to a network.
 
 Submit a forecast using `multipart/form-data`:
 
 ```bash
 curl -X POST http://localhost:5001/api/forecast \
-  -H "X-API-Key: $FORECAST_API_KEY" \
   -F "files=@./evidence.pdf" \
   -F "simulation_requirement=Forecast likely outcomes and risks" \
   -F "max_rounds=20" \
@@ -242,23 +239,20 @@ as supporting inputs.
 The endpoint returns HTTP `202` with a `job_id`, `status_url`, and `result_url`. Poll status:
 
 ```bash
-curl http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx \
-  -H "X-API-Key: $FORECAST_API_KEY"
+curl http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx
 ```
 
 Fetch the completed report:
 
 ```bash
-curl http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx/result \
-  -H "X-API-Key: $FORECAST_API_KEY"
+curl http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx/result
 ```
 
 If a graph-processing job fails with `resumable: true`, continue the same job
 and graph instead of submitting the files again:
 
 ```bash
-curl -X POST http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx/resume \
-  -H "X-API-Key: $FORECAST_API_KEY"
+curl -X POST http://localhost:5001/api/forecast/forecast_xxxxxxxxxxxx/resume
 ```
 
 Final response fields useful to another frontend:

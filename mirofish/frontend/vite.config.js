@@ -12,6 +12,7 @@ export default defineConfig({
     }
   },
   server: {
+    host: process.env.MIROFISH_UI_HOST || '127.0.0.1',
     port: 3000,
     open: true,
     proxy: {

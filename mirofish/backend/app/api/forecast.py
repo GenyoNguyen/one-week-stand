@@ -1,8 +1,6 @@
 """Backend-only API for the complete forecasting pipeline."""
 
 import os
-import hmac
-from functools import wraps
 from typing import Any
 
 from flask import jsonify, request, url_for
@@ -72,23 +70,6 @@ def _as_bool(value: Any, default: bool) -> bool:
     raise ValueError("Boolean values must be one of: true, false, 1, 0, yes, no, on, off")
 
 
-def _require_api_key(handler):
-    @wraps(handler)
-    def wrapped(*args, **kwargs):
-        if not Config.FORECAST_API_KEY:
-            return jsonify({
-                "success": False,
-                "error": "Forecast service is disabled until FORECAST_API_KEY is configured",
-            }), 503
-        authorization = request.headers.get("Authorization", "")
-        bearer = authorization[7:] if authorization.lower().startswith("bearer ") else ""
-        provided = request.headers.get("X-API-Key") or bearer
-        if not provided or not hmac.compare_digest(provided, Config.FORECAST_API_KEY):
-            return jsonify({"success": False, "error": "Unauthorized"}), 401
-        return handler(*args, **kwargs)
-    return wrapped
-
-
 def _as_int(
     value: Any,
     default: int,
@@ -117,7 +98,6 @@ def _public_response(job) -> dict[str, Any]:
 
 
 @forecast_bp.route("", methods=["POST"])
-@_require_api_key
 def create_forecast():
     """Upload source files and start the complete asynchronous forecast pipeline."""
     project = None
@@ -169,6 +149,18 @@ def create_forecast():
             request.form.get("report_prompt", "").strip()
             or Config.FORECAST_DEFAULT_REPORT_PROMPT
         )
+        requested_locale = request.form.get("output_locale", "").strip().lower()
+        if requested_locale and requested_locale not in {"en", "zh"}:
+            return jsonify({
+                "success": False,
+                "error": "output_locale must be either en or zh",
+            }), 400
+        if requested_locale:
+            output_locale = requested_locale
+        elif data_profile == "hotel":
+            output_locale = "en"
+        else:
+            output_locale = request.accept_languages.best_match(["en", "zh"]) or "zh"
 
         enable_twitter = _as_bool(request.form.get("enable_twitter"), True)
         enable_reddit = _as_bool(request.form.get("enable_reddit"), True)
@@ -193,6 +185,7 @@ def create_forecast():
 
         options = {
             "data_profile": data_profile,
+            "output_locale": output_locale,
             "simulation_requirement": simulation_requirement,
             "report_prompt": report_prompt,
             "additional_context": request.form.get("additional_context", "").strip(),
@@ -263,17 +256,21 @@ def create_forecast():
 
 
 @forecast_bp.route("/latest", methods=["GET"])
-@_require_api_key
 def get_latest_forecast():
     """Return the most recent completed forecast so its report survives a page reload."""
-    job = ForecastService.get_latest_completed_job()
+    data_profile = request.args.get("data_profile", "").strip().lower() or None
+    if data_profile not in {None, "generic", "hotel"}:
+        return jsonify({
+            "success": False,
+            "error": "data_profile must be either generic or hotel",
+        }), 400
+    job = ForecastService.get_latest_completed_job(data_profile=data_profile)
     if not job:
         return jsonify({"success": False, "error": "No completed forecast found"}), 404
     return jsonify({"success": True, "data": _public_response(job)})
 
 
 @forecast_bp.route("/<job_id>", methods=["GET"])
-@_require_api_key
 def get_forecast(job_id: str):
     ForecastService.recover_interrupted_jobs()
     try:
@@ -286,7 +283,6 @@ def get_forecast(job_id: str):
 
 
 @forecast_bp.route("/<job_id>/resume", methods=["POST"])
-@_require_api_key
 def resume_forecast(job_id: str):
     """Resume a checkpointed graph wait without creating a duplicate graph."""
     ForecastService.recover_interrupted_jobs()
@@ -311,7 +307,6 @@ def resume_forecast(job_id: str):
 
 
 @forecast_bp.route("/<job_id>/result", methods=["GET"])
-@_require_api_key
 def get_forecast_result(job_id: str):
     ForecastService.recover_interrupted_jobs()
     try:
