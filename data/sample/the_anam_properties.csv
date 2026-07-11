@@ -1,0 +1,4 @@
+property,city,province,country,property_type,room_count,currency,timezone
+The Anam 1,Cam Ranh,Khanh Hoa,Vietnam,Coastal Resort,120,VND,Asia/Ho_Chi_Minh
+The Anam 2,Mui Ne,Binh Thuan,Vietnam,Beach Resort,85,VND,Asia/Ho_Chi_Minh
+The Anam 3,Ho Chi Minh City,Ho Chi Minh City,Vietnam,TBD,64,VND,Asia/Ho_Chi_Minh
