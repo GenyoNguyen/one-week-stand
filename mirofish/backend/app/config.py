@@ -7,14 +7,20 @@ import os
 import shlex
 from dotenv import load_dotenv
 
-# 加载项目根目录的 .env 文件
-# 路径: MiroFish/.env (相对于 backend/app/config.py)
-project_root_env = os.path.join(os.path.dirname(__file__), '../../.env')
+# 优先加载 MiroFish 自己的 .env；作为子目录运行时，回退到仓库根目录。
+mirofish_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+env_file = os.environ.get('MIROFISH_ENV_FILE')
+if not env_file:
+    env_candidates = (
+        os.path.join(mirofish_root, '.env'),
+        os.path.join(os.path.dirname(mirofish_root), '.env'),
+    )
+    env_file = next((path for path in env_candidates if os.path.isfile(path)), None)
 
-if os.path.exists(project_root_env):
-    load_dotenv(project_root_env, override=True)
+if env_file:
+    load_dotenv(env_file, override=True)
 else:
-    # 如果根目录没有 .env，尝试加载环境变量（用于生产环境）
+    # 没有配置文件时使用进程环境（用于生产环境）
     load_dotenv(override=True)
 
 

@@ -99,7 +99,7 @@ Click the image to watch MiroFish's deep prediction of the lost ending based on 
 
 | Tool | Version | Description | Check Installation |
 |------|---------|-------------|-------------------|
-| **Node.js** | 18+ | Frontend runtime, includes npm | `node -v` |
+| **Node.js** | 20.19+ or 22.12+ | Frontend runtime, includes npm | `node -v` |
 | **Python** | ≥3.11, ≤3.12 | Backend runtime | `python --version` |
 | **uv** | Latest | Python package manager | `uv --version` |
 
@@ -111,6 +111,10 @@ cp .env.example .env
 
 # Edit the .env file and fill in the required API keys
 ```
+
+The project-level `../run.sh` uses the parent repository's `.env`. Set
+`MIROFISH_ENV_FILE` to use another location explicitly. When the backend is
+started directly, a local `mirofish/.env` takes precedence over the parent.
 
 **Required Environment Variables:**
 
@@ -147,9 +151,13 @@ npm run setup:backend
 #### 3. Start Services
 
 ```bash
-# Start both frontend and backend (run from project root)
-npm run dev
+# Install missing dependencies and start both services with hot reload
+../run.sh
 ```
+
+Every normal launch stops the previous managed instance first. Use
+`../run.sh --setup-only` to install dependencies without starting services,
+`../run.sh --skip-install` for a quick restart, or `../run.sh --stop` to stop it.
 
 **Service URLs:**
 - Frontend: `http://localhost:3000`
@@ -168,7 +176,7 @@ npm run frontend  # Start frontend only
 # 1. Configure environment variables (same as source deployment)
 cp .env.example .env
 
-# 2. Pull image and start
+# 2. Build the local image and start
 docker compose up -d
 ```
 
