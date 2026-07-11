@@ -409,16 +409,17 @@
     gap: 8px;
   }
   button.primary {
-    background: var(--accent);
+    background: var(--primary);
     color: #fff;
     border: none;
     border-radius: var(--radius);
     padding: 6px 16px;
     font-size: 12.5px;
     font-weight: 600;
+    box-shadow: var(--shadow-card);
   }
   button.primary:hover {
-    background: var(--accent-ink);
+    background: var(--primary-hover);
   }
   button.ghost {
     background: none;

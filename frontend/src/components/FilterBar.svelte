@@ -52,7 +52,7 @@
     justify-content: space-between;
     gap: 16px;
     padding: 10px 28px;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    background: color-mix(in srgb, var(--panel) 92%, transparent);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--hairline);
   }
@@ -70,29 +70,31 @@
     border: 1px solid var(--hairline-strong);
     border-radius: var(--radius);
     padding: 5px 8px;
+    box-shadow: var(--shadow-card);
   }
+  /* shadcn-style segmented control: muted track, raised active thumb */
   .pills {
     display: inline-flex;
-    border: 1px solid var(--hairline-strong);
+    gap: 2px;
+    border: 1px solid var(--hairline);
     border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--panel);
+    padding: 2px;
+    background: var(--panel-tint);
   }
   .pills button {
     border: none;
     background: none;
-    padding: 5px 11px;
+    border-radius: calc(var(--radius) - 2px);
+    padding: 4px 11px;
     font-size: 12.5px;
     font-weight: 500;
     color: var(--ink-2);
   }
-  .pills button + button {
-    border-left: 1px solid var(--hairline);
-  }
   .pills button.active {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
+    background: var(--panel);
+    color: var(--gold-ink);
     font-weight: 600;
+    box-shadow: var(--shadow-card);
   }
   .fresh {
     font-size: 11.5px;

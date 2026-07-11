@@ -212,15 +212,17 @@
   }
   .tabs {
     display: inline-flex;
-    border: 1px solid var(--hairline-strong);
+    gap: 2px;
+    border: 1px solid var(--hairline);
     border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--panel);
+    padding: 2px;
+    background: var(--panel-tint);
   }
   .tabs button {
     border: none;
     background: none;
-    padding: 6px 14px;
+    border-radius: calc(var(--radius) - 2px);
+    padding: 5px 14px;
     font-size: 12.5px;
     font-weight: 500;
     color: var(--ink-2);
@@ -228,13 +230,11 @@
     align-items: center;
     gap: 6px;
   }
-  .tabs button + button {
-    border-left: 1px solid var(--hairline);
-  }
   .tabs button.active {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
+    background: var(--panel);
+    color: var(--gold-ink);
     font-weight: 600;
+    box-shadow: var(--shadow-card);
   }
   .dot {
     width: 7px;

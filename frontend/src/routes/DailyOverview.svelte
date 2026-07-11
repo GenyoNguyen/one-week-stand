@@ -1,5 +1,6 @@
 <script>
   import KpiCard from '../components/KpiCard.svelte';
+  import AnamLogo from '../components/AnamLogo.svelte';
   import ForecastChart from '../components/ForecastChart.svelte';
   import PropertyTable from '../components/PropertyTable.svelte';
   import RecommendationPanel from '../components/RecommendationPanel.svelte';
@@ -125,6 +126,9 @@
   {:else}
     <section class="hero-band">
       <div class="hero panel">
+        <div class="hero-mark" aria-hidden="true">
+          <AnamLogo size={104} color="#c99a3c" opacity={0.16} />
+        </div>
         <div class="kicker">RevPAR tonight</div>
         <div class="hero-num num">{fmtMoneyFull(today.revpar)}</div>
         <div class="hero-deltas">
@@ -248,6 +252,14 @@
     background: var(--sidebar);
     border-color: var(--sidebar);
     color: var(--sidebar-ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-mark {
+    position: absolute;
+    right: -14px;
+    bottom: -26px;
+    pointer-events: none;
   }
   .hero .kicker {
     color: var(--sidebar-muted);

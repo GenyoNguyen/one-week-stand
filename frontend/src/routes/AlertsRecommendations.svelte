@@ -161,26 +161,26 @@
   }
   .chips {
     display: inline-flex;
-    border: 1px solid var(--hairline-strong);
+    gap: 2px;
+    border: 1px solid var(--hairline);
     border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--panel);
+    padding: 2px;
+    background: var(--panel-tint);
   }
   .chips button {
     border: none;
     background: none;
-    padding: 6px 12px;
+    border-radius: calc(var(--radius) - 2px);
+    padding: 5px 12px;
     font-size: 12.5px;
     font-weight: 500;
     color: var(--ink-2);
   }
-  .chips button + button {
-    border-left: 1px solid var(--hairline);
-  }
   .chips button.active {
-    background: var(--accent-soft);
-    color: var(--accent-ink);
+    background: var(--panel);
+    color: var(--gold-ink);
     font-weight: 600;
+    box-shadow: var(--shadow-card);
   }
   .count {
     color: var(--ink-3);

@@ -186,7 +186,7 @@ Ghi chú: các file docs trên đã có sẵn (rỗng) trong `docs/` — đều 
 ## 8. Checklist "không trông như AI code" (soát trước khi nộp)
 
 - [ ] Không Inter/Roboto/system font; Fraunces + IBM Plex Sans load đúng (kể cả tiếng Việt có dấu)
-- [ ] Không gradient tím; không shadow mặc định; bo góc ≤4px
+- [ ] Không gradient tím; shadow chỉ ở mức whisper (0 1px 2px); bo góc 8px card / 6px control (quyết định owner 11/07: hướng shadcn-admin + brand The Anam — logo sunburst thật, wordmark Cinzel, gold/charcoal cho điều hướng, teal giữ cho dữ liệu)
 - [ ] Không emoji ở bất kỳ đâu trong UI; icon 1 bộ duy nhất (Lucide, stroke 1.5px)
 - [ ] Không card grid đều nhau — layout có hierarchy 2/3–1/3
 - [ ] Mọi con số: tabular, căn phải, có đơn vị, có ngữ cảnh so sánh (vs budget/LY/OTB)
