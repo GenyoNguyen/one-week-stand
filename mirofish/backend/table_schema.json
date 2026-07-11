@@ -1,0 +1,37 @@
+{
+  "title": "Evidence Assessment",
+  "allow_extra_columns": false,
+  "columns": [
+    {
+      "key": "claim",
+      "label": "Claim",
+      "type": "string",
+      "required": true
+    },
+    {
+      "key": "evidence",
+      "label": "Evidence",
+      "type": "string",
+      "required": true
+    },
+    {
+      "key": "assessment",
+      "label": "Assessment",
+      "type": "string",
+      "required": true,
+      "enum": [
+        "consistent",
+        "inconsistent",
+        "needs_verification"
+      ]
+    },
+    {
+      "key": "confidence",
+      "label": "Confidence",
+      "type": "number",
+      "required": true,
+      "minimum": 0,
+      "maximum": 1
+    }
+  ]
+}
