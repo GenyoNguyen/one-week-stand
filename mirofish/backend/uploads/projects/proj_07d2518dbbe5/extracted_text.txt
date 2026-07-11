@@ -1,0 +1,71 @@
+
+
+=== CV_PhanThuyPhuong.pdf ===
+Phan Thuy Phuong
+Ho Chi Minh City
+ph2o.phuong@gmail.com • +84 947 239 117
+linkedin.com/in/aquamarine3236 • github.com/aquamarine3236
+Portfolio Website
+EDUCATION
+University of Information Technology
+Ho Chi Minh City, Vietnam
+Major in Artificial Intelligence; GPA: 8.2/10
+2023 - 2026 (Expected)
+• Relevant Coursework: Natural Language Processing, Machine Learning, Deep Learning, Software Engineering
+• Certificates:
+– NVIDIA: Applications of AI for Anomaly Detection
+– AWS Certified AI Practitioner
+– AWS Cloud Practitioner Essentials
+– Fundamentals of Generative AI
+– Essentials of Prompt Engineering
+EXPERIENCE
+TISOHA Software Solutions
+Ho Chi Minh City, Vietnam
+Software Engineer Internship
+September 2025 – November 2025
+• Assisted in the development of software solutions using .NET.
+• Collaborated with the engineering team to research about Medusa.
+AU-AVAGO CO., LTD
+Ho Chi Minh City, Vietnam
+Python Development Internship
+December 2025 – January 2026
+• Developed an automated tool to crawl data, establish connections, and send messages on LinkedIn.
+• Developed an automated tool to crawl data, establish connections, and send messages on X/Twitter.
+TPS Thanh Phong
+Ho Chi Minh City, Vietnam
+IT Internship
+January 2026 – March 2026
+• Leveraged AI-powered tools to automate routine office tasks, increasing efficiency and reducing manual workload
+• Supported training on the application of AI for the People’s Committee of Binh Hung Commune.
+PROJECTS
+Text Analysis Tool
+View on GitHub
+Django, ReactJS
+• Developed a multilingual text analysis platform supporting English and Vietnamese with summarization and
+sentiment classification.
+• Implemented file handling features supporting .doc and .pdf uploads for flexible user input.
+TiepLM AI Assistant
+View on GitHub
+RAG, FastAPI, Qdrant, React
+• Engineered a generic ”NotebookLM-like” assistant for Deep Learning video courses, featuring hierarchical text
+summarization, Q&A with inline citations, and automated quiz generation.
+• Implemented a Retrieval-Augmented Generation (RAG) pipeline using hybrid search (Vector + BM25) and
+cross-encoder reranking to ensure high-accuracy context retrieval.
+• Designed a modular monolith backend using FastAPI and PostgreSQL with a standalone ingestion pipeline to handle
+vector embeddings in Qdrant.
+Attendance Tracking System
+View on GitHub
+Node.js (Express, Socket.IO), Firebase Firestore, Redis, Flutter
+• Built a full-stack attendance system with QR and direct check-in/out, featuring real-time updates via Socket.IO.
+• Implemented secure Wi-Fi and GPS validation with a Flutter mobile scanner and admin dashboard.
+
+TECH STACKS
+Programming: Python, .NET, SQL, JavaScript, HTML, CSS
+Frameworks: FastAPI, Django, Angular, Flask, Bootstrap, ReactJS, Flutter
+Tools: Git, Docker, Qdrant, Redis
+AI/ML: Scikit-learn, PyTorch
+Cloud: AWS
+Soft Skills: Debugging, Researching, Communicating, Collaborating
+LANGUAGE
+Vietnamese: Native
+English: IELTS 7.5 (2025)

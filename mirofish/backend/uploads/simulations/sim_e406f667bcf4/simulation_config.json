@@ -1,0 +1,320 @@
+{
+  "simulation_id": "sim_e406f667bcf4",
+  "project_id": "proj_d0cb8857453b",
+  "graph_id": "mirofish_b85a541c0ed2417a",
+  "simulation_requirement": "\r\nCheck this CV for me and look for the inconsistents in the CV that might be caused by the applicant's unfaithfullness when making this CV",
+  "time_config": {
+    "total_simulation_hours": 96,
+    "minutes_per_round": 60,
+    "agents_per_hour_min": 2,
+    "agents_per_hour_max": 6,
+    "peak_hours": [
+      20,
+      21,
+      22
+    ],
+    "peak_activity_multiplier": 1.5,
+    "off_peak_hours": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "off_peak_activity_multiplier": 0.05,
+    "morning_hours": [
+      6,
+      7,
+      8
+    ],
+    "morning_activity_multiplier": 0.4,
+    "work_hours": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "work_activity_multiplier": 0.7
+  },
+  "agent_configs": [
+    {
+      "agent_id": 0,
+      "entity_uuid": "f6a3c35f-c1fc-4171-9376-be523ee66039",
+      "entity_name": "University of Information Technology",
+      "entity_type": "University",
+      "activity_level": 0.2,
+      "posts_per_hour": 0.2,
+      "comments_per_hour": 0.3,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "response_delay_min": 60,
+      "response_delay_max": 240,
+      "sentiment_bias": 0.0,
+      "stance": "observer",
+      "influence_weight": 2.8
+    },
+    {
+      "agent_id": 1,
+      "entity_uuid": "f09a0b89-20af-4311-9c31-3a6bd9613dce",
+      "entity_name": "Phan Thuy Phuong",
+      "entity_type": "Person",
+      "activity_level": 0.8,
+      "posts_per_hour": 1.6,
+      "comments_per_hour": 2.4,
+      "active_hours": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 1,
+      "response_delay_max": 15,
+      "sentiment_bias": -0.2,
+      "stance": "neutral",
+      "influence_weight": 1.0
+    },
+    {
+      "agent_id": 2,
+      "entity_uuid": "eb5e7837-812c-48ef-96f4-45ade3fa3281",
+      "entity_name": "TISOHA Software Solutions",
+      "entity_type": "Company",
+      "activity_level": 0.35,
+      "posts_per_hour": 0.5,
+      "comments_per_hour": 0.8,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "response_delay_min": 10,
+      "response_delay_max": 45,
+      "sentiment_bias": 0.1,
+      "stance": "observer",
+      "influence_weight": 1.4
+    },
+    {
+      "agent_id": 3,
+      "entity_uuid": "7f4b738a-dcba-44b7-936c-487080335693",
+      "entity_name": "TPS Thanh Phong",
+      "entity_type": "Organization",
+      "activity_level": 0.18,
+      "posts_per_hour": 0.2,
+      "comments_per_hour": 0.4,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "response_delay_min": 60,
+      "response_delay_max": 180,
+      "sentiment_bias": 0.0,
+      "stance": "observer",
+      "influence_weight": 1.8
+    },
+    {
+      "agent_id": 4,
+      "entity_uuid": "685b00a2-9e72-434f-9e96-9ffd1197dc4d",
+      "entity_name": "People's Committee of Binh Hung Commune",
+      "entity_type": "Organization",
+      "activity_level": 0.15,
+      "posts_per_hour": 0.1,
+      "comments_per_hour": 0.2,
+      "active_hours": [
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "response_delay_min": 90,
+      "response_delay_max": 240,
+      "sentiment_bias": 0.05,
+      "stance": "supportive",
+      "influence_weight": 2.6
+    },
+    {
+      "agent_id": 5,
+      "entity_uuid": "5287451e-799f-4819-89aa-77c18d7ec596",
+      "entity_name": "AU-AVAGO CO., LTD",
+      "entity_type": "Company",
+      "activity_level": 0.3,
+      "posts_per_hour": 0.4,
+      "comments_per_hour": 0.7,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "response_delay_min": 15,
+      "response_delay_max": 60,
+      "sentiment_bias": 0.1,
+      "stance": "observer",
+      "influence_weight": 1.5
+    },
+    {
+      "agent_id": 6,
+      "entity_uuid": "12ef6b4e-6788-45ba-aff2-1adbff81d501",
+      "entity_name": "NVIDIA",
+      "entity_type": "Organization",
+      "activity_level": 0.25,
+      "posts_per_hour": 0.3,
+      "comments_per_hour": 0.5,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "response_delay_min": 5,
+      "response_delay_max": 30,
+      "sentiment_bias": 0.15,
+      "stance": "supportive",
+      "influence_weight": 2.3
+    },
+    {
+      "agent_id": 7,
+      "entity_uuid": "04d69c08-cab8-4bba-9b88-ea708f7614f1",
+      "entity_name": "GitHub",
+      "entity_type": "Company",
+      "activity_level": 0.55,
+      "posts_per_hour": 0.8,
+      "comments_per_hour": 1.2,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "response_delay_min": 5,
+      "response_delay_max": 25,
+      "sentiment_bias": 0.0,
+      "stance": "observer",
+      "influence_weight": 2.0
+    }
+  ],
+  "event_config": {
+    "initial_posts": [
+      {
+        "content": "I reviewed this CV and found a few points that look inconsistent. The internship timeline needs closer inspection, especially whether the dates overlap in a way that is realistic for a student. The claimed responsibilities also seem unusually broad for the stated roles.",
+        "poster_type": "Person",
+        "poster_agent_id": 1
+      },
+      {
+        "content": "From an academic perspective, the education section is clear, but the CV should be checked for date alignment across education, internships, and projects. If the applicant submitted this for evaluation, the chronology should be verified carefully.",
+        "poster_type": "University",
+        "poster_agent_id": 0
+      },
+      {
+        "content": "This CV includes multiple technical skills, projects, and certifications, but some entries may require evidence. In particular, the project descriptions and internship tasks should be supported by concrete links, repositories, or references to avoid appearing overstated.",
+        "poster_type": "Company",
+        "poster_agent_id": 2
+      },
+      {
+        "content": "The listed experience at TPS Thanh Phong and the AI training activity may be legitimate, but the wording is broad and could be interpreted as embellished. A fact-check would help determine whether the applicant accurately described their involvement.",
+        "poster_type": "Organization",
+        "poster_agent_id": 3
+      },
+      {
+        "content": "The GitHub portfolio and project section should be checked against the claims in the CV. If the repositories do not match the described work, that would be a major credibility issue.",
+        "poster_type": "Company",
+        "poster_agent_id": 5
+      }
+    ],
+    "scheduled_events": [],
+    "hot_topics": [
+      "CV inconsistency",
+      "timeline mismatch",
+      "internship chronology",
+      "credential credibility",
+      "project authenticity",
+      "LinkedIn automation",
+      "AI certifications",
+      "academic background"
+    ],
+    "narrative_direction": "Public discussion is likely to focus on whether the CV contains suspicious inconsistencies in dates, internships, and claimed achievements, with attention shifting from simple proofreading issues to possible fabrication or exaggeration. The conversation may split into two directions: one side arguing the mismatches could be harmless formatting or documentation errors, and the other side questioning the applicant's honesty and overall credibility. As more details are examined, scrutiny may intensify around overlapping experience dates, the realism of the listed projects, and whether the certifications and responsibilities are presented in a trustworthy way."
+  },
+  "twitter_config": {
+    "platform": "twitter",
+    "recency_weight": 0.4,
+    "popularity_weight": 0.3,
+    "relevance_weight": 0.3,
+    "viral_threshold": 10,
+    "echo_chamber_strength": 0.5
+  },
+  "reddit_config": {
+    "platform": "reddit",
+    "recency_weight": 0.3,
+    "popularity_weight": 0.4,
+    "relevance_weight": 0.3,
+    "viral_threshold": 15,
+    "echo_chamber_strength": 0.6
+  },
+  "llm_model": "gpt-5.4-mini-2026-03-17",
+  "llm_base_url": "https://api.openai.com/v1/",
+  "generated_at": "2026-07-11T16:20:44.332728",
+  "generation_reasoning": "Time Config: This is a CV inconsistency-checking scenario, so the likely participants are recruiters, HR staff, and job-seeking professionals in a Vietnam/UTC+8-like routine. Such users are most active after work in the evening, when people review documents and discuss career content. Activity should remain moderate during work hours, with a smaller morning ramp-up and very low engagement after midnight. A 96-hour window is long enough to simulate a sustained review conversation without making it feel like a viral public event. The agent range is kept moderate because this is a focused professional topic rather than a mass-public discussion. | Event Config: The CV contains several elements that could trigger suspicion, especially the sequence of internships in 2025-2026, the breadth of technical claims, and the need for proof for projects and certifications. The generated posts are designed to simulate a verification-oriented discussion without assuming fraud outright, while using only the allowed entity types for poster_type. | Agent Config: 8 generated | Post Assignment: 5 posts assigned"
+}
