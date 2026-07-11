@@ -336,7 +336,7 @@ function guestsStaying(property, date, bookingsStaying) {
   );
 }
 
-function staffingStatus(property, date, flow) {
+function staffingAssessment(property, date, flow) {
   const dayOfWeek = parseDate(date).getUTCDay();
   const weekendPressure = dayOfWeek === 5 || dayOfWeek === 6 ? 1.4 : 0;
   const guestTurnover = flow.guests_checking_in + flow.guests_checking_out;
@@ -349,10 +349,11 @@ function staffingStatus(property, date, flow) {
     + weekendPressure;
   const labelNoise = (seededUnit("staffing-label-noise", property.code, date) - 0.5) * 0.12;
   const staffingPressure = nonlinearWorkload / property.staffingCapacity + labelNoise;
+  const riskIndex = clamp(Math.round(50 + (staffingPressure - 1) * 210), 0, 100);
 
-  if (staffingPressure > 1.08) return "Under-deployed";
-  if (staffingPressure < 0.88) return "Over-deployed";
-  return "Right amount";
+  if (riskIndex >= 67) return { riskIndex, status: "Under-deployed" };
+  if (riskIndex <= 25) return { riskIndex, status: "Over-deployed" };
+  return { riskIndex, status: "Right amount" };
 }
 
 function buildGuestFlowRows() {
@@ -404,7 +405,9 @@ function buildGuestFlowRows() {
         guests_staying: currentGuests,
         guests_checking_out: guestsCheckingOut,
       };
-      flow.staffing_status = staffingStatus(property, date, flow);
+      const assessment = staffingAssessment(property, date, flow);
+      flow.staffing_risk_index = assessment.riskIndex;
+      flow.staffing_status = assessment.status;
       rows.push(flow);
     }
   }
@@ -547,6 +550,28 @@ function escapeCsv(value) {
   return /[",\r\n]/.test(text) ? '"' + text.replaceAll('"', '""') + '"' : text;
 }
 
+function escapeMarkdown(value) {
+  return String(value).replaceAll("|", "\\|").replaceAll("\r", " ").replaceAll("\n", " ");
+}
+
+function writeMarkdownFile(fileName, title, headers, rows) {
+  const lines = [
+    "# " + title,
+    "",
+    "Synthetic sample data.",
+    "",
+    "| " + headers.join(" | ") + " |",
+    "| " + headers.map(() => "---").join(" | ") + " |",
+    ...rows.map(
+      (row) => "| " + headers.map((header) => escapeMarkdown(row[header])).join(" | ") + " |",
+    ),
+  ];
+  const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
+  const outputPath = path.resolve(scriptDirectory, "..", "data", fileName);
+  fs.writeFileSync(outputPath, lines.join("\n") + "\n", "utf8");
+  console.log("Generated " + rows.length.toLocaleString() + " rows in " + outputPath);
+}
+
 function writeCsv(rows) {
   const lines = [
     HEADERS.join(","),
@@ -562,6 +587,12 @@ function writeCsv(rows) {
   );
   fs.writeFileSync(outputPath, lines.join("\n") + "\n", "utf8");
   console.log("Generated " + rows.length.toLocaleString() + " rows in " + outputPath);
+  writeMarkdownFile(
+    "the_anam_daily_reservation_performance.md",
+    "The Anam Daily Reservation Performance",
+    HEADERS,
+    rows,
+  );
 }
 
 function writePropertyCsv() {
@@ -593,6 +624,7 @@ function writePropertyCsv() {
   const outputPath = path.resolve(scriptDirectory, "..", "data", "sample", "the_anam_properties.csv");
   fs.writeFileSync(outputPath, lines.join("\n") + "\n", "utf8");
   console.log("Generated " + rows.length + " rows in " + outputPath);
+  writeMarkdownFile("the_anam_properties.md", "The Anam Properties", headers, rows);
 }
 
 function writeRoomCsv() {
@@ -639,6 +671,7 @@ function writeRoomCsv() {
   const outputPath = path.resolve(scriptDirectory, "..", "data", "sample", "the_anam_rooms.csv");
   fs.writeFileSync(outputPath, lines.join("\n") + "\n", "utf8");
   console.log("Generated " + rows.length + " rows in " + outputPath);
+  writeMarkdownFile("the_anam_rooms.md", "The Anam Rooms", headers, rows);
 }
 
 function writeGuestFlowCsv(rows) {
@@ -651,6 +684,7 @@ function writeGuestFlowCsv(rows) {
     "guests_checking_in",
     "guests_staying",
     "guests_checking_out",
+    "staffing_risk_index",
     "staffing_status",
   ];
   const lines = [
@@ -667,6 +701,12 @@ function writeGuestFlowCsv(rows) {
   );
   fs.writeFileSync(outputPath, lines.join("\n") + "\n", "utf8");
   console.log("Generated " + rows.length.toLocaleString() + " rows in " + outputPath);
+  writeMarkdownFile(
+    "the_anam_daily_guest_flow.md",
+    "The Anam Daily Guest Flow",
+    headers,
+    rows,
+  );
 }
 
 writeCsv(injectStories(buildRows()));

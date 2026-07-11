@@ -1,0 +1,24 @@
+{
+  "simulation_id": "sim_e406f667bcf4",
+  "project_id": "proj_d0cb8857453b",
+  "graph_id": "mirofish_b85a541c0ed2417a",
+  "enable_twitter": true,
+  "enable_reddit": true,
+  "status": "running",
+  "entities_count": 8,
+  "profiles_count": 8,
+  "entity_types": [
+    "Person",
+    "Organization",
+    "Company",
+    "University"
+  ],
+  "config_generated": true,
+  "config_reasoning": "Time Config: This is a CV inconsistency-checking scenario, so the likely participants are recruiters, HR staff, and job-seeking professionals in a Vietnam/UTC+8-like routine. Such users are most active after work in the evening, when people review documents and discuss career content. Activity should remain moderate during work hours, with a smaller morning ramp-up and very low engagement after midnight. A 96-hour window is long enough to simulate a sustained review conversation without making it feel like a viral public event. The agent range is kept moderate because this is a focused professional topic rather than a mass-public discussion. | Event Config: The CV contains several elements that could trigger suspicion, especially the sequence of internships in 2025-2026, the breadth of technical claims, and the need for proof for projects and certifications. The generated posts are designed to simulate a verification-oriented discussion without assuming fraud outright, while using only the allowed entity types for poster_type. | Agent Config: 8 generated | Post Assignment: 5 posts assigned",
+  "current_round": 0,
+  "twitter_status": "not_started",
+  "reddit_status": "not_started",
+  "created_at": "2026-07-11T16:20:12.713075",
+  "updated_at": "2026-07-11T16:44:52.211063",
+  "error": null
+}

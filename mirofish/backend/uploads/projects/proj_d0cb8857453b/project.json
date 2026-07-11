@@ -1,0 +1,414 @@
+{
+  "project_id": "proj_d0cb8857453b",
+  "name": "Unnamed Project",
+  "status": "graph_completed",
+  "created_at": "2026-07-11T16:17:40.739343",
+  "updated_at": "2026-07-11T16:19:09.407883",
+  "files": [
+    {
+      "filename": "CV_PhanThuyPhuong.pdf",
+      "size": 75188
+    }
+  ],
+  "total_text_length": 2979,
+  "ontology": {
+    "entity_types": [
+      {
+        "name": "JobApplicant",
+        "description": "An individual seeking employment or internships, distinct from generic Person.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Applicant's full legal or preferred name"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "Current city or region"
+          },
+          {
+            "name": "profile_link",
+            "type": "text",
+            "description": "Public profile or portfolio link"
+          }
+        ],
+        "examples": [
+          "Phan Thuy Phuong"
+        ]
+      },
+      {
+        "name": "Student",
+        "description": "A person enrolled in a school or university, distinct from generic Person.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Student's full name"
+          },
+          {
+            "name": "major",
+            "type": "text",
+            "description": "Field of study"
+          },
+          {
+            "name": "gpa",
+            "type": "text",
+            "description": "Reported grade point average"
+          }
+        ],
+        "examples": [
+          "University of Information Technology student"
+        ]
+      },
+      {
+        "name": "Intern",
+        "description": "A person holding a temporary internship role, distinct from generic Person.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Intern's full name"
+          },
+          {
+            "name": "internship_title",
+            "type": "text",
+            "description": "Internship role title"
+          },
+          {
+            "name": "internship_period",
+            "type": "text",
+            "description": "Start and end dates of the internship"
+          }
+        ],
+        "examples": [
+          "Software Engineer Internship candidate",
+          "Python Development Intern"
+        ]
+      },
+      {
+        "name": "SoftwareEngineer",
+        "description": "A person working in software engineering, more specific than generic Person.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Engineer’s full name"
+          },
+          {
+            "name": "specialization",
+            "type": "text",
+            "description": "Primary software area or stack"
+          },
+          {
+            "name": "employment_type",
+            "type": "text",
+            "description": "Employment or internship status"
+          }
+        ],
+        "examples": [
+          "Software Engineer Internship"
+        ]
+      },
+      {
+        "name": "Developer",
+        "description": "A person who builds software or tools, distinct from generic Person.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Developer's full name"
+          },
+          {
+            "name": "primary_language",
+            "type": "text",
+            "description": "Main programming language used"
+          },
+          {
+            "name": "project_focus",
+            "type": "text",
+            "description": "Typical project domain"
+          }
+        ],
+        "examples": [
+          "Python Development Internship",
+          "Project developer"
+        ]
+      },
+      {
+        "name": "University",
+        "description": "A higher-education institution, more specific than generic Organization.",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Official university name"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "Campus city or country"
+          },
+          {
+            "name": "website",
+            "type": "text",
+            "description": "Official website URL"
+          }
+        ],
+        "examples": [
+          "University of Information Technology"
+        ]
+      },
+      {
+        "name": "Company",
+        "description": "A business entity or private employer, more specific than generic Organization.",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Official company name"
+          },
+          {
+            "name": "industry",
+            "type": "text",
+            "description": "Business sector"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "Headquarters or office location"
+          }
+        ],
+        "examples": [
+          "TISOHA Software Solutions",
+          "AU-AVAGO CO., LTD"
+        ]
+      },
+      {
+        "name": "ProjectTeam",
+        "description": "A project-based working group or team that can speak or be referenced online, more specific than ...",
+        "attributes": [
+          {
+            "name": "team_name",
+            "type": "text",
+            "description": "Project or team name"
+          },
+          {
+            "name": "domain",
+            "type": "text",
+            "description": "Main work domain"
+          },
+          {
+            "name": "platform_link",
+            "type": "text",
+            "description": "Public project or repository link"
+          }
+        ],
+        "examples": [
+          "Text Analysis Tool",
+          "TiepLM AI Assistant",
+          "Attendance Tracking System"
+        ]
+      },
+      {
+        "name": "Person",
+        "description": "Fallback type for any natural person not covered by a more specific person type.",
+        "attributes": [
+          {
+            "name": "full_name",
+            "type": "text",
+            "description": "Person's full name"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "Known location"
+          }
+        ],
+        "examples": [
+          "Any other applicant",
+          "A reviewer",
+          "A recruiter"
+        ]
+      },
+      {
+        "name": "Organization",
+        "description": "Fallback type for any organization not covered by a more specific organization type.",
+        "attributes": [
+          {
+            "name": "org_name",
+            "type": "text",
+            "description": "Organization's official or common name"
+          },
+          {
+            "name": "location",
+            "type": "text",
+            "description": "Known location"
+          }
+        ],
+        "examples": [
+          "Any small firm",
+          "Any association",
+          "Any public institution"
+        ]
+      }
+    ],
+    "edge_types": [
+      {
+        "name": "STUDIES_AT",
+        "description": "Links a student to an educational institution.",
+        "source_targets": [
+          {
+            "source": "Student",
+            "target": "University"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "APPLIES_FOR",
+        "description": "Links an applicant to a company or organization for a role.",
+        "source_targets": [
+          {
+            "source": "JobApplicant",
+            "target": "Company"
+          },
+          {
+            "source": "JobApplicant",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "WORKS_FOR",
+        "description": "Links a person or worker to their employer.",
+        "source_targets": [
+          {
+            "source": "Intern",
+            "target": "Company"
+          },
+          {
+            "source": "SoftwareEngineer",
+            "target": "Company"
+          },
+          {
+            "source": "Developer",
+            "target": "Company"
+          },
+          {
+            "source": "Person",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "PARTICIPATES_IN",
+        "description": "Links a person or team to a project or initiative.",
+        "source_targets": [
+          {
+            "source": "Intern",
+            "target": "ProjectTeam"
+          },
+          {
+            "source": "Developer",
+            "target": "ProjectTeam"
+          },
+          {
+            "source": "Person",
+            "target": "ProjectTeam"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "COLLABORATES_WITH",
+        "description": "Indicates cooperation between people, companies, or teams.",
+        "source_targets": [
+          {
+            "source": "Company",
+            "target": "Company"
+          },
+          {
+            "source": "ProjectTeam",
+            "target": "Company"
+          },
+          {
+            "source": "Person",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "USES_TECHNOLOGY",
+        "description": "Links a person or project to a technology stack or toolset.",
+        "source_targets": [
+          {
+            "source": "Developer",
+            "target": "Organization"
+          },
+          {
+            "source": "SoftwareEngineer",
+            "target": "Organization"
+          },
+          {
+            "source": "ProjectTeam",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "CERTIFIED_BY",
+        "description": "Links a person to a certifying organization.",
+        "source_targets": [
+          {
+            "source": "Student",
+            "target": "Organization"
+          },
+          {
+            "source": "JobApplicant",
+            "target": "Organization"
+          },
+          {
+            "source": "Person",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      },
+      {
+        "name": "LOCATED_IN",
+        "description": "Indicates the city or region associated with a person or organization.",
+        "source_targets": [
+          {
+            "source": "JobApplicant",
+            "target": "Organization"
+          },
+          {
+            "source": "Student",
+            "target": "Organization"
+          },
+          {
+            "source": "Company",
+            "target": "Organization"
+          },
+          {
+            "source": "University",
+            "target": "Organization"
+          }
+        ],
+        "attributes": []
+      }
+    ]
+  },
+  "analysis_summary": "The CV describes a Vietnamese AI student and job applicant with internships, software projects, certifications, and technical skills. For social-media-style simulation, the main speaking subjects are the applicant, the university, employers, and project teams. The content also contains potential credibility issues such as future-dated internships and unusually broad technical claims, which may be relevant for inconsistency analysis.",
+  "graph_id": "mirofish_b85a541c0ed2417a",
+  "graph_build_task_id": "20103c21-1a4a-44f8-96c8-eb033d028c5c",
+  "simulation_requirement": "\r\nCheck this CV for me and look for the inconsistents in the CV that might be caused by the applicant's unfaithfullness when making this CV",
+  "chunk_size": 500,
+  "chunk_overlap": 50,
+  "error": null
+}
