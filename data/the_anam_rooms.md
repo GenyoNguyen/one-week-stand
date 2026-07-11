@@ -1,0 +1,502 @@
+# The Anam Rooms
+
+Synthetic sample data.
+
+| property | room_id | room_type | floor | bed_type | max_guests | size_sqm | base_rate_vnd |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ACR | ANAM-ACR-001 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-002 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-003 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-004 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-005 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-006 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-007 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-008 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-009 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-010 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-011 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-012 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-013 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-014 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-015 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-016 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-017 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-018 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-019 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-020 | Deluxe King | 1 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-021 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-022 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-023 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-024 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-025 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-026 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-027 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-028 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-029 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-030 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-031 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-032 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-033 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-034 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-035 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-036 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-037 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-038 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-039 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-040 | Deluxe King | 2 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-041 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-042 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-043 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-044 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-045 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-046 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-047 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-048 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-049 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-050 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-051 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-052 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-053 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-054 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-055 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-056 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-057 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-058 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-059 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-060 | Deluxe King | 3 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-061 | Deluxe King | 4 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-062 | Deluxe King | 4 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-063 | Deluxe King | 4 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-064 | Deluxe King | 4 | King | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-065 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-066 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-067 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-068 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-069 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-070 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-071 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-072 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-073 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-074 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-075 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-076 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-077 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-078 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-079 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-080 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-081 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-082 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-083 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-084 | Deluxe Twin | 1 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-085 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-086 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-087 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-088 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-089 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-090 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-091 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-092 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-093 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-094 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-095 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-096 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-097 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-098 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-099 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-100 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-101 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-102 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-103 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-104 | Deluxe Twin | 2 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-105 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-106 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-107 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-108 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-109 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-110 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-111 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-112 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-113 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-114 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-115 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-116 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-117 | Deluxe Twin | 3 | Twin | 2 | 42 | 4230000 |
+| ACR | ANAM-ACR-118 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-119 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-120 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-121 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-122 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-123 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-124 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-125 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-126 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-127 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-128 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-129 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-130 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-131 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-132 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-133 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-134 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-135 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-136 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-137 | Suite | 1 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-138 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-139 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-140 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-141 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-142 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-143 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-144 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-145 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-146 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-147 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-148 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-149 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-150 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-151 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-152 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-153 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-154 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-155 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-156 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-157 | Suite | 2 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-158 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-159 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-160 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-161 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-162 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-163 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-164 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-165 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-166 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-167 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-168 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-169 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-170 | Suite | 3 | King | 3 | 68 | 5875000 |
+| ACR | ANAM-ACR-171 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-172 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-173 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-174 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-175 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-176 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-177 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-178 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-179 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-180 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-181 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-182 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-183 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-184 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-185 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-186 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-187 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-188 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-189 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-190 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-191 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-192 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-193 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-194 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-195 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-196 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-197 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-198 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-199 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-200 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-201 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-202 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-203 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-204 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-205 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-206 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-207 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-208 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-209 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-210 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-211 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-212 | Villa | 1 | King | 4 | 110 | 8225000 |
+| ACR | ANAM-ACR-213 | Villa | 1 | King | 4 | 110 | 8225000 |
+| AMN | ANAM-AMN-001 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-002 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-003 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-004 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-005 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-006 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-007 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-008 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-009 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-010 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-011 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-012 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-013 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-014 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-015 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-016 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-017 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-018 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-019 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-020 | Deluxe King | 1 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-021 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-022 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-023 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-024 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-025 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-026 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-027 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-028 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-029 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-030 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-031 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-032 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-033 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-034 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-035 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-036 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-037 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-038 | Deluxe King | 2 | King | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-039 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-040 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-041 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-042 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-043 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-044 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-045 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-046 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-047 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-048 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-049 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-050 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-051 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-052 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-053 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-054 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-055 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-056 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-057 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-058 | Deluxe Twin | 1 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-059 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-060 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-061 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-062 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-063 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-064 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-065 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-066 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-067 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-068 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-069 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-070 | Deluxe Twin | 2 | Twin | 2 | 42 | 2385000 |
+| AMN | ANAM-AMN-071 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-072 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-073 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-074 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-075 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-076 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-077 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-078 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-079 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-080 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-081 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-082 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-083 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-084 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-085 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-086 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-087 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-088 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-089 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-090 | Suite | 1 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-091 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-092 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-093 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-094 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-095 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-096 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-097 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-098 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-099 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-100 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-101 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-102 | Suite | 2 | King | 3 | 68 | 3313000 |
+| AMN | ANAM-AMN-103 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-104 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-105 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-106 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-107 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-108 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-109 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-110 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-111 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-112 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-113 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-114 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-115 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-116 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-117 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-118 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-119 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-120 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-121 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-122 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-123 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-124 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-125 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-126 | Villa | 1 | King | 4 | 110 | 4638000 |
+| AMN | ANAM-AMN-127 | Villa | 1 | King | 4 | 110 | 4638000 |
+| ANT | ANAM-ANT-001 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-002 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-003 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-004 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-005 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-006 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-007 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-008 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-009 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-010 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-011 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-012 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-013 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-014 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-015 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-016 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-017 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-018 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-019 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-020 | Deluxe King | 1 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-021 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-022 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-023 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-024 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-025 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-026 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-027 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-028 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-029 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-030 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-031 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-032 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-033 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-034 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-035 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-036 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-037 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-038 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-039 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-040 | Deluxe King | 2 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-041 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-042 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-043 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-044 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-045 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-046 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-047 | Deluxe King | 3 | King | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-048 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-049 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-050 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-051 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-052 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-053 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-054 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-055 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-056 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-057 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-058 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-059 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-060 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-061 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-062 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-063 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-064 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-065 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-066 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-067 | Deluxe Twin | 1 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-068 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-069 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-070 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-071 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-072 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-073 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-074 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-075 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-076 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-077 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-078 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-079 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-080 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-081 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-082 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-083 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-084 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-085 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-086 | Deluxe Twin | 2 | Twin | 2 | 42 | 3015000 |
+| ANT | ANAM-ANT-087 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-088 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-089 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-090 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-091 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-092 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-093 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-094 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-095 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-096 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-097 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-098 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-099 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-100 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-101 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-102 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-103 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-104 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-105 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-106 | Suite | 1 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-107 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-108 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-109 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-110 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-111 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-112 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-113 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-114 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-115 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-116 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-117 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-118 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-119 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-120 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-121 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-122 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-123 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-124 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-125 | Suite | 2 | King | 3 | 68 | 4188000 |
+| ANT | ANAM-ANT-126 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-127 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-128 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-129 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-130 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-131 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-132 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-133 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-134 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-135 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-136 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-137 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-138 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-139 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-140 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-141 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-142 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-143 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-144 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-145 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-146 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-147 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-148 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-149 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-150 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-151 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-152 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-153 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-154 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-155 | Villa | 1 | King | 4 | 110 | 5863000 |
+| ANT | ANAM-ANT-156 | Villa | 1 | King | 4 | 110 | 5863000 |
