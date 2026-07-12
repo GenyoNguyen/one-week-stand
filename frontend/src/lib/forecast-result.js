@@ -551,15 +551,20 @@ function evidenceValues(risk) {
   return [];
 }
 
+// Fixed en-US grouping so impact strings match the rest of the dashboard
+// regardless of the host machine's locale (Number.toLocaleString() would use
+// the OS locale and render e.g. "69.000.000" on a Vietnamese machine).
+const groupUS = new Intl.NumberFormat('en-US');
+
 function actionImpact(value, currency) {
   if (value === null || value === undefined) return 'Impact not quantified';
   if (!isObject(value)) return String(value);
   const minimum = optionalNumber(value.minimum, 'action.impact.minimum');
   const maximum = optionalNumber(value.maximum, 'action.impact.maximum');
   const unit = String(value.currency || currency || '').trim();
-  if (minimum !== null && maximum !== null) return `${unit} ${minimum.toLocaleString()}–${maximum.toLocaleString()}`.trim();
-  if (maximum !== null) return `Up to ${unit} ${maximum.toLocaleString()}`.trim();
-  if (minimum !== null) return `At least ${unit} ${minimum.toLocaleString()}`.trim();
+  if (minimum !== null && maximum !== null) return `${unit} ${groupUS.format(minimum)}–${groupUS.format(maximum)}`.trim();
+  if (maximum !== null) return `Up to ${unit} ${groupUS.format(maximum)}`.trim();
+  if (minimum !== null) return `At least ${unit} ${groupUS.format(minimum)}`.trim();
   return 'Impact not quantified';
 }
 
