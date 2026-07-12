@@ -44,6 +44,33 @@ Every normal launch stops the previous managed instance first. Use
 `./run.sh --setup-only` to install dependencies without starting services,
 `./run.sh --skip-install` for a quick restart, or `./run.sh --stop` to stop it.
 
+## Production deployment
+
+Pushes to `main` run frontend and backend checks, then deploy through the
+repository's `micro-production` self-hosted runner. The production checkout is
+kept at `~/micro-production`, while the backend reads the existing project-level
+`~/micro/.env`. The backend virtual environment is shared between the production
+and development checkouts to avoid duplicating its large dependencies. Nginx
+serves the built dashboard and proxies `/api` to the loopback-only backend.
+
+Bootstrap this VM once, then perform the first deployment:
+
+```bash
+./scripts/bootstrap-server.sh
+./scripts/deploy.sh
+```
+
+Production is served at `http://20.195.42.122`. The GitHub runner must have the
+`micro-production` label; the deploy job never runs for pull requests. A
+repository administrator can register this VM and install the runner service
+without exposing its temporary token:
+
+```bash
+./scripts/register-runner.sh
+```
+
+The Azure network security group attached to the VM must allow inbound TCP/80.
+
 ## Project structure
 
 | Part | What | Where | Status |

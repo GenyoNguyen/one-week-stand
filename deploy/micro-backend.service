@@ -1,0 +1,25 @@
+[Unit]
+Description=Micro MiroFish backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tcuong1000
+Group=tcuong1000
+WorkingDirectory=/home/tcuong1000/micro-production/mirofish/backend
+Environment=HOME=/home/tcuong1000
+Environment=PATH=/home/tcuong1000/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+Environment=MIROFISH_ENV_FILE=/home/tcuong1000/micro/.env
+Environment=FLASK_DEBUG=false
+Environment=FLASK_USE_RELOADER=false
+Environment=FLASK_HOST=127.0.0.1
+Environment=FLASK_PORT=5001
+ExecStart=/home/tcuong1000/micro-production/.venv/bin/gunicorn --chdir /home/tcuong1000/micro-production/mirofish/backend --bind 127.0.0.1:5001 --workers 1 --threads 8 --timeout 0 --access-logfile - --error-logfile - app:create_app()
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

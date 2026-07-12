@@ -8,3 +8,4 @@ __pycache__/
 # MiroFish runtime artifacts
 /mirofish/backend/logs/
 /mirofish/backend/uploads/
+/mirofish/backend/.venv
