@@ -1,20 +1,31 @@
 <script>
   import RecommendationPanel from '../components/RecommendationPanel.svelte';
+  import DashboardDataState from '../components/DashboardDataState.svelte';
   import { getAlerts } from '../lib/api.js';
+  import { invalidateDashboard } from '../lib/dashboard-store.js';
   import { propertyFilter, alertStatus, focusAlert } from '../lib/stores.js';
+  import { fmtMoney } from '../lib/formatters.js';
 
   let loading = true;
   let alerts = [];
   let filter = 'all';
   let openId = null; // accordion: one alert expanded at a time
   let autoOpened = false;
+  let loadError = null;
 
   const SEV_ORDER = { risk: 0, watch: 1, opportunity: 2 };
 
   async function load() {
     loading = true;
-    alerts = await getAlerts();
-    loading = false;
+    loadError = null;
+    try {
+      alerts = await getAlerts();
+    } catch (error) {
+      loadError = error;
+      alerts = [];
+    } finally {
+      loading = false;
+    }
   }
   load();
 
@@ -35,10 +46,10 @@
   $: acceptedAlerts = scoped.filter((a) => $alertStatus[a.id] === 'accepted');
   $: acceptedCount = acceptedAlerts.length;
   $: dismissedCount = scoped.filter((a) => $alertStatus[a.id] === 'dismissed').length;
-  // sum the "$NNK" figures on accepted actions — modeled impact secured today
+  // Sum structured live impact values. Demo strings retain their legacy $NNK parsing.
   $: impactSum = acceptedAlerts.reduce((s, a) => {
     const m = a.impact?.match(/\$(\d+)K/);
-    return s + (m ? Number(m[1]) : 0);
+    return s + (Number.isFinite(a.impactValue) ? a.impactValue : m ? Number(m[1]) * 1000 : 0);
   }, 0);
   $: ownerCounts = Object.entries(
     acceptedAlerts.reduce((o, a) => ((o[a.owner] = (o[a.owner] || 0) + 1), o), {})
@@ -58,6 +69,11 @@
   }
 
   const toggle = (id) => (openId = openId === id ? null : id);
+
+  function retry() {
+    invalidateDashboard();
+    void load();
+  }
 </script>
 
 <div class="view reveal">
@@ -80,6 +96,8 @@
 
   {#if loading}
     <div class="skeleton" style="height:420px"></div>
+  {:else if loadError}
+    <DashboardDataState error={loadError} onRetry={retry} />
   {:else if !open.length && !resolved.length}
     <div class="panel empty">
       <p><b>No alerts for this scope.</b></p>
@@ -120,7 +138,7 @@
             </div>
           </div>
           {#if impactSum > 0}
-            <div class="impact num">≈ ${impactSum}K modeled impact on accepted actions</div>
+            <div class="impact num">Up to {fmtMoney(impactSum)} source-derived impact on accepted actions</div>
           {/if}
           {#if ownerCounts.length}
             <div class="owners">

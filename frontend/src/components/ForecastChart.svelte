@@ -9,7 +9,7 @@
   export let height = 300;
   export let compact = false;
   export let accent = 'var(--accent)'; // fixed per-property colour when charted per property
-  export let label = 'Occupancy: on the books, forecast with 50/80% bands, and reference line';
+  export let label = 'Occupancy outlook: on the books and the selected reference line';
 
   let width = 600;
   let hover = null; // {x, point}
@@ -26,26 +26,40 @@
   $: y = scaleLinear().domain([0, 1]).range([ih, 0]);
 
   $: compareKey = compare === 'budget' ? 'budgetOcc' : 'lyOcc';
+  $: hasForecast = data.some((d) => Number.isFinite(d.fcOcc));
+  $: hasIntervals = data.some(
+    (d) =>
+      Number.isFinite(d.fcLo80) &&
+      Number.isFinite(d.fcHi80) &&
+      Number.isFinite(d.fcLo50) &&
+      Number.isFinite(d.fcHi50)
+  );
+  $: hasComparison = data.some((d) => Number.isFinite(d[compareKey]));
 
   $: band80 = d3area()
+    .defined((d) => Number.isFinite(d.fcLo80) && Number.isFinite(d.fcHi80))
     .x((d) => x(d.date))
     .y0((d) => y(d.fcLo80))
     .y1((d) => y(d.fcHi80))
     .curve(curveMonotoneX)(data);
   $: band50 = d3area()
+    .defined((d) => Number.isFinite(d.fcLo50) && Number.isFinite(d.fcHi50))
     .x((d) => x(d.date))
     .y0((d) => y(d.fcLo50))
     .y1((d) => y(d.fcHi50))
     .curve(curveMonotoneX)(data);
   $: fcLine = d3line()
+    .defined((d) => Number.isFinite(d.fcOcc))
     .x((d) => x(d.date))
     .y((d) => y(d.fcOcc))
     .curve(curveMonotoneX)(data);
   $: otbLine = d3line()
+    .defined((d) => Number.isFinite(d.occ))
     .x((d) => x(d.date))
     .y((d) => y(d.occ))
     .curve(curveMonotoneX)(data);
   $: cmpLine = d3line()
+    .defined((d) => Number.isFinite(d[compareKey]))
     .x((d) => x(d.date))
     .y((d) => y(d[compareKey]))
     .curve(curveMonotoneX)(data);
@@ -81,12 +95,14 @@
       <line x1="0" x2={iw} y1={y(0)} y2={y(0)} class="axis" />
 
       <!-- confidence bands: two discrete opacity steps, no gradient -->
-      <path d={band80} class="band b80" style="fill:{accent}" />
-      <path d={band50} class="band b50" style="fill:{accent}" />
+      {#if hasIntervals}
+        <path d={band80} class="band b80" style="fill:{accent}" />
+        <path d={band50} class="band b50" style="fill:{accent}" />
+      {/if}
 
       <!-- reference, forecast, on-the-books -->
-      <path d={cmpLine} class="cmp" style="stroke:{GRAY_CONTEXT}" />
-      <path d={fcLine} class="fc" style="stroke:{accent}" />
+      {#if hasComparison}<path d={cmpLine} class="cmp" style="stroke:{GRAY_CONTEXT}" />{/if}
+      {#if hasForecast}<path d={fcLine} class="fc" style="stroke:{accent}" />{/if}
       <path d={otbLine} class="otb" />
 
       <!-- x ticks -->
@@ -97,7 +113,9 @@
       {#if hover}
         <line x1={hover.x} x2={hover.x} y1="0" y2={ih} class="crosshair" />
         <circle cx={hover.x} cy={y(hover.point.occ)} r="3.5" class="dot otb-dot" />
-        <circle cx={hover.x} cy={y(hover.point.fcOcc)} r="3.5" class="dot fc-dot" style="fill:{accent}" />
+        {#if Number.isFinite(hover.point.fcOcc)}
+          <circle cx={hover.x} cy={y(hover.point.fcOcc)} r="3.5" class="dot fc-dot" style="fill:{accent}" />
+        {/if}
       {/if}
     </g>
   </svg>
@@ -109,12 +127,18 @@
     >
       <div class="t-date">{fmtDateFull(hover.point.date)}</div>
       <div class="t-row"><span class="sw otb-sw"></span>On the books <b class="num">{fmtPct(hover.point.occ)}</b></div>
-      <div class="t-row"><span class="sw fc-sw" style="background:{accent}"></span>Forecast <b class="num">{fmtPct(hover.point.fcOcc)}</b>
-        <span class="t-band num">({fmtPct(hover.point.fcLo80)}–{fmtPct(hover.point.fcHi80)})</span>
-      </div>
-      <div class="t-row"><span class="sw cmp-sw"></span>{compare === 'budget' ? 'Budget' : 'Last year'}
-        <b class="num">{fmtPct(hover.point[compareKey])}</b>
-      </div>
+      {#if Number.isFinite(hover.point.fcOcc)}
+        <div class="t-row"><span class="sw fc-sw" style="background:{accent}"></span>Forecast <b class="num">{fmtPct(hover.point.fcOcc)}</b>
+          {#if Number.isFinite(hover.point.fcLo80) && Number.isFinite(hover.point.fcHi80)}
+            <span class="t-band num">({fmtPct(hover.point.fcLo80)}–{fmtPct(hover.point.fcHi80)})</span>
+          {/if}
+        </div>
+      {/if}
+      {#if Number.isFinite(hover.point[compareKey])}
+        <div class="t-row"><span class="sw cmp-sw"></span>{compare === 'budget' ? 'Budget' : 'Last year'}
+          <b class="num">{fmtPct(hover.point[compareKey])}</b>
+        </div>
+      {/if}
     </div>
   {/if}
 </div>
@@ -122,10 +146,12 @@
 {#if !compact}
   <div class="legend">
     <span><i class="line ink"></i>On the books</span>
-    <span><i class="line dash"></i>Forecast</span>
-    <span><i class="block b50s"></i>50% band</span>
-    <span><i class="block b80s"></i>80% band</span>
-    <span><i class="line gray"></i>{compare === 'budget' ? 'Budget' : 'Last year'}</span>
+    {#if hasForecast}<span><i class="line dash"></i>Forecast</span>{/if}
+    {#if hasIntervals}
+      <span><i class="block b50s"></i>50% band</span>
+      <span><i class="block b80s"></i>80% band</span>
+    {/if}
+    {#if hasComparison}<span><i class="line gray"></i>{compare === 'budget' ? 'Budget' : 'Last year'}</span>{/if}
   </div>
 {/if}
 

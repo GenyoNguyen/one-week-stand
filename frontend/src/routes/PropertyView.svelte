@@ -3,7 +3,9 @@
   import PaceChart from '../components/PaceChart.svelte';
   import Heatmap from '../components/Heatmap.svelte';
   import DonutChart from '../components/DonutChart.svelte';
+  import DashboardDataState from '../components/DashboardDataState.svelte';
   import { getSeries, getPaceCurve, getPickupCalendar, getSegmentMix } from '../lib/api.js';
+  import { dashboardMetadataStore, invalidateDashboard } from '../lib/dashboard-store.js';
   import { selectedProperty, propertyFilter, compareMode } from '../lib/stores.js';
   import { PROPERTIES, SERIES } from '../lib/constants.js';
   import { fmtPct, fmtMoneyFull, fmtInt, fmtDate } from '../lib/formatters.js';
@@ -15,6 +17,12 @@
   let pace = null;
   let calendar = [];
   let mix = [];
+  let loadError = null;
+
+  function sumAvailable(rows, key) {
+    const values = rows.map((row) => row[key]).filter(Number.isFinite);
+    return values.length ? values.reduce((sum, value) => sum + value, 0) : null;
+  }
 
   // property is ONE state across the app: the tabs write both stores, so the
   // global select can never disagree with the heading (review round 2)
@@ -27,37 +35,61 @@
   async function load(pid) {
     const my = ++seq;
     loading = true;
-    const [t, h, n, pc, cal, mixAll] = await Promise.all([
-      getSeries(pid, 0, 0),
-      getSeries(pid, -13, 0),
-      getSeries(pid, 1, 30),
-      getPaceCurve(pid),
-      getPickupCalendar(pid),
-      getSegmentMix()
-    ]);
-    if (my !== seq) return;
-    today = t[0];
-    hist = h;
-    next30 = n;
-    pace = pc;
-    calendar = cal;
-    mix = mixAll.find((m) => m.property.id === pid)?.mix ?? [];
-    loading = false;
+    loadError = null;
+    try {
+      const [t, h, n, pc, cal, mixAll] = await Promise.all([
+        getSeries(pid, 0, 0),
+        getSeries(pid, -13, 0),
+        getSeries(pid, 1, 30),
+        getPaceCurve(pid),
+        getPickupCalendar(pid),
+        getSegmentMix()
+      ]);
+      if (my !== seq) return;
+      if (!t.length) throw new Error('This property has no performance row for the forecast as-of date.');
+      today = t[0];
+      hist = h;
+      next30 = n;
+      pace = pc;
+      calendar = cal;
+      mix = mixAll.find((m) => m.property.id === pid)?.mix ?? [];
+    } catch (error) {
+      if (my !== seq) return;
+      loadError = error;
+      today = null;
+      hist = [];
+      next30 = [];
+      pace = null;
+      calendar = [];
+      mix = [];
+    } finally {
+      if (my === seq) loading = false;
+    }
   }
   $: load($selectedProperty);
 
-  $: prop = PROPERTIES.find((p) => p.id === $selectedProperty);
+  $: propertyDefinitions = $dashboardMetadataStore?.properties?.length
+    ? $dashboardMetadataStore.properties
+    : PROPERTIES;
+  $: prop = propertyDefinitions.find((p) => p.id === $selectedProperty) || propertyDefinitions[0];
+  $: if (
+    $dashboardMetadataStore?.properties?.length
+    && !propertyDefinitions.some((property) => property.id === $selectedProperty)
+  ) {
+    selectedProperty.set(propertyDefinitions[0].id);
+    propertyFilter.set(propertyDefinitions[0].id);
+  }
   $: cmpOcc = today ? ($compareMode === 'budget' ? today.budgetOcc : today.lyOcc) : 0;
   $: cmpAdr = today ? ($compareMode === 'budget' ? today.budgetAdr : today.lyAdr) : 0;
   $: cmpLabel = $compareMode === 'budget' ? 'vs budget' : 'vs last year';
   $: otbRn30 = next30.reduce((s, r) => s + r.roomsSold, 0);
-  $: pu7next30 = next30.reduce((s, r) => s + r.pu7, 0);
-  $: cxl7next30 = next30.reduce((s, r) => s + r.cxl7, 0);
-  // trailing norm = the pre-spike baseline the generator uses (~2% of OTB)
-  $: cxlNorm = next30.reduce((s, r) => s + r.roomsSold * 0.02, 0);
-  // required pace: rooms still needed to hit forecast, spread over ~4.3 weeks
-  $: gapToForecast = next30.reduce((s, r) => s + Math.max(0, (r.fcOcc - r.occ) * r.capacity), 0);
-  $: requiredWeekly = gapToForecast / 4.3;
+  $: pickupSnapshotNext30 = sumAvailable(next30, 'pu7');
+  $: cancellationsNext30 = sumAvailable(next30, 'cxl7');
+
+  function retry() {
+    invalidateDashboard();
+    void load($selectedProperty);
+  }
 </script>
 
 <div class="view reveal">
@@ -67,7 +99,7 @@
       <p class="view-sub">{prop.rooms} keys · property deep-dive</p>
     </div>
     <div class="tabs" role="tablist">
-      {#each PROPERTIES as p}
+      {#each propertyDefinitions as p}
         <button
           role="tab"
           aria-selected={p.id === $selectedProperty}
@@ -83,6 +115,8 @@
   {#if loading}
     <div class="skeleton" style="height:120px"></div>
     <div class="skeleton" style="height:300px"></div>
+  {:else if loadError}
+    <DashboardDataState error={loadError} onRetry={retry} />
   {:else}
     <section class="kpis">
       <KpiCard
@@ -100,38 +134,40 @@
         spark={hist.map((d) => d.adr)}
       />
       <KpiCard
-        label="Pickup 7d, next 30 days"
-        value={`${fmtInt(pu7next30)} rm`}
-        delta={(pu7next30 - requiredWeekly) / requiredWeekly}
-        deltaLabel="vs pace needed for forecast"
-        spark={next30.map((d) => d.pu7)}
-        sparkCaption="by stay date"
+        label="Source pickup, next 30 stay dates"
+        value={`${fmtInt(pickupSnapshotNext30)} rm`}
+        spark={pickupSnapshotNext30 === null ? null : next30.map((d) => d.pu7).filter(Number.isFinite)}
+        sparkCaption="uploaded measure by stay date"
       />
       <KpiCard
-        label="Cancellations 7d"
-        value={`${fmtInt(cxl7next30)} rm`}
-        delta={(cxl7next30 - cxlNorm) / cxlNorm}
-        deltaLabel="vs trailing norm ({(cxl7next30 / cxlNorm).toFixed(1)}×)"
+        label="Source cancellations, next 30 stay dates"
+        value={`${fmtInt(cancellationsNext30)} rm`}
         goodWhenUp={false}
-        spark={next30.map((d) => d.cxl7)}
-        sparkCaption="by stay date, next 30 days"
+        spark={cancellationsNext30 === null ? null : next30.map((d) => d.cxl7).filter(Number.isFinite)}
+        sparkCaption="reporting-day counts by stay date"
       />
     </section>
 
     <section class="grid">
       <div class="col">
+        {#if pace?.points?.length}
         <div class="panel">
-          <div class="panel-head"><h2 class="kicker">Booking pace — {pace.monthLabel}</h2></div>
+          <div class="panel-head"><h2 class="kicker">Booking pace {pace.isSnapshot ? 'snapshot' : 'curve'} — {pace.monthLabel}</h2></div>
           <div class="panel-body">
-            <PaceChart points={pace.points} currentWeeksOut={pace.currentWeeksOut} monthLabel={pace.monthLabel} />
+            <PaceChart
+              points={pace.points}
+              currentWeeksOut={pace.currentWeeksOut}
+              monthLabel={pace.monthLabel}
+              snapshot={pace.isSnapshot}
+            />
             <details class="fallback">
             <summary>View as table</summary>
             <table class="data">
               <thead>
                 <tr>
-                  <th>Weeks out</th>
-                  <th class="r">This year, RN</th>
-                  <th class="r">Last year, RN</th>
+                  <th>{pace.isSnapshot ? 'Arrival lead' : 'Weeks out'}</th>
+                  <th class="r">{pace.isSnapshot ? 'OTB, RN' : 'This year, RN'}</th>
+                  <th class="r">{pace.isSnapshot ? 'STLY OTB, RN' : 'Last year, RN'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -147,6 +183,9 @@
             </details>
           </div>
         </div>
+        {:else}
+          <DashboardDataState empty />
+        {/if}
 
         <div class="panel">
           <div class="panel-head"><h2 class="kicker">Segment mix — next 30 days on the books</h2></div>
@@ -190,20 +229,21 @@
       </div>
 
       <div class="panel heat">
-        <div class="panel-head"><h2 class="kicker">7-day pickup by stay date</h2></div>
+        <div class="panel-head"><h2 class="kicker">Source pickup by stay date</h2></div>
         <div class="panel-body">
-          <Heatmap cells={calendar} />
-          <details class="fallback">
+          {#if calendar.length}
+            <Heatmap cells={calendar} />
+            <details class="fallback">
             <summary>View as table</summary>
             <table class="data">
               <thead>
                 <tr>
                   <th>Stay date</th>
-                  <th class="r">Pickup 7d</th>
+                  <th class="r">Uploaded pickup</th>
                 </tr>
               </thead>
               <tbody>
-                {#each calendar.filter((c) => c.pu7 > 0) as c (c.date)}
+                {#each calendar as c (c.date)}
                   <tr>
                     <td>{fmtDate(c.date)}</td>
                     <td class="r">{fmtInt(c.pu7)} rm</td>
@@ -211,7 +251,10 @@
                 {/each}
               </tbody>
             </table>
-          </details>
+            </details>
+          {:else}
+            <p class="unavailable">Pickup is not available in this result.</p>
+          {/if}
         </div>
       </div>
     </section>
@@ -223,6 +266,11 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
+  }
+  .unavailable {
+    margin: 0;
+    color: var(--ink-3);
+    font-size: 12.5px;
   }
   .head {
     display: flex;

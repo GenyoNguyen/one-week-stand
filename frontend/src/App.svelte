@@ -8,6 +8,7 @@
   import SegmentChannelView from './routes/SegmentChannelView.svelte';
   import AlertsRecommendations from './routes/AlertsRecommendations.svelte';
   import DataUpload from './routes/DataUpload.svelte';
+  import ForecastReport from './routes/ForecastReport.svelte';
   import { currentView, navigate } from './lib/stores.js';
 
   const VIEWS = [
@@ -49,13 +50,20 @@
     }
   ];
 
+  let reportJobId = '';
   $: active = VIEWS.find((v) => v.id === $currentView) ?? VIEWS[0];
 
   const go = navigate;
 
   onMount(() => {
     const fromHash = () => {
-      const id = location.hash.replace('#', '');
+      const id = location.hash.replace(/^#/, '');
+      if (id.startsWith('report/')) {
+        reportJobId = decodeURIComponent(id.slice('report/'.length));
+        currentView.set('data');
+        return;
+      }
+      reportJobId = '';
       if (VIEWS.some((v) => v.id === id)) currentView.set(id);
     };
     fromHash();
@@ -74,7 +82,7 @@
 
     <nav>
       {#each VIEWS as v (v.id)}
-        <button class="nav-item" class:active={v.id === active.id} on:click={() => go(v.id)}>
+        <button class="nav-item" class:active={v.id === active.id || (reportJobId && v.id === 'data')} on:click={() => go(v.id)}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d={v.icon} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -84,15 +92,19 @@
     </nav>
 
     <div class="side-foot">
-      <div class="foot-line">Mock data preview</div>
-      <div class="foot-line dim">Forecast &amp; intelligence services pending — shapes match the API contract</div>
+      <div class="foot-line">Forecast projects</div>
+      <div class="foot-line dim">Upload jobs and generated reports stay available from the Data view</div>
     </div>
   </aside>
 
   <div class="main">
     <FilterBar />
     <main class="content">
-      <svelte:component this={active.component} />
+      {#if reportJobId}
+        <ForecastReport jobId={reportJobId} />
+      {:else}
+        <svelte:component this={active.component} />
+      {/if}
     </main>
   </div>
 </div>
