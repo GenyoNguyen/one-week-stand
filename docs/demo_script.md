@@ -4,9 +4,10 @@
 
 ## Pre-stage checklist
 
-- [ ] `npm run dev --prefix frontend` running; open `http://localhost:5173/#daily`; filters at **All properties · vs Budget**
+- [ ] Start in demo mode so the deck runs offline on the story data — **not** the default live/backend mode: `VITE_DASHBOARD_DEMO=true npm run dev --prefix frontend`. (Without this flag the app calls the MiroFish backend and every view shows a "Could not load dashboard data" panel unless a completed forecast is available.)
+- [ ] Open `http://localhost:5173/#daily`; filters at **All properties · vs Budget**
 - [ ] Refresh the page to reset Accept/Dismiss state
-- [ ] Projector at 1280×860 or 1920×1080 (both verified, no layout breakage); the demo **runs offline** (self-hosted fonts, mock data)
+- [ ] Projector at 1280×860 or 1920×1080 (both verified, no layout breakage); demo mode **runs offline** (self-hosted fonts, mock data)
 - [ ] Have two CSVs ready for the Data section: one valid against the schema, one with missing columns
 
 ## Narrative: "From three hours of Excel to a ten-minute decision"
